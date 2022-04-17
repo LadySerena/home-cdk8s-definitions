@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Placeholder Empty 1`] = `
+Array [
+  Object {
+    "aggregationRule": Object {
+      "clusterRoleSelectors": Array [
+        Object {
+          "matchLabels": Object {
+            "rbac.serenacodes.com/aggregate-to-cluster-admin": "true",
+          },
+        },
+      ],
+    },
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "home-lab-rbac",
+      },
+      "name": "kat-cluster-admin",
+    },
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "home-lab-rbac",
+        "rbac.serenacodes.com/aggregate-to-cluster-admin": "true",
+      },
+      "name": "kat-admin-core-resources",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "configmaps",
+          "endpoints",
+          "namespaces",
+          "nodes",
+          "persistentvolumeclaims",
+          "persistentvolumes",
+          "pods",
+          "replicationcontrollers",
+          "resourcequotas",
+          "secrets",
+          "serviceaccounts",
+          "services",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "apiextensions.k8s.io",
+        ],
+        "resources": Array [
+          "customresourcedefinitions",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "apiregistration.k8s.io",
+        ],
+        "resources": Array [
+          "apiservices",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "authentication.k8s.io",
+        ],
+        "resources": Array [
+          "localsubjectaccessreviews",
+          "selfsubjectaccessreviews",
+          "selfsubjectrulesreviews",
+          "subjectaccessreviews",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "batch",
+        ],
+        "resources": Array [
+          "cronjobs",
+          "jobs",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "apps",
+        ],
+        "resources": Array [
+          "controllerrevisions",
+          "daemonsets",
+          "replicasets",
+          "statefulsets",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "autoscaling",
+        ],
+        "resources": Array [
+          "horizontalpodautoscalers",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "events.k8s.io",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingressclasses",
+          "ingresses",
+          "networkpolicies",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "policy",
+        ],
+        "resources": Array [
+          "poddisruptionbudgets",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "rbac.authorization.k8s.io",
+        ],
+        "resources": Array [
+          "clusterrolebindings",
+          "clusterroles",
+          "rolebindings",
+          "roles",
+        ],
+        "verbs": Array [
+          "*",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "home-lab-rbac",
+      },
+      "name": "kat-kitty-rolebinding",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "kat-cluster-admin",
+    },
+    "subjects": Array [
+      Object {
+        "apiGroup": "rbac.authorization.k8s.io",
+        "kind": "User",
+        "name": "kitty",
+      },
+    ],
+  },
+]
+`;
