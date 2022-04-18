@@ -19,7 +19,7 @@ Array [
         "app.kubernetes.io/managed-by": "cdk8s",
         "app.kubernetes.io/name": "home-lab-rbac",
       },
-      "name": "kat-cluster-admin",
+      "name": "tel-cluster-admin",
     },
   },
   Object {
@@ -31,7 +31,7 @@ Array [
         "app.kubernetes.io/name": "home-lab-rbac",
         "rbac.serenacodes.com/aggregate-to-cluster-admin": "true",
       },
-      "name": "kat-admin-core-resources",
+      "name": "tel-admin-core-resources",
     },
     "rules": Array [
       Object {
@@ -39,6 +39,7 @@ Array [
           "",
         ],
         "resources": Array [
+          "bindings",
           "configmaps",
           "endpoints",
           "namespaces",
@@ -203,20 +204,310 @@ Array [
         "app.kubernetes.io/managed-by": "cdk8s",
         "app.kubernetes.io/name": "home-lab-rbac",
       },
-      "name": "kat-kitty-rolebinding",
+      "name": "tel-serena-rolebinding",
     },
     "roleRef": Object {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
-      "name": "kat-cluster-admin",
+      "name": "tel-cluster-admin",
     },
     "subjects": Array [
       Object {
         "apiGroup": "rbac.authorization.k8s.io",
         "kind": "User",
-        "name": "kitty",
+        "name": "serena",
       },
     ],
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+      },
+      "name": "metrics-server",
+      "namespace": "kube-system",
+    },
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+        "rbac.authorization.k8s.io/aggregate-to-admin": "true",
+        "rbac.authorization.k8s.io/aggregate-to-edit": "true",
+        "rbac.authorization.k8s.io/aggregate-to-view": "true",
+      },
+      "name": "system:metrics-server-aggregated-reader",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "metrics.k8s.io",
+        ],
+        "resources": Array [
+          "pods",
+          "nodes",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+      },
+      "name": "system:metrics-server",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "nodes/metrics",
+        ],
+        "verbs": Array [
+          "get",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "pods",
+          "nodes",
+          "namespaces",
+          "configmaps",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+      },
+      "name": "metrics-server:system:auth-delegator",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "system:auth-delegator",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "metrics-server",
+        "namespace": "kube-system",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+      },
+      "name": "system:metrics-server",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "system:metrics-server",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "metrics-server",
+        "namespace": "kube-system",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+      },
+      "name": "metrics-server-auth-reader",
+      "namespace": "kube-system",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "extension-apiserver-authentication-reader",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "metrics-server",
+        "namespace": "kube-system",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "name": "metrics-server",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "name": "https",
+          "port": 443,
+          "protocol": "TCP",
+          "targetPort": "https",
+        },
+      ],
+      "selector": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+      },
+      "type": "ClusterIP",
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+      },
+      "name": "metrics-server",
+      "namespace": "kube-system",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app.kubernetes.io/managed-by": "cdk8s",
+          "app.kubernetes.io/name": "metrics-server",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app.kubernetes.io/managed-by": "cdk8s",
+            "app.kubernetes.io/name": "metrics-server",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "--secure-port=4443",
+                "--cert-dir=/tmp",
+                "--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname",
+                "--kubelet-use-node-status-port",
+                "--metric-resolution=30s",
+                "--kubelet-insecure-tls",
+              ],
+              "image": "k8s.gcr.io/metrics-server/metrics-server:v0.6.1",
+              "imagePullPolicy": "IfNotPresent",
+              "livenessProbe": Object {
+                "failureThreshold": 4,
+                "httpGet": Object {
+                  "path": "/livez",
+                  "port": "https",
+                  "scheme": "HTTPS",
+                },
+                "initialDelaySeconds": 15,
+                "periodSeconds": 10,
+              },
+              "name": "metrics-server",
+              "ports": Array [
+                Object {
+                  "containerPort": 4443,
+                  "name": "https",
+                  "protocol": "TCP",
+                },
+              ],
+              "readinessProbe": Object {
+                "failureThreshold": 3,
+                "httpGet": Object {
+                  "path": "/readyz",
+                  "port": "https",
+                  "scheme": "HTTPS",
+                },
+                "initialDelaySeconds": 20,
+                "periodSeconds": 10,
+              },
+              "securityContext": Object {
+                "allowPrivilegeEscalation": false,
+                "readOnlyRootFilesystem": true,
+                "runAsNonRoot": true,
+                "runAsUser": 1000,
+              },
+              "volumeMounts": Array [
+                Object {
+                  "mountPath": "/tmp",
+                  "name": "tmp",
+                },
+              ],
+            },
+          ],
+          "priorityClassName": "system-cluster-critical",
+          "serviceAccountName": "metrics-server",
+          "volumes": Array [
+            Object {
+              "emptyDir": Object {},
+              "name": "tmp",
+            },
+          ],
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "apiregistration.k8s.io/v1",
+    "kind": "APIService",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metrics-server",
+      },
+      "name": "v1beta1.metrics.k8s.io",
+    },
+    "spec": Object {
+      "group": "metrics.k8s.io",
+      "groupPriorityMinimum": 100,
+      "insecureSkipTLSVerify": true,
+      "service": Object {
+        "name": "metrics-server",
+        "namespace": "kube-system",
+      },
+      "version": "v1beta1",
+      "versionPriority": 100,
+    },
   },
 ]
 `;

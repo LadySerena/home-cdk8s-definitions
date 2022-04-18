@@ -1,9 +1,12 @@
 *.d.ts
 *.js
-!.eslintrc.js
 !jest.config.js
 node_modules
+imports/*
+__snapshots__/
 dist/
+
+
 ### Example user template template
 ### Example user template
 
@@ -93,6 +96,7 @@ web_modules/
 
 # Next.js build output
 .next
+out
 
 # Nuxt.js build / generate output
 .nuxt
