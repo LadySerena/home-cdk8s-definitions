@@ -14094,12 +14094,6 @@ export function toJson_AlertmanagerConfigSpecRouteMatchers(obj: AlertmanagerConf
 export enum AlertmanagerConfigSpecInhibitRulesSourceMatchMatchType {
   /** __stripped_by_cdk8s__ */
   STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
 }
 
 /**
@@ -14108,12 +14102,6 @@ export enum AlertmanagerConfigSpecInhibitRulesSourceMatchMatchType {
  * @schema AlertmanagerConfigSpecInhibitRulesTargetMatchMatchType
  */
 export enum AlertmanagerConfigSpecInhibitRulesTargetMatchMatchType {
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
   /** __stripped_by_cdk8s__ */
   STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
 }
@@ -15818,12 +15806,6 @@ export function toJson_AlertmanagerConfigSpecReceiversWechatConfigsHttpConfig(ob
  * @schema AlertmanagerConfigSpecRouteMatchersMatchType
  */
 export enum AlertmanagerConfigSpecRouteMatchersMatchType {
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
-  /** __stripped_by_cdk8s__ */
-  STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
   /** __stripped_by_cdk8s__ */
   STRIPPED_BY_CDK8S = '__stripped_by_cdk8s__',
 }

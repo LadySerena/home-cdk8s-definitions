@@ -9,6 +9,8 @@ import {
   KubeService,
   KubeServiceAccount,
 } from "../imports/k8s";
+import { StandardLabels } from "./standardLabels";
+import { readVerbs } from "./Constants";
 
 export interface MetricsServerProps {
   readonly name?: string;
@@ -19,11 +21,7 @@ export interface MetricsServerProps {
 export class MetricsServer extends Construct {
   constructor(scope: Construct, id: string, props: MetricsServerProps) {
     super(scope, id);
-    const standardLabels = {
-      "app.kubernetes.io/name": "metrics-server",
-      "app.kubernetes.io/managed-by": "cdk8s",
-    };
-    const readVerbs = ["get", "list", "watch"];
+    const standardLabels = StandardLabels("metrics-server");
 
     const name = props.name || "metrics-server";
     const labels = props.labels || standardLabels;

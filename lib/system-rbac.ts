@@ -1,5 +1,6 @@
 import { Construct } from "constructs";
 import { KubeClusterRole, KubeClusterRoleBinding } from "../imports/k8s";
+import { StandardLabels } from "./standardLabels";
 
 function setNamePrefix(prefix: string, name: string): string {
   return prefix.concat("-", name);
@@ -16,10 +17,7 @@ export class SystemRbac extends Construct {
     const userName = props.user || "default-user";
     const prefix = props.resourcePrefix || "ckd8s";
     // TODO make labels configurable
-    const rbacLabel: { [key: string]: string } = {
-      "app.kubernetes.io/name": "home-lab-rbac",
-      "app.kubernetes.io/managed-by": "cdk8s",
-    };
+    const rbacLabel = StandardLabels("system-rbac");
     // TODO make aggregateLabelKey configurable
     const aggregateLabelKey = "rbac.serenacodes.com/aggregate-to-cluster-admin";
     const aggregatedRoleLabels = Object.assign(
