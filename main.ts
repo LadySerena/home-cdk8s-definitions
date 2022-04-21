@@ -4,6 +4,8 @@ import { App, Chart, ChartProps } from "cdk8s";
 import { SystemRbac } from "./lib/system-rbac";
 import { MetricsServer } from "./lib/metrics-server";
 import { PrometheusOperator } from "./lib/prometheus-operator";
+import { PrometheusOperatorCrds } from "./lib/prometheus-operator-crds";
+import { Monitoring } from "./lib/monitoring";
 
 export class MyChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
@@ -18,9 +20,20 @@ export class MyChart extends Chart {
     new MetricsServer(this, "metrics-server", {});
 
     new PrometheusOperator(this, "prometheus-operator", {});
+
+    new Monitoring(this, "serena-monitoring", {});
+  }
+}
+
+export class PrometheusCrds extends Chart {
+  constructor(scope: Construct, id: string, props: ChartProps = {}) {
+    super(scope, id, props);
+
+    new PrometheusOperatorCrds(this, "prometheus-crds");
   }
 }
 
 const app = new App();
 new MyChart(app, "home-kubernetes-js");
+new PrometheusCrds(app, "prometheus-crds");
 app.synth();
