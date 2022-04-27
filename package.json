@@ -11,12 +11,13 @@
     "compile": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "build": "npm run compile && npm run update-snapshot && npm run lint && npm run test && npm run synth",
+    "build": "npm run compile && npm run update-snapshot && npm run lint && npm run test",
     "upgrade": "npm i cdk8s@latest cdk8s-cli@latest",
     "upgrade:next": "npm i cdk8s@next cdk8s-cli@next",
     "update-snapshot": "jest --updateSnapshot",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "fmt": "prettier --write ."
+    "fmt": "prettier --write .",
+    "apply": "npm run compile && npm run synth && kubectl apply -f dist/home-kubernetes-js.k8s.yaml"
   },
   "dependencies": {
     "cdk8s": "^1.5.70",

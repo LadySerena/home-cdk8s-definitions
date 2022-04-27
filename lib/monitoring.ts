@@ -1,7 +1,7 @@
 import { Construct } from "constructs";
 import { StandardLabels } from "./standardLabels";
-import { Prometheus } from "../imports/monitoring.coreos.com";
-import { KubeNamespace } from "../imports/k8s";
+import { PodMonitor, Prometheus } from "../imports/monitoring.coreos.com";
+import { KubeNamespace, KubeRoleBinding, KubeServiceAccount } from "../imports/k8s";
 
 export interface MonitoringProps {
   readonly name?: string;
@@ -22,6 +22,36 @@ export class Monitoring extends Construct {
     const monitoringLabels = Object.assign({}, labels, {
       "monitoring.serenacodes.com/service-monitor-opt-in": "true",
       "monitoring.serenacodes.com/rule-opt-in": "true",
+      "monitoring.serenacodes.com/pod-monitor-opt-in": "true",
+    });
+
+    const prometheusServiceAccount = new KubeServiceAccount(this, "prometheus-service-account", {
+      metadata: {
+        name: "prometheus",
+        namespace: namespace,
+        labels: labels,
+      },
+    });
+
+    new KubeRoleBinding(this, "prometheus-binding", {
+      metadata: {
+        name: "prometheus",
+        namespace: namespace,
+        labels: labels,
+      },
+      roleRef: {
+        kind: "ClusterRole",
+        name: "view",
+        apiGroup: "rbac.authorization.k8s.io",
+      },
+      subjects: [
+        {
+          kind: prometheusServiceAccount.kind,
+          name: prometheusServiceAccount.name,
+          namespace: namespace,
+          apiGroup: "",
+        },
+      ],
     });
 
     new KubeNamespace(this, "prometheus-ns", {
@@ -38,9 +68,18 @@ export class Monitoring extends Construct {
         labels: labels,
       },
       spec: {
+        serviceAccountName: prometheusServiceAccount.name,
+        podMetadata: {
+          labels: labels,
+        },
         serviceMonitorSelector: {
           matchLabels: {
             "monitoring.serenacodes.com/service-monitor-opt-in": "true",
+          },
+        },
+        podMonitorSelector: {
+          matchLabels: {
+            "monitoring.serenacodes.com/pod-monitor-opt-in": "true",
           },
         },
         serviceMonitorNamespaceSelector: {
@@ -62,7 +101,31 @@ export class Monitoring extends Construct {
             "monitoring.serenacodes.com/rule-opt-in": "true",
           },
         },
-        additionalScrapeConfigs: {},
+      },
+    });
+
+    new PodMonitor(this, "self-monitor", {
+      metadata: {
+        name: "self-monitor",
+        namespace: namespace,
+        labels: monitoringLabels,
+      },
+      spec: {
+        podMetricsEndpoints: [
+          {
+            port: "web",
+            path: "/metrics",
+            scheme: "http",
+          },
+          {
+            port: "reloader-web",
+            path: "/metrics",
+            scheme: "http",
+          },
+        ],
+        selector: {
+          matchLabels: labels,
+        },
       },
     });
   }
