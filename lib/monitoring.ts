@@ -1,7 +1,7 @@
 import { Construct } from "constructs";
 import { StandardLabels } from "./standardLabels";
 import { PodMonitor, Prometheus } from "../imports/monitoring.coreos.com";
-import { KubeNamespace, KubeRoleBinding, KubeServiceAccount } from "../imports/k8s";
+import { IntOrString, KubeNamespace, KubeRoleBinding, KubeService, KubeServiceAccount } from "../imports/k8s";
 
 export interface MonitoringProps {
   readonly name?: string;
@@ -124,8 +124,30 @@ export class Monitoring extends Construct {
           },
         ],
         selector: {
-          matchLabels: labels,
+          matchLabels: {
+            "app.kubernetes.io/name": "prometheus",
+          },
         },
+      },
+    });
+
+    new KubeService(this, "prometheus-nodeport", {
+      metadata: {
+        name: "prometheus-nodeport",
+        namespace: namespace,
+        labels: labels,
+      },
+      spec: {
+        type: "LoadBalancer",
+        selector: {
+          "app.kubernetes.io/name": "prometheus",
+        },
+        ports: [
+          {
+            port: 9090,
+            targetPort: IntOrString.fromString("web"),
+          },
+        ],
       },
     });
   }

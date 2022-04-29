@@ -751,10 +751,693 @@ Array [
       ],
       "selector": Object {
         "matchLabels": Object {
-          "app.kubernetes.io/managed-by": "cdk8s",
           "app.kubernetes.io/name": "prometheus",
         },
       },
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "prometheus",
+      },
+      "name": "prometheus-nodeport",
+      "namespace": "monitoring",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "port": 9090,
+          "targetPort": "web",
+        },
+      ],
+      "selector": Object {
+        "app.kubernetes.io/name": "prometheus",
+      },
+      "type": "LoadBalancer",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "metallb-system",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "controller",
+      "namespace": "metallb-system",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "speaker",
+      "namespace": "metallb-system",
+    },
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "metallb-system:controller",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "services",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "services/status",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "policy",
+        ],
+        "resourceNames": Array [
+          "controller",
+        ],
+        "resources": Array [
+          "podsecuritypolicies",
+        ],
+        "verbs": Array [
+          "use",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "metallb-system:speaker",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "services",
+          "endpoints",
+          "nodes",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "discovery.k8s.io",
+        ],
+        "resources": Array [
+          "endpointslices",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "policy",
+        ],
+        "resourceNames": Array [
+          "speaker",
+        ],
+        "resources": Array [
+          "podsecuritypolicies",
+        ],
+        "verbs": Array [
+          "use",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "Role",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "config-watcher",
+      "namespace": "metallb-system",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "configmaps",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "Role",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "pod-lister",
+      "namespace": "metallb-system",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "pods",
+        ],
+        "verbs": Array [
+          "list",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "Role",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "controller",
+      "namespace": "metallb-system",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "create",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resourceNames": Array [
+          "memberlist",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "list",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "apps",
+        ],
+        "resourceNames": Array [
+          "controller",
+        ],
+        "resources": Array [
+          "deployments",
+        ],
+        "verbs": Array [
+          "get",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "metallb-system:controller",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "metallb-system:controller",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "controller",
+        "namespace": "metallb-system",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "metallb-system:speaker",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "metallb-system:speaker",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "speaker",
+        "namespace": "metallb-system",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "config-watcher",
+      "namespace": "metallb-system",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "config-watcher",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "controller",
+      },
+      Object {
+        "kind": "ServiceAccount",
+        "name": "speaker",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "pod-lister",
+      "namespace": "metallb-system",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "pod-lister",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "speaker",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "controller",
+      "namespace": "metallb-system",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "controller",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "controller",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "DaemonSet",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/component": "speaker",
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "speaker",
+      "namespace": "metallb-system",
+    },
+    "spec": Object {
+      "selector": Object {
+        "matchLabels": Object {
+          "app.kubernetes.io/component": "speaker",
+          "app.kubernetes.io/managed-by": "cdk8s",
+          "app.kubernetes.io/name": "metallb",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "annotations": Object {
+            "prometheus.io/port": "7472",
+            "prometheus.io/scrape": "true",
+          },
+          "labels": Object {
+            "app.kubernetes.io/component": "speaker",
+            "app.kubernetes.io/managed-by": "cdk8s",
+            "app.kubernetes.io/name": "metallb",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "--port=7472",
+                "--config=config",
+                "--log-level=info",
+              ],
+              "env": Array [
+                Object {
+                  "name": "METALLB_NODE_NAME",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "spec.nodeName",
+                    },
+                  },
+                },
+                Object {
+                  "name": "METALLB_HOST",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "status.hostIP",
+                    },
+                  },
+                },
+                Object {
+                  "name": "METALLB_ML_BIND_ADDR",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "status.podIP",
+                    },
+                  },
+                },
+                Object {
+                  "name": "METALLB_ML_LABELS",
+                  "value": "app=metallb,component=speaker",
+                },
+                Object {
+                  "name": "METALLB_ML_SECRET_KEY",
+                  "valueFrom": Object {
+                    "secretKeyRef": Object {
+                      "key": "secretkey",
+                      "name": "memberlist",
+                    },
+                  },
+                },
+              ],
+              "image": "quay.io/metallb/speaker:v0.12.1",
+              "livenessProbe": Object {
+                "failureThreshold": 3,
+                "httpGet": Object {
+                  "path": "/metrics",
+                  "port": "monitoring",
+                },
+                "initialDelaySeconds": 10,
+                "periodSeconds": 10,
+                "successThreshold": 1,
+                "timeoutSeconds": 1,
+              },
+              "name": "speaker",
+              "ports": Array [
+                Object {
+                  "containerPort": 7472,
+                  "name": "monitoring",
+                },
+                Object {
+                  "containerPort": 7946,
+                  "name": "memberlist-tcp",
+                },
+                Object {
+                  "containerPort": 7946,
+                  "name": "memberlist-udp",
+                  "protocol": "UDP",
+                },
+              ],
+              "readinessProbe": Object {
+                "failureThreshold": 3,
+                "httpGet": Object {
+                  "path": "/metrics",
+                  "port": "monitoring",
+                },
+                "initialDelaySeconds": 10,
+                "periodSeconds": 10,
+                "successThreshold": 1,
+                "timeoutSeconds": 1,
+              },
+              "securityContext": Object {
+                "allowPrivilegeEscalation": false,
+                "capabilities": Object {
+                  "add": Array [
+                    "NET_RAW",
+                  ],
+                  "drop": Array [
+                    "ALL",
+                  ],
+                },
+                "readOnlyRootFilesystem": true,
+              },
+            },
+          ],
+          "hostNetwork": true,
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+          "serviceAccountName": "speaker",
+          "terminationGracePeriodSeconds": 2,
+          "tolerations": Array [
+            Object {
+              "effect": "NoSchedule",
+              "key": "node-role.kubernetes.io/master",
+              "operator": "Exists",
+            },
+          ],
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/component": "controller",
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "metallb",
+      },
+      "name": "controller",
+      "namespace": "metallb-system",
+    },
+    "spec": Object {
+      "revisionHistoryLimit": 3,
+      "selector": Object {
+        "matchLabels": Object {
+          "app.kubernetes.io/component": "controller",
+          "app.kubernetes.io/managed-by": "cdk8s",
+          "app.kubernetes.io/name": "metallb",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "annotations": Object {
+            "prometheus.io/port": "7472",
+            "prometheus.io/scrape": "true",
+          },
+          "labels": Object {
+            "app.kubernetes.io/component": "controller",
+            "app.kubernetes.io/managed-by": "cdk8s",
+            "app.kubernetes.io/name": "metallb",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "--port=7472",
+                "--config=config",
+                "--log-level=info",
+              ],
+              "env": Array [
+                Object {
+                  "name": "METALLB_ML_SECRET_NAME",
+                  "value": "memberlist",
+                },
+                Object {
+                  "name": "METALLB_DEPLOYMENT",
+                  "value": "controller",
+                },
+              ],
+              "image": "quay.io/metallb/controller:v0.12.1",
+              "livenessProbe": Object {
+                "failureThreshold": 3,
+                "httpGet": Object {
+                  "path": "/metrics",
+                  "port": "monitoring",
+                },
+                "initialDelaySeconds": 10,
+                "periodSeconds": 10,
+                "successThreshold": 1,
+                "timeoutSeconds": 1,
+              },
+              "name": "controller",
+              "ports": Array [
+                Object {
+                  "containerPort": 7472,
+                  "name": "monitoring",
+                },
+              ],
+              "readinessProbe": Object {
+                "failureThreshold": 3,
+                "httpGet": Object {
+                  "path": "/metrics",
+                  "port": "monitoring",
+                },
+                "initialDelaySeconds": 10,
+                "periodSeconds": 10,
+                "successThreshold": 1,
+                "timeoutSeconds": 1,
+              },
+              "securityContext": Object {
+                "allowPrivilegeEscalation": false,
+                "capabilities": Object {
+                  "drop": Array [
+                    "all",
+                  ],
+                },
+                "readOnlyRootFilesystem": true,
+              },
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+          "securityContext": Object {
+            "fsGroup": 65534,
+            "runAsNonRoot": true,
+            "runAsUser": 65534,
+          },
+          "serviceAccountName": "controller",
+          "terminationGracePeriodSeconds": 0,
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "data": Object {
+      "config": "address-pools:
+- name: default
+  protocol: layer2
+  addresses:
+  - 10.1.192.0/18
+",
+    },
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "name": "config",
+      "namespace": "metallb-system",
     },
   },
 ]

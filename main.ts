@@ -6,6 +6,7 @@ import { MetricsServer } from "./lib/metrics-server";
 import { PrometheusOperator } from "./lib/prometheus-operator";
 import { PrometheusOperatorCrds } from "./lib/prometheus-operator-crds";
 import { Monitoring } from "./lib/monitoring";
+import { Metallb } from "./lib/metallb";
 
 export class MyChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
@@ -22,6 +23,8 @@ export class MyChart extends Chart {
     new PrometheusOperator(this, "prometheus-operator", {});
 
     new Monitoring(this, "serena-monitoring", {});
+
+    new Metallb(this, "metallb", {});
   }
 }
 
