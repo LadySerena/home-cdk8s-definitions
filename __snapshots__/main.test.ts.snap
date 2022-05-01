@@ -777,7 +777,42 @@ Array [
       "selector": Object {
         "app.kubernetes.io/name": "prometheus",
       },
-      "type": "LoadBalancer",
+    },
+  },
+  Object {
+    "apiVersion": "networking.k8s.io/v1",
+    "kind": "Ingress",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "prometheus",
+      },
+      "name": "monitoring-ingress",
+      "namespace": "monitoring",
+    },
+    "spec": Object {
+      "ingressClassName": "nginx",
+      "rules": Array [
+        Object {
+          "host": "prometheus.internal.serenacodes.com",
+          "http": Object {
+            "paths": Array [
+              Object {
+                "backend": Object {
+                  "service": Object {
+                    "name": "prometheus-nodeport",
+                    "port": Object {
+                      "name": "web",
+                    },
+                  },
+                },
+                "path": "/",
+                "pathType": "Prefix",
+              },
+            ],
+          },
+        },
+      ],
     },
   },
   Object {
@@ -1439,6 +1474,839 @@ Array [
       "name": "config",
       "namespace": "metallb-system",
     },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx",
+      "namespace": "ingress-nginx",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-admission",
+      "namespace": "ingress-nginx",
+    },
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "Role",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx:ingress-nginx",
+      "namespace": "ingress-nginx",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "namespaces",
+        ],
+        "verbs": Array [
+          "get",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "configmaps",
+          "pods",
+          "secrets",
+          "endpoints",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "services",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingresses",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingresses/status",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingressclasses",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resourceNames": Array [
+          "ingress-controller-leader",
+        ],
+        "resources": Array [
+          "configmaps",
+        ],
+        "verbs": Array [
+          "get",
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "configmaps",
+        ],
+        "verbs": Array [
+          "create",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "Role",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx:ingress-nginx-admission",
+      "namespace": "ingress-nginx",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "create",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx:ingress-nginx",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "configmaps",
+          "endpoints",
+          "nodes",
+          "pods",
+          "secrets",
+          "namespaces",
+        ],
+        "verbs": Array [
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "nodes",
+        ],
+        "verbs": Array [
+          "get",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "services",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingresses",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingresses/status",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingressclasses",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx:ingress-nginx-admission",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "admissionregistration.k8s.io",
+        ],
+        "resources": Array [
+          "validatingwebhookconfigurations",
+        ],
+        "verbs": Array [
+          "get",
+          "update",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx",
+      "namespace": "ingress-nginx",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "ingress-nginx:ingress-nginx",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "ingress-nginx",
+        "namespace": "ingress-nginx",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-admission",
+      "namespace": "ingress-nginx",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "ingress-nginx:ingress-nginx-admission",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "ingress-nginx-admission",
+        "namespace": "ingress-nginx",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx:ingress-nginx",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "ingress-nginx:ingress-nginx",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "ingress-nginx",
+        "namespace": "ingress-nginx",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx:ingress-nginx-admission",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "ingress-nginx:ingress-nginx-admission",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "ingress-nginx-admission",
+        "namespace": "ingress-nginx",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "v1",
+    "data": Object {
+      "allow-snippet-annotations": "true",
+    },
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-controller",
+      "namespace": "ingress-nginx",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-controller",
+      "namespace": "ingress-nginx",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "appProtocol": "http",
+          "name": "http",
+          "port": 80,
+          "protocol": "TCP",
+          "targetPort": "http",
+        },
+        Object {
+          "appProtocol": "https",
+          "name": "https",
+          "port": 443,
+          "protocol": "TCP",
+          "targetPort": "https",
+        },
+      ],
+      "selector": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "type": "LoadBalancer",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-controller-admission",
+      "namespace": "ingress-nginx",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "appProtocol": "https",
+          "name": "https-webhook",
+          "port": 443,
+          "targetPort": "webhook",
+        },
+      ],
+      "selector": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "type": "ClusterIP",
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-controller",
+      "namespace": "ingress-nginx",
+    },
+    "spec": Object {
+      "minReadySeconds": 0,
+      "revisionHistoryLimit": 10,
+      "selector": Object {
+        "matchLabels": Object {
+          "app.kubernetes.io/managed-by": "cdk8s",
+          "app.kubernetes.io/name": "ingress-nginx",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app.kubernetes.io/managed-by": "cdk8s",
+            "app.kubernetes.io/name": "ingress-nginx",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "/nginx-ingress-controller",
+                "--election-id=ingress-controller-leader",
+                "--controller-class=k8s.io/ingress-nginx",
+                "--ingress-class=nginx",
+                "--configmap=$(POD_NAMESPACE)/ingress-nginx-controller",
+                "--validating-webhook=:8443",
+                "--validating-webhook-certificate=/usr/local/certificates/cert",
+                "--validating-webhook-key=/usr/local/certificates/key",
+              ],
+              "env": Array [
+                Object {
+                  "name": "POD_NAME",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "metadata.name",
+                    },
+                  },
+                },
+                Object {
+                  "name": "POD_NAMESPACE",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "metadata.namespace",
+                    },
+                  },
+                },
+                Object {
+                  "name": "LD_PRELOAD",
+                  "value": "/usr/local/lib/libmimalloc.so",
+                },
+              ],
+              "image": "k8s.gcr.io/ingress-nginx/controller:v1.2.0@sha256:d8196e3bc1e72547c5dec66d6556c0ff92a23f6d0919b206be170bc90d5f9185",
+              "imagePullPolicy": "IfNotPresent",
+              "lifecycle": Object {
+                "preStop": Object {
+                  "exec": Object {
+                    "command": Array [
+                      "/wait-shutdown",
+                    ],
+                  },
+                },
+              },
+              "livenessProbe": Object {
+                "failureThreshold": 5,
+                "httpGet": Object {
+                  "path": "/healthz",
+                  "port": 10254,
+                  "scheme": "HTTP",
+                },
+                "initialDelaySeconds": 10,
+                "periodSeconds": 10,
+                "successThreshold": 1,
+                "timeoutSeconds": 1,
+              },
+              "name": "controller",
+              "ports": Array [
+                Object {
+                  "containerPort": 80,
+                  "name": "http",
+                  "protocol": "TCP",
+                },
+                Object {
+                  "containerPort": 443,
+                  "name": "https",
+                  "protocol": "TCP",
+                },
+                Object {
+                  "containerPort": 8443,
+                  "name": "webhook",
+                  "protocol": "TCP",
+                },
+              ],
+              "readinessProbe": Object {
+                "failureThreshold": 3,
+                "httpGet": Object {
+                  "path": "/healthz",
+                  "port": 10254,
+                  "scheme": "HTTP",
+                },
+                "initialDelaySeconds": 10,
+                "periodSeconds": 10,
+                "successThreshold": 1,
+                "timeoutSeconds": 1,
+              },
+              "resources": Object {
+                "requests": Object {
+                  "cpu": "100m",
+                  "memory": "90Mi",
+                },
+              },
+              "securityContext": Object {
+                "allowPrivilegeEscalation": true,
+                "capabilities": Object {
+                  "add": Array [
+                    "NET_BIND_SERVICE",
+                  ],
+                  "drop": Array [
+                    "ALL",
+                  ],
+                },
+                "runAsUser": 101,
+              },
+              "volumeMounts": Array [
+                Object {
+                  "mountPath": "/usr/local/certificates/",
+                  "name": "webhook-cert",
+                  "readOnly": true,
+                },
+              ],
+            },
+          ],
+          "dnsPolicy": "ClusterFirst",
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+          "serviceAccountName": "ingress-nginx",
+          "terminationGracePeriodSeconds": 300,
+          "volumes": Array [
+            Object {
+              "name": "webhook-cert",
+              "secret": Object {
+                "secretName": "ingress-nginx-admission",
+              },
+            },
+          ],
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "batch/v1",
+    "kind": "Job",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-admission-create",
+      "namespace": "ingress-nginx",
+    },
+    "spec": Object {
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app.kubernetes.io/managed-by": "cdk8s",
+            "app.kubernetes.io/name": "ingress-nginx",
+          },
+          "name": "ingress-nginx-admission-create",
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "create",
+                "--host=ingress-nginx-controller-admission,ingress-nginx-controller-admission.$(POD_NAMESPACE).svc",
+                "--namespace=$(POD_NAMESPACE)",
+                "--secret-name=ingress-nginx-admission",
+              ],
+              "env": Array [
+                Object {
+                  "name": "POD_NAMESPACE",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "metadata.namespace",
+                    },
+                  },
+                },
+              ],
+              "image": "k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1@sha256:64d8c73dca984af206adf9d6d7e46aa550362b1d7a01f3a0a91b20cc67868660",
+              "imagePullPolicy": "IfNotPresent",
+              "name": "create",
+              "securityContext": Object {
+                "allowPrivilegeEscalation": false,
+              },
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+          "restartPolicy": "OnFailure",
+          "securityContext": Object {
+            "fsGroup": 2000,
+            "runAsNonRoot": true,
+            "runAsUser": 2000,
+          },
+          "serviceAccountName": "ingress-nginx-admission",
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "batch/v1",
+    "kind": "Job",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-admission-patch",
+      "namespace": "ingress-nginx",
+    },
+    "spec": Object {
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app.kubernetes.io/managed-by": "cdk8s",
+            "app.kubernetes.io/name": "ingress-nginx",
+          },
+          "name": "ingress-nginx-admission-patch",
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "patch",
+                "--webhook-name=ingress-nginx-admission",
+                "--namespace=$(POD_NAMESPACE)",
+                "--patch-mutating=false",
+                "--secret-name=ingress-nginx-admission",
+                "--patch-failure-policy=Fail",
+              ],
+              "env": Array [
+                Object {
+                  "name": "POD_NAMESPACE",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "metadata.namespace",
+                    },
+                  },
+                },
+              ],
+              "image": "k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1@sha256:64d8c73dca984af206adf9d6d7e46aa550362b1d7a01f3a0a91b20cc67868660",
+              "imagePullPolicy": "IfNotPresent",
+              "name": "patch",
+              "securityContext": Object {
+                "allowPrivilegeEscalation": false,
+              },
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+          "restartPolicy": "OnFailure",
+          "securityContext": Object {
+            "fsGroup": 2000,
+            "runAsNonRoot": true,
+            "runAsUser": 2000,
+          },
+          "serviceAccountName": "ingress-nginx-admission",
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "networking.k8s.io/v1",
+    "kind": "IngressClass",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "nginx",
+    },
+    "spec": Object {
+      "controller": "k8s.io/ingress-nginx",
+    },
+  },
+  Object {
+    "apiVersion": "admissionregistration.k8s.io/v1",
+    "kind": "ValidatingWebhookConfiguration",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "ingress-nginx",
+      },
+      "name": "ingress-nginx-admission",
+    },
+    "webhooks": Array [
+      Object {
+        "admissionReviewVersions": Array [
+          "v1",
+        ],
+        "clientConfig": Object {
+          "service": Object {
+            "name": "ingress-nginx-controller-admission",
+            "namespace": "ingress-nginx",
+            "path": "/networking/v1/ingresses",
+          },
+        },
+        "failurePolicy": "Fail",
+        "matchPolicy": "Equivalent",
+        "name": "validate.nginx.ingress.kubernetes.io",
+        "rules": Array [
+          Object {
+            "apiGroups": Array [
+              "networking.k8s.io",
+            ],
+            "apiVersions": Array [
+              "v1",
+            ],
+            "operations": Array [
+              "CREATE",
+              "UPDATE",
+            ],
+            "resources": Array [
+              "ingresses",
+            ],
+          },
+        ],
+        "sideEffects": "None",
+      },
+    ],
   },
 ]
 `;

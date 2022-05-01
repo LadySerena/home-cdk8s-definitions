@@ -1,7 +1,14 @@
 import { Construct } from "constructs";
 import { StandardLabels } from "./standardLabels";
 import { PodMonitor, Prometheus } from "../imports/monitoring.coreos.com";
-import { IntOrString, KubeNamespace, KubeRoleBinding, KubeService, KubeServiceAccount } from "../imports/k8s";
+import {
+  IntOrString,
+  KubeIngress,
+  KubeNamespace,
+  KubeRoleBinding,
+  KubeService,
+  KubeServiceAccount,
+} from "../imports/k8s";
 
 export interface MonitoringProps {
   readonly name?: string;
@@ -131,14 +138,13 @@ export class Monitoring extends Construct {
       },
     });
 
-    new KubeService(this, "prometheus-nodeport", {
+    const prometheusService = new KubeService(this, "prometheus-nodeport", {
       metadata: {
         name: "prometheus-nodeport",
         namespace: namespace,
         labels: labels,
       },
       spec: {
-        type: "LoadBalancer",
         selector: {
           "app.kubernetes.io/name": "prometheus",
         },
@@ -146,6 +152,38 @@ export class Monitoring extends Construct {
           {
             port: 9090,
             targetPort: IntOrString.fromString("web"),
+          },
+        ],
+      },
+    });
+
+    new KubeIngress(this, "prometheus-ingress", {
+      metadata: {
+        name: "monitoring-ingress",
+        namespace: namespace,
+        labels: labels,
+      },
+      spec: {
+        ingressClassName: "nginx",
+        rules: [
+          {
+            host: "prometheus.internal.serenacodes.com",
+            http: {
+              paths: [
+                {
+                  backend: {
+                    service: {
+                      name: prometheusService.name,
+                      port: {
+                        name: "web",
+                      },
+                    },
+                  },
+                  path: "/",
+                  pathType: "Prefix",
+                },
+              ],
+            },
           },
         ],
       },
