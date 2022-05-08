@@ -8,6 +8,7 @@ import { PrometheusOperatorCrds } from "./lib/prometheus-operator-crds";
 import { Monitoring } from "./lib/monitoring";
 import { Metallb } from "./lib/metallb";
 import { IngressNginx } from "./lib/ingress-nginx";
+import { Cilium } from "./lib/cilium";
 import { CertManager } from "./lib/cert-manager";
 import { CertManagerCrds } from "./lib/cert-manager-crds";
 import { CertificateAuthority } from "./lib/certificate-authority";
@@ -41,6 +42,10 @@ export class MyChart extends Chart {
     new CertificateAuthority(this, "serena-ca", {
       namespace: resourceNamespace,
     });
+
+    new Cilium(this, "cilium");
+
+
   }
 }
 
