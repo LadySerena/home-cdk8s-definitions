@@ -39,13 +39,11 @@ export class MyChart extends Chart {
       resourceNamespace: resourceNamespace,
     });
 
-    new CertificateAuthority(this, "serena-ca", {
+    const CertAuthority = new CertificateAuthority(this, "serena-ca", {
       namespace: resourceNamespace,
     });
 
-    new Cilium(this, "cilium");
-
-
+    new Cilium(this, "cilium", { clusterIssuer: CertAuthority.issuer });
   }
 }
 

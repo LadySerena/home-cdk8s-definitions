@@ -10,6 +10,8 @@ export interface CertificateAuthorityProps {
 }
 
 export class CertificateAuthority extends Construct {
+  issuer: ClusterIssuer;
+
   constructor(scope: Construct, id: string, props: CertificateAuthorityProps) {
     super(scope, id);
 
@@ -49,6 +51,7 @@ export class CertificateAuthority extends Construct {
         isCa: true,
         commonName: "home-ca-root",
         secretName: secretName,
+        duration: "8766h",
         privateKey: {
           algorithm: CertificateSpecPrivateKeyAlgorithm.ECDSA,
           size: 256,
@@ -58,10 +61,14 @@ export class CertificateAuthority extends Construct {
           kind: selfSignedIssuer.kind,
           group: selfSignedIssuer.apiGroup,
         },
+        subject: {
+          countries: ["US"],
+          organizations: ["serena homelab"],
+        },
       },
     });
 
-    new ClusterIssuer(this, "ca-issuer", {
+    this.issuer = new ClusterIssuer(this, "ca-issuer", {
       metadata: {
         name: name,
         labels: labels,
