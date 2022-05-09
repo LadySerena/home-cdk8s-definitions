@@ -8,6 +8,8 @@ import { PrometheusOperatorCrds } from "./lib/prometheus-operator-crds";
 import { Monitoring } from "./lib/monitoring";
 import { Metallb } from "./lib/metallb";
 import { IngressNginx } from "./lib/ingress-nginx";
+import { CertManager } from "./lib/cert-manager";
+import { CertManagerCrds } from "./lib/cert-manager-crds";
 
 export class MyChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
@@ -28,6 +30,8 @@ export class MyChart extends Chart {
     new Metallb(this, "metallb", {});
 
     new IngressNginx(this, "nginx", {});
+
+    new CertManager(this, "cert-manager", {});
   }
 }
 
@@ -39,7 +43,16 @@ export class PrometheusCrds extends Chart {
   }
 }
 
+export class CertManagerCrdInstall extends Chart {
+  constructor(scope: Construct, id: string, props: ChartProps = {}) {
+    super(scope, id, props);
+
+    new CertManagerCrds(this, "cert-manager-crds");
+  }
+}
+
 const app = new App();
 new MyChart(app, "home-kubernetes-js");
 new PrometheusCrds(app, "prometheus-crds");
+new CertManagerCrdInstall(app, "cert-manager-crds");
 app.synth();

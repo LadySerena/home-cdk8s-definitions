@@ -2026,7 +2026,7 @@ Array [
                   "value": "/usr/local/lib/libmimalloc.so",
                 },
               ],
-              "image": "k8s.gcr.io/ingress-nginx/controller:v1.2.0@sha256:d8196e3bc1e72547c5dec66d6556c0ff92a23f6d0919b206be170bc90d5f9185",
+              "image": "gcr.io/k8s-staging-ingress-nginx/controller-chroot:v1.2.0",
               "imagePullPolicy": "IfNotPresent",
               "lifecycle": Object {
                 "preStop": Object {
@@ -2090,6 +2090,7 @@ Array [
                 "capabilities": Object {
                   "add": Array [
                     "NET_BIND_SERVICE",
+                    "SYS_CHROOT",
                   ],
                   "drop": Array [
                     "ALL",
@@ -2305,6 +2306,1890 @@ Array [
           },
         ],
         "sideEffects": "None",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-cainjector",
+      "namespace": "cert-manager",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager",
+      "namespace": "cert-manager",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "ServiceAccount",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-webhook",
+      "namespace": "cert-manager",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "data": Object {},
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-webhook",
+      "namespace": "cert-manager",
+    },
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-cainjector",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "get",
+          "create",
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "admissionregistration.k8s.io",
+        ],
+        "resources": Array [
+          "validatingwebhookconfigurations",
+          "mutatingwebhookconfigurations",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "apiregistration.k8s.io",
+        ],
+        "resources": Array [
+          "apiservices",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "apiextensions.k8s.io",
+        ],
+        "resources": Array [
+          "customresourcedefinitions",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "update",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-issuers",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "issuers",
+          "issuers/status",
+        ],
+        "verbs": Array [
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "issuers",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "create",
+          "update",
+          "delete",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-clusterissuers",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "clusterissuers",
+          "clusterissuers/status",
+        ],
+        "verbs": Array [
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "clusterissuers",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "create",
+          "update",
+          "delete",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-certificates",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates",
+          "certificates/status",
+          "certificaterequests",
+          "certificaterequests/status",
+        ],
+        "verbs": Array [
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates",
+          "certificaterequests",
+          "clusterissuers",
+          "issuers",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates/finalizers",
+          "certificaterequests/finalizers",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "orders",
+        ],
+        "verbs": Array [
+          "create",
+          "delete",
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "create",
+          "update",
+          "delete",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-orders",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "orders",
+          "orders/status",
+        ],
+        "verbs": Array [
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "orders",
+          "challenges",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "clusterissuers",
+          "issuers",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "challenges",
+        ],
+        "verbs": Array [
+          "create",
+          "delete",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "orders/finalizers",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-challenges",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "challenges",
+          "challenges/status",
+        ],
+        "verbs": Array [
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "challenges",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "issuers",
+          "clusterissuers",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "pods",
+          "services",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "create",
+          "delete",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingresses",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "create",
+          "delete",
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "gateway.networking.k8s.io",
+        ],
+        "resources": Array [
+          "httproutes",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "create",
+          "delete",
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "route.openshift.io",
+        ],
+        "resources": Array [
+          "routes/custom-host",
+        ],
+        "verbs": Array [
+          "create",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "challenges/finalizers",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-ingress-shim",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates",
+          "certificaterequests",
+        ],
+        "verbs": Array [
+          "create",
+          "update",
+          "delete",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates",
+          "certificaterequests",
+          "issuers",
+          "clusterissuers",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingresses",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "networking.k8s.io",
+        ],
+        "resources": Array [
+          "ingresses/finalizers",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "gateway.networking.k8s.io",
+        ],
+        "resources": Array [
+          "gateways",
+          "httproutes",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "gateway.networking.k8s.io",
+        ],
+        "resources": Array [
+          "gateways/finalizers",
+          "httproutes/finalizers",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "events",
+        ],
+        "verbs": Array [
+          "create",
+          "patch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+        "rbac.authorization.k8s.io/aggregate-to-admin": "true",
+        "rbac.authorization.k8s.io/aggregate-to-edit": "true",
+        "rbac.authorization.k8s.io/aggregate-to-view": "true",
+      },
+      "name": "cert-manager:cert-manager-view",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates",
+          "certificaterequests",
+          "issuers",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "challenges",
+          "orders",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+        "rbac.authorization.k8s.io/aggregate-to-admin": "true",
+        "rbac.authorization.k8s.io/aggregate-to-edit": "true",
+      },
+      "name": "cert-manager:cert-manager-edit",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates",
+          "certificaterequests",
+          "issuers",
+        ],
+        "verbs": Array [
+          "create",
+          "delete",
+          "deletecollection",
+          "patch",
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resources": Array [
+          "certificates/status",
+        ],
+        "verbs": Array [
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "acme.cert-manager.io",
+        ],
+        "resources": Array [
+          "challenges",
+          "orders",
+        ],
+        "verbs": Array [
+          "create",
+          "delete",
+          "deletecollection",
+          "patch",
+          "update",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-approve:cert-manager-io",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "cert-manager.io",
+        ],
+        "resourceNames": Array [
+          "issuers.cert-manager.io/*",
+          "clusterissuers.cert-manager.io/*",
+        ],
+        "resources": Array [
+          "signers",
+        ],
+        "verbs": Array [
+          "approve",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-certificatesigningrequests",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "certificates.k8s.io",
+        ],
+        "resources": Array [
+          "certificatesigningrequests",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "certificates.k8s.io",
+        ],
+        "resources": Array [
+          "certificatesigningrequests/status",
+        ],
+        "verbs": Array [
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "certificates.k8s.io",
+        ],
+        "resourceNames": Array [
+          "issuers.cert-manager.io/*",
+          "clusterissuers.cert-manager.io/*",
+        ],
+        "resources": Array [
+          "signers",
+        ],
+        "verbs": Array [
+          "sign",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "authorization.k8s.io",
+        ],
+        "resources": Array [
+          "subjectaccessreviews",
+        ],
+        "verbs": Array [
+          "create",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRole",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-webhook:subjectaccessreviews",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "authorization.k8s.io",
+        ],
+        "resources": Array [
+          "subjectaccessreviews",
+        ],
+        "verbs": Array [
+          "create",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-cainjector",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-cainjector",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager-cainjector",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-issuers",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-controller-issuers",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-clusterissuers",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-controller-clusterissuers",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-certificates",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-controller-certificates",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-orders",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-controller-orders",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-challenges",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-controller-challenges",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-ingress-shim",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-controller-ingress-shim",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-approve:cert-manager-io",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-controller-approve:cert-manager-io",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-controller-certificatesigningrequests",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-controller-certificatesigningrequests",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "ClusterRoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:cert-manager-webhook:subjectaccessreviews",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "ClusterRole",
+      "name": "cert-manager:cert-manager-webhook:subjectaccessreviews",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager-webhook",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "Role",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-cainjector:leaderelection",
+      "namespace": "kube-system",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "coordination.k8s.io",
+        ],
+        "resourceNames": Array [
+          "cert-manager-cainjector-leader-election",
+          "cert-manager-cainjector-leader-election-core",
+        ],
+        "resources": Array [
+          "leases",
+        ],
+        "verbs": Array [
+          "get",
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "coordination.k8s.io",
+        ],
+        "resources": Array [
+          "leases",
+        ],
+        "verbs": Array [
+          "create",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "Role",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:leaderelection",
+      "namespace": "kube-system",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "coordination.k8s.io",
+        ],
+        "resourceNames": Array [
+          "cert-manager-controller",
+        ],
+        "resources": Array [
+          "leases",
+        ],
+        "verbs": Array [
+          "get",
+          "update",
+          "patch",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "coordination.k8s.io",
+        ],
+        "resources": Array [
+          "leases",
+        ],
+        "verbs": Array [
+          "create",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "Role",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-webhook:dynamic-serving",
+      "namespace": "cert-manager",
+    },
+    "rules": Array [
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resourceNames": Array [
+          "cert-manager-webhook-ca",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "get",
+          "list",
+          "watch",
+          "update",
+        ],
+      },
+      Object {
+        "apiGroups": Array [
+          "",
+        ],
+        "resources": Array [
+          "secrets",
+        ],
+        "verbs": Array [
+          "create",
+        ],
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-cainjector:leaderelection",
+      "namespace": "kube-system",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "cert-manager-cainjector:leaderelection",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager-cainjector",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager:leaderelection",
+      "namespace": "kube-system",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "cert-manager:leaderelection",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "rbac.authorization.k8s.io/v1",
+    "kind": "RoleBinding",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-webhook:dynamic-serving",
+      "namespace": "cert-manager",
+    },
+    "roleRef": Object {
+      "apiGroup": "rbac.authorization.k8s.io",
+      "kind": "Role",
+      "name": "cert-manager-webhook:dynamic-serving",
+    },
+    "subjects": Array [
+      Object {
+        "kind": "ServiceAccount",
+        "name": "cert-manager-webhook",
+        "namespace": "cert-manager",
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager",
+      "namespace": "cert-manager",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "name": "tcp-prometheus-servicemonitor",
+          "port": 9402,
+          "protocol": "TCP",
+          "targetPort": 9402,
+        },
+      ],
+      "selector": Object {
+        "app.kubernetes.io/component": "controller",
+        "app.kubernetes.io/instance": "cert-manager",
+        "app.kubernetes.io/name": "cert-manager",
+      },
+      "type": "ClusterIP",
+    },
+  },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-server",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-webhook",
+      "namespace": "cert-manager",
+    },
+    "spec": Object {
+      "ports": Array [
+        Object {
+          "name": "https",
+          "port": 443,
+          "protocol": "TCP",
+          "targetPort": "https",
+        },
+      ],
+      "selector": Object {
+        "app.kubernetes.io/component": "webhook",
+        "app.kubernetes.io/instance": "cert-manager",
+        "app.kubernetes.io/name": "webhook",
+      },
+      "type": "ClusterIP",
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app": "cainjector",
+        "app.kubernetes.io/component": "cainjector",
+        "app.kubernetes.io/instance": "cert-manager",
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cainjector",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-cainjector",
+      "namespace": "cert-manager",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app.kubernetes.io/component": "cainjector",
+          "app.kubernetes.io/instance": "cert-manager",
+          "app.kubernetes.io/name": "cainjector",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app": "cainjector",
+            "app.kubernetes.io/component": "cainjector",
+            "app.kubernetes.io/instance": "cert-manager",
+            "app.kubernetes.io/managed-by": "cdk8s",
+            "app.kubernetes.io/name": "cainjector",
+            "app.kubernetes.io/version": "v1.8.0",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "--v=2",
+                "--leader-election-namespace=kube-system",
+              ],
+              "env": Array [
+                Object {
+                  "name": "POD_NAMESPACE",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "metadata.namespace",
+                    },
+                  },
+                },
+              ],
+              "image": "quay.io/jetstack/cert-manager-cainjector:v1.8.0",
+              "imagePullPolicy": "IfNotPresent",
+              "name": "cert-manager",
+              "securityContext": Object {
+                "allowPrivilegeEscalation": false,
+              },
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+          "securityContext": Object {
+            "runAsNonRoot": true,
+          },
+          "serviceAccountName": "cert-manager-cainjector",
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app": "cert-manager",
+        "app.kubernetes.io/component": "controller",
+        "app.kubernetes.io/instance": "cert-manager",
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "cert-manager",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager",
+      "namespace": "cert-manager",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app.kubernetes.io/component": "controller",
+          "app.kubernetes.io/instance": "cert-manager",
+          "app.kubernetes.io/name": "cert-manager",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "annotations": Object {
+            "prometheus.io/path": "/metrics",
+            "prometheus.io/port": "9402",
+            "prometheus.io/scrape": "true",
+          },
+          "labels": Object {
+            "app": "cert-manager",
+            "app.kubernetes.io/component": "controller",
+            "app.kubernetes.io/instance": "cert-manager",
+            "app.kubernetes.io/managed-by": "cdk8s",
+            "app.kubernetes.io/name": "cert-manager",
+            "app.kubernetes.io/version": "v1.8.0",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "--v=2",
+                "--cluster-resource-namespace=$(POD_NAMESPACE)",
+                "--leader-election-namespace=kube-system",
+              ],
+              "env": Array [
+                Object {
+                  "name": "POD_NAMESPACE",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "metadata.namespace",
+                    },
+                  },
+                },
+              ],
+              "image": "quay.io/jetstack/cert-manager-controller:v1.8.0",
+              "imagePullPolicy": "IfNotPresent",
+              "name": "cert-manager",
+              "ports": Array [
+                Object {
+                  "containerPort": 9402,
+                  "name": "http-metrics",
+                  "protocol": "TCP",
+                },
+              ],
+              "securityContext": Object {
+                "allowPrivilegeEscalation": false,
+              },
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+          "securityContext": Object {
+            "runAsNonRoot": true,
+          },
+          "serviceAccountName": "cert-manager",
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": Object {
+      "labels": Object {
+        "app": "webhook",
+        "app.kubernetes.io/component": "webhook",
+        "app.kubernetes.io/instance": "cert-manager",
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "webhook",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-webhook",
+      "namespace": "cert-manager",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app.kubernetes.io/component": "webhook",
+          "app.kubernetes.io/instance": "cert-manager",
+          "app.kubernetes.io/name": "webhook",
+        },
+      },
+      "template": Object {
+        "metadata": Object {
+          "labels": Object {
+            "app": "webhook",
+            "app.kubernetes.io/component": "webhook",
+            "app.kubernetes.io/instance": "cert-manager",
+            "app.kubernetes.io/name": "webhook",
+            "app.kubernetes.io/version": "v1.8.0",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "args": Array [
+                "--v=2",
+                "--secure-port=10250",
+                "--dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)",
+                "--dynamic-serving-ca-secret-name=cert-manager-webhook-ca",
+                "--dynamic-serving-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc",
+              ],
+              "env": Array [
+                Object {
+                  "name": "POD_NAMESPACE",
+                  "valueFrom": Object {
+                    "fieldRef": Object {
+                      "fieldPath": "metadata.namespace",
+                    },
+                  },
+                },
+              ],
+              "image": "quay.io/jetstack/cert-manager-webhook:v1.8.0",
+              "imagePullPolicy": "IfNotPresent",
+              "livenessProbe": Object {
+                "failureThreshold": 3,
+                "httpGet": Object {
+                  "path": "/livez",
+                  "port": 6080,
+                  "scheme": "HTTP",
+                },
+                "initialDelaySeconds": 60,
+                "periodSeconds": 10,
+                "successThreshold": 1,
+                "timeoutSeconds": 1,
+              },
+              "name": "cert-manager",
+              "ports": Array [
+                Object {
+                  "containerPort": 10250,
+                  "name": "https",
+                  "protocol": "TCP",
+                },
+              ],
+              "readinessProbe": Object {
+                "failureThreshold": 3,
+                "httpGet": Object {
+                  "path": "/healthz",
+                  "port": 6080,
+                  "scheme": "HTTP",
+                },
+                "initialDelaySeconds": 5,
+                "periodSeconds": 5,
+                "successThreshold": 1,
+                "timeoutSeconds": 1,
+              },
+              "securityContext": Object {
+                "allowPrivilegeEscalation": false,
+              },
+            },
+          ],
+          "nodeSelector": Object {
+            "kubernetes.io/os": "linux",
+          },
+          "securityContext": Object {
+            "runAsNonRoot": true,
+          },
+          "serviceAccountName": "cert-manager-webhook",
+        },
+      },
+    },
+  },
+  Object {
+    "apiVersion": "admissionregistration.k8s.io/v1",
+    "kind": "MutatingWebhookConfiguration",
+    "metadata": Object {
+      "annotations": Object {
+        "cert-manager.io/inject-ca-from-secret": "cert-manager/cert-manager-webhook-ca",
+      },
+      "labels": Object {
+        "app": "webhook",
+        "app.kubernetes.io/component": "webhook",
+        "app.kubernetes.io/instance": "cert-manager",
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "webhook",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-webhook",
+    },
+    "webhooks": Array [
+      Object {
+        "admissionReviewVersions": Array [
+          "v1",
+        ],
+        "clientConfig": Object {
+          "service": Object {
+            "name": "cert-manager-webhook",
+            "namespace": "cert-manager",
+            "path": "/mutate",
+          },
+        },
+        "failurePolicy": "Fail",
+        "matchPolicy": "Equivalent",
+        "name": "webhook.cert-manager.io",
+        "rules": Array [
+          Object {
+            "apiGroups": Array [
+              "cert-manager.io",
+              "acme.cert-manager.io",
+            ],
+            "apiVersions": Array [
+              "v1",
+            ],
+            "operations": Array [
+              "CREATE",
+              "UPDATE",
+            ],
+            "resources": Array [
+              "*/*",
+            ],
+          },
+        ],
+        "sideEffects": "None",
+        "timeoutSeconds": 10,
+      },
+    ],
+  },
+  Object {
+    "apiVersion": "admissionregistration.k8s.io/v1",
+    "kind": "MutatingWebhookConfiguration",
+    "metadata": Object {
+      "annotations": Object {
+        "cert-manager.io/inject-ca-from-secret": "cert-manager/cert-manager-webhook-ca",
+      },
+      "labels": Object {
+        "app": "webhook",
+        "app.kubernetes.io/component": "webhook",
+        "app.kubernetes.io/instance": "cert-manager",
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "webhook",
+        "app.kubernetes.io/version": "v1.8.0",
+      },
+      "name": "cert-manager-webhook",
+    },
+    "webhooks": Array [
+      Object {
+        "admissionReviewVersions": Array [
+          "v1",
+        ],
+        "clientConfig": Object {
+          "service": Object {
+            "name": "cert-manager-webhook",
+            "namespace": "cert-manager",
+            "path": "/validate",
+          },
+        },
+        "failurePolicy": "Fail",
+        "matchPolicy": "Equivalent",
+        "name": "webhook.cert-manager.io",
+        "namespaceSelector": Object {
+          "matchExpressions": Array [
+            Object {
+              "key": "cert-manager.io/disable-validation",
+              "operator": "NotIn",
+              "values": Array [
+                "true",
+              ],
+            },
+            Object {
+              "key": "name",
+              "operator": "NotIn",
+              "values": Array [
+                "cert-manager",
+              ],
+            },
+          ],
+        },
+        "rules": Array [
+          Object {
+            "apiGroups": Array [
+              "cert-manager.io",
+              "acme.cert-manager.io",
+            ],
+            "apiVersions": Array [
+              "v1",
+            ],
+            "operations": Array [
+              "CREATE",
+              "UPDATE",
+            ],
+            "resources": Array [
+              "*/*",
+            ],
+          },
+        ],
+        "sideEffects": "None",
+        "timeoutSeconds": 10,
       },
     ],
   },
