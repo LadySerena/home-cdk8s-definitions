@@ -4193,5 +4193,68 @@ Array [
       },
     ],
   },
+  Object {
+    "apiVersion": "v1",
+    "kind": "Namespace",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "serena-ca",
+      },
+      "name": "certificate-authority",
+    },
+  },
+  Object {
+    "apiVersion": "cert-manager.io/v1",
+    "kind": "ClusterIssuer",
+    "metadata": Object {
+      "name": "self-signed",
+    },
+    "spec": Object {
+      "selfSigned": Object {},
+    },
+  },
+  Object {
+    "apiVersion": "cert-manager.io/v1",
+    "kind": "Certificate",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "serena-ca",
+      },
+      "name": "serena-ca",
+      "namespace": "certificate-authority",
+    },
+    "spec": Object {
+      "commonName": "home-ca-root",
+      "isCA": true,
+      "issuerRef": Object {
+        "group": "cert-manager.io",
+        "kind": "ClusterIssuer",
+        "name": "self-signed",
+      },
+      "privateKey": Object {
+        "algorithm": "ECDSA",
+        "size": 256,
+      },
+      "secretName": "root-ca",
+    },
+  },
+  Object {
+    "apiVersion": "cert-manager.io/v1",
+    "kind": "ClusterIssuer",
+    "metadata": Object {
+      "labels": Object {
+        "app.kubernetes.io/managed-by": "cdk8s",
+        "app.kubernetes.io/name": "serena-ca",
+      },
+      "name": "serena-ca",
+    },
+    "spec": Object {
+      "ca": Object {
+        "secretName": "root-ca",
+      },
+    },
+  },
 ]
 `;

@@ -12,6 +12,7 @@ import {
   KubeRoleBinding,
   KubeService,
   KubeServiceAccount,
+  KubeValidatingWebhookConfiguration,
 } from "../imports/k8s";
 import { rbacGroup, readVerbs } from "./Constants";
 
@@ -19,6 +20,7 @@ export interface CertManagerProps {
   readonly name?: string;
   readonly labels?: { [key: string]: string };
   readonly namespace?: string;
+  readonly resourceNamespace: string;
 }
 
 export class CertManager extends Construct {
@@ -952,11 +954,7 @@ export class CertManager extends Construct {
                 env: [
                   {
                     name: "POD_NAMESPACE",
-                    valueFrom: {
-                      fieldRef: {
-                        fieldPath: "metadata.namespace",
-                      },
-                    },
+                    value: "certificate-authority",
                   },
                 ],
               },
@@ -1107,7 +1105,7 @@ export class CertManager extends Construct {
       ],
     });
 
-    new KubeMutatingWebhookConfiguration(this, "webhookValidatingConfig", {
+    new KubeValidatingWebhookConfiguration(this, "webhookValidatingConfig", {
       metadata: {
         name: `${name}-webhook`,
         labels: webhookLabels,

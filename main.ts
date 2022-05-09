@@ -10,6 +10,7 @@ import { Metallb } from "./lib/metallb";
 import { IngressNginx } from "./lib/ingress-nginx";
 import { CertManager } from "./lib/cert-manager";
 import { CertManagerCrds } from "./lib/cert-manager-crds";
+import { CertificateAuthority } from "./lib/certificate-authority";
 
 export class MyChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
@@ -31,7 +32,15 @@ export class MyChart extends Chart {
 
     new IngressNginx(this, "nginx", {});
 
-    new CertManager(this, "cert-manager", {});
+    const resourceNamespace = "certificate-authority";
+
+    new CertManager(this, "cert-manager", {
+      resourceNamespace: resourceNamespace,
+    });
+
+    new CertificateAuthority(this, "serena-ca", {
+      namespace: resourceNamespace,
+    });
   }
 }
 
