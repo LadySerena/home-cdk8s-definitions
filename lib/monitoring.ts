@@ -3,11 +3,14 @@ import { StandardLabels } from "./standardLabels";
 import { PodMonitor, Prometheus } from "../imports/monitoring.coreos.com";
 import {
   IntOrString,
+  KubeDaemonSet,
   KubeIngress,
   KubeNamespace,
   KubeRoleBinding,
   KubeService,
   KubeServiceAccount,
+  Quantity,
+  Volume,
 } from "../imports/k8s";
 
 export interface MonitoringProps {
@@ -186,6 +189,121 @@ export class Monitoring extends Construct {
             },
           },
         ],
+      },
+    });
+
+    const nodeExporterLabels = Object.assign({}, labels, {
+      "app.kubernetes.io/component": "exporter",
+      "app.kubernetes.io/name": "node-exporter",
+    });
+
+    const sysfsVolume: Volume = {
+      hostPath: {
+        path: "/sys",
+        type: "Directory",
+      },
+      name: "sysfs",
+    };
+
+    const rootVolume: Volume = {
+      hostPath: {
+        path: "/",
+        type: "Directory",
+      },
+      name: "root",
+    };
+
+    const procfsVolume: Volume = {
+      hostPath: {
+        path: "/proc",
+        type: "Directory",
+      },
+      name: "procfs",
+    };
+
+    new KubeDaemonSet(this, "node-exporter", {
+      metadata: {
+        name: "node-exporter",
+        namespace: namespace,
+        labels: nodeExporterLabels,
+      },
+      spec: {
+        selector: {
+          matchLabels: nodeExporterLabels,
+        },
+        template: {
+          metadata: {
+            labels: nodeExporterLabels,
+          },
+          spec: {
+            containers: [
+              {
+                name: "node-exporter",
+                image: "quay.io/prometheus/node-exporter:v1.3.1",
+                args: ["--path.procfs=/host/proc", "--path.rootfs=/host/root", "--path.sysfs=/host/sys"],
+                ports: [
+                  {
+                    containerPort: 9100,
+                    protocol: "TCP",
+                    name: "web",
+                  },
+                ],
+                resources: {
+                  requests: {
+                    cpu: Quantity.fromString("100m"),
+                    memory: Quantity.fromString("200Mi"),
+                  },
+                },
+                volumeMounts: [
+                  {
+                    mountPath: "/host/sys",
+                    mountPropagation: "HostToContainer",
+                    name: sysfsVolume.name,
+                    readOnly: true,
+                  },
+                  {
+                    mountPath: "/host/root",
+                    mountPropagation: "HostToContainer",
+                    name: rootVolume.name,
+                    readOnly: true,
+                  },
+                  {
+                    mountPath: "/host/proc",
+                    mountPropagation: "HostToContainer",
+                    name: procfsVolume.name,
+                    readOnly: true,
+                  },
+                ],
+              },
+            ],
+            volumes: [rootVolume, sysfsVolume, procfsVolume],
+            tolerations: [
+              {
+                operator: "Exists",
+              },
+            ],
+          },
+        },
+      },
+    });
+
+    new PodMonitor(this, "node-exporter-monitor", {
+      metadata: {
+        name: "node-exporter-monitor",
+        namespace: namespace,
+        labels: monitoringLabels,
+      },
+      spec: {
+        podMetricsEndpoints: [
+          {
+            port: "web",
+            path: "/metrics",
+            scheme: "http",
+          },
+        ],
+        selector: {
+          matchLabels: nodeExporterLabels,
+        },
       },
     });
   }
