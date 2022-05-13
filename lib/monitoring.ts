@@ -1,6 +1,10 @@
 import { Construct } from "constructs";
 import { StandardLabels } from "./standardLabels";
-import { PodMonitor, Prometheus } from "../imports/monitoring.coreos.com";
+import {
+  PodMonitor,
+  Prometheus,
+  PrometheusSpecRemoteWriteWriteRelabelConfigsAction,
+} from "../imports/monitoring.coreos.com";
 import {
   IntOrString,
   KubeDaemonSet,
@@ -106,6 +110,34 @@ export class Monitoring extends Construct {
             "monitoring.serenacodes.com/rule-opt-in": "true",
           },
         },
+        remoteWrite: [
+          {
+            url: "https://prometheus-prod-10-prod-us-central-0.grafana.net/api/prom/push",
+            basicAuth: {
+              username: {
+                name: "grafana-cloud",
+                key: "username",
+              },
+              password: {
+                name: "grafana-cloud",
+                key: "password",
+              },
+            },
+            writeRelabelConfigs: [
+              {
+                sourceLabels: ["__name__"],
+                regex: ".*_bucket",
+                action: PrometheusSpecRemoteWriteWriteRelabelConfigsAction.DROP,
+              },
+              {
+                sourceLabels: ["fstype"],
+                regex:
+                  "(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs|tmpfs)",
+                action: PrometheusSpecRemoteWriteWriteRelabelConfigsAction.LABELKEEP,
+              },
+            ],
+          },
+        ],
         ruleNamespaceSelector: {
           matchLabels: {
             "monitoring.serenacodes.com/rule-opt-in": "true",
@@ -240,7 +272,18 @@ export class Monitoring extends Construct {
               {
                 name: "node-exporter",
                 image: "quay.io/prometheus/node-exporter:v1.3.1",
-                args: ["--path.procfs=/host/proc", "--path.rootfs=/host/root", "--path.sysfs=/host/sys"],
+                args: [
+                  "--path.procfs=/host/proc",
+                  "--path.rootfs=/host/root",
+                  "--path.sysfs=/host/sys",
+                  "--collector.disable-defaults",
+                  "--collector.filesystem",
+                  "--collector.meminfo",
+                  "--collector.hwmon",
+                  "--collector.cpufreq",
+                  "--collector.loadavg",
+                  "--web.disable-exporter-metrics",
+                ],
                 ports: [
                   {
                     containerPort: 9100,
