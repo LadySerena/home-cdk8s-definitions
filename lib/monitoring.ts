@@ -2,8 +2,8 @@ import { Construct } from "constructs";
 import { StandardLabels } from "./standardLabels";
 import {
   PodMonitor,
+  PodMonitorSpecPodMetricsEndpointsMetricRelabelingsAction,
   Prometheus,
-  PrometheusSpecRemoteWriteWriteRelabelConfigsAction,
 } from "../imports/monitoring.coreos.com";
 import {
   IntOrString,
@@ -123,19 +123,6 @@ export class Monitoring extends Construct {
                 key: "password",
               },
             },
-            writeRelabelConfigs: [
-              {
-                sourceLabels: ["__name__"],
-                regex: ".*_bucket",
-                action: PrometheusSpecRemoteWriteWriteRelabelConfigsAction.DROP,
-              },
-              {
-                sourceLabels: ["fstype"],
-                regex:
-                  "(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs|tmpfs)",
-                action: PrometheusSpecRemoteWriteWriteRelabelConfigsAction.LABELKEEP,
-              },
-            ],
           },
         ],
         ruleNamespaceSelector: {
@@ -158,6 +145,13 @@ export class Monitoring extends Construct {
             port: "web",
             path: "/metrics",
             scheme: "http",
+            metricRelabelings: [
+              {
+                sourceLabels: ["__name__"],
+                regex: ".+_bucket",
+                action: PodMonitorSpecPodMetricsEndpointsMetricRelabelingsAction.DROP,
+              },
+            ],
           },
           {
             port: "reloader-web",
@@ -342,6 +336,13 @@ export class Monitoring extends Construct {
             port: "web",
             path: "/metrics",
             scheme: "http",
+            metricRelabelings: [
+              {
+                sourceLabels: ["fstype"],
+                regex: "(ext4|bpf|vfat)",
+                action: PodMonitorSpecPodMetricsEndpointsMetricRelabelingsAction.KEEP,
+              },
+            ],
           },
         ],
         selector: {
