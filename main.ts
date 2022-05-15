@@ -12,6 +12,7 @@ import { Cilium } from "./lib/cilium";
 import { CertManager } from "./lib/cert-manager";
 import { CertManagerCrds } from "./lib/cert-manager-crds";
 import { CertificateAuthority } from "./lib/certificate-authority";
+import { HelloWorld } from "./lib/hello-world-service";
 
 export class MyChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
@@ -63,8 +64,20 @@ export class CertManagerCrdInstall extends Chart {
   }
 }
 
+export class Demo extends Chart {
+  constructor(scope: Construct, id: string, props: ChartProps = {}) {
+    super(scope, id, props);
+
+    new HelloWorld(this, "hello-world", {
+      name: "hello-world-service",
+      namespace: "hello-world-service",
+    });
+  }
+}
+
 const app = new App();
 new MyChart(app, "home-kubernetes-js");
 new PrometheusCrds(app, "prometheus-crds");
 new CertManagerCrdInstall(app, "cert-manager-crds");
+new Demo(app, "demo");
 app.synth();

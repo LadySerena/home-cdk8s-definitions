@@ -374,7 +374,7 @@ export class IngressNginx extends Construct {
                     value: "/usr/local/lib/libmimalloc.so",
                   },
                 ],
-                image: "gcr.io/k8s-staging-ingress-nginx/controller-chroot:v1.2.0",
+                image: "gcr.io/k8s-staging-ingress-nginx/controller:v1.2.0",
                 imagePullPolicy: "IfNotPresent",
                 lifecycle: {
                   preStop: {

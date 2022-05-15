@@ -7,10 +7,10 @@ import {
 } from "../imports/monitoring.coreos.com";
 import {
   IntOrString,
+  KubeClusterRoleBinding,
   KubeDaemonSet,
   KubeIngress,
   KubeNamespace,
-  KubeRoleBinding,
   KubeService,
   KubeServiceAccount,
   Quantity,
@@ -47,7 +47,7 @@ export class Monitoring extends Construct {
       },
     });
 
-    new KubeRoleBinding(this, "prometheus-binding", {
+    new KubeClusterRoleBinding(this, "prometheus-binding", {
       metadata: {
         name: "prometheus",
         namespace: namespace,
@@ -99,6 +99,11 @@ export class Monitoring extends Construct {
         serviceMonitorNamespaceSelector: {
           matchLabels: {
             "monitoring.serenacodes.com/service-monitor-opt-in": "true",
+          },
+        },
+        podMonitorNamespaceSelector: {
+          matchLabels: {
+            "monitoring.serenacodes.com/pod-monitor-opt-in": "true",
           },
         },
         version: "v2.33.5",
