@@ -103,6 +103,9 @@ export class Monitoring extends Construct {
             },
           },
         },
+        securityContext: {
+          fsGroup: 65534,
+        },
         podMetadata: {
           labels: labels,
         },
