@@ -13,6 +13,7 @@ import { CertManager } from "./lib/cert-manager";
 import { CertManagerCrds } from "./lib/cert-manager-crds";
 import { CertificateAuthority } from "./lib/certificate-authority";
 import { HelloWorld } from "./lib/hello-world-service";
+import { StorageProvider } from "./lib/storageProvider";
 
 export class MyChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
@@ -27,8 +28,6 @@ export class MyChart extends Chart {
     new MetricsServer(this, "metrics-server", {});
 
     new PrometheusOperator(this, "prometheus-operator", {});
-
-    new Monitoring(this, "serena-monitoring", {});
 
     new Metallb(this, "metallb", {});
 
@@ -45,6 +44,8 @@ export class MyChart extends Chart {
     });
 
     new Cilium(this, "cilium", { clusterIssuer: CertAuthority.issuer });
+
+    new Monitoring(this, "serena-monitoring", {});
   }
 }
 
@@ -75,9 +76,18 @@ export class Demo extends Chart {
   }
 }
 
+export class Storage extends Chart {
+  constructor(scope: Construct, id: string, props: ChartProps = {}) {
+    super(scope, id, props);
+
+    new StorageProvider(this, "storage", {});
+  }
+}
+
 const app = new App();
 new MyChart(app, "home-kubernetes-js");
 new PrometheusCrds(app, "prometheus-crds");
 new CertManagerCrdInstall(app, "cert-manager-crds");
+new Storage(app, "storage");
 new Demo(app, "demo");
 app.synth();

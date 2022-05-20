@@ -4,6 +4,7 @@ import {
   PodMonitor,
   PodMonitorSpecPodMetricsEndpointsMetricRelabelingsAction,
   Prometheus,
+  PrometheusSpecStorageVolumeClaimTemplateSpecResourcesRequests,
 } from "../imports/monitoring.coreos.com";
 import {
   IntOrString,
@@ -13,6 +14,7 @@ import {
   KubeNamespace,
   KubeService,
   KubeServiceAccount,
+  KubeStorageClass,
   Quantity,
   Volume,
 } from "../imports/k8s";
@@ -21,6 +23,7 @@ export interface MonitoringProps {
   readonly name?: string;
   readonly labels?: { [key: string]: string };
   readonly namespace?: string;
+  readonly storageClass?: KubeStorageClass;
 }
 
 export class Monitoring extends Construct {
@@ -83,6 +86,23 @@ export class Monitoring extends Construct {
       },
       spec: {
         serviceAccountName: prometheusServiceAccount.name,
+        storage: {
+          volumeClaimTemplate: {
+            metadata: {
+              name: "prometheus-storage",
+              labels: labels,
+            },
+            spec: {
+              storageClassName: "longhorn",
+              accessModes: ["ReadWriteOnce"],
+              resources: {
+                requests: {
+                  storage: PrometheusSpecStorageVolumeClaimTemplateSpecResourcesRequests.fromString("1Gi"),
+                },
+              },
+            },
+          },
+        },
         podMetadata: {
           labels: labels,
         },

@@ -49,7 +49,7 @@ export class HelloWorld extends Construct {
             containers: [
               {
                 name: name,
-                image: "us.gcr.io/telvanni-platform/hello-world-service:0.0.2",
+                image: "us.gcr.io/telvanni-platform/hello-world-service:rust-2",
                 ports: [
                   {
                     name: "web",
