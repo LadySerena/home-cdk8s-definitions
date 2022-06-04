@@ -5,9 +5,11 @@ import {
   PodMonitorSpecPodMetricsEndpointsMetricRelabelingsAction,
   Prometheus,
   PrometheusSpecStorageVolumeClaimTemplateSpecResourcesRequests,
+  ServiceMonitor,
 } from "../imports/monitoring.coreos.com";
 import {
   IntOrString,
+  KubeClusterRole,
   KubeClusterRoleBinding,
   KubeDaemonSet,
   KubeIngress,
@@ -18,6 +20,7 @@ import {
   Quantity,
   Volume,
 } from "../imports/k8s";
+import { readVerbs } from "./Constants";
 
 export interface MonitoringProps {
   readonly name?: string;
@@ -42,6 +45,30 @@ export class Monitoring extends Construct {
       "monitoring.serenacodes.com/pod-monitor-opt-in": "true",
     });
 
+    const scrapeClusterRole = new KubeClusterRole(this, "prometheus-scrape-role", {
+      metadata: {
+        name,
+        namespace,
+        labels,
+      },
+      rules: [
+        {
+          apiGroups: [""],
+          resources: ["nodes", "services", "pods", "endpoints", "configmaps"],
+          verbs: readVerbs,
+        },
+        {
+          nonResourceUrLs: ["/metrics", "/metrics/cadvisor"],
+          verbs: ["get"],
+        },
+        {
+          apiGroups: [""],
+          resources: ["nodes/metrics"],
+          verbs: ["get"],
+        },
+      ],
+    });
+
     const prometheusServiceAccount = new KubeServiceAccount(this, "prometheus-service-account", {
       metadata: {
         name: "prometheus",
@@ -57,9 +84,9 @@ export class Monitoring extends Construct {
         labels: labels,
       },
       roleRef: {
-        kind: "ClusterRole",
-        name: "view",
-        apiGroup: "rbac.authorization.k8s.io",
+        kind: scrapeClusterRole.kind,
+        name: scrapeClusterRole.name,
+        apiGroup: scrapeClusterRole.apiGroup,
       },
       subjects: [
         {
@@ -97,7 +124,7 @@ export class Monitoring extends Construct {
               accessModes: ["ReadWriteOnce"],
               resources: {
                 requests: {
-                  storage: PrometheusSpecStorageVolumeClaimTemplateSpecResourcesRequests.fromString("1Gi"),
+                  storage: PrometheusSpecStorageVolumeClaimTemplateSpecResourcesRequests.fromString("2Gi"),
                 },
               },
             },
@@ -109,6 +136,7 @@ export class Monitoring extends Construct {
         podMetadata: {
           labels: labels,
         },
+        logLevel: "debug",
         serviceMonitorSelector: {
           matchLabels: {
             "monitoring.serenacodes.com/service-monitor-opt-in": "true",
@@ -375,6 +403,38 @@ export class Monitoring extends Construct {
         ],
         selector: {
           matchLabels: nodeExporterLabels,
+        },
+      },
+    });
+
+    const tokenPath = "/var/run/secrets/kubernetes.io/serviceaccount/token";
+
+    new ServiceMonitor(this, "kubelet-monitor", {
+      metadata: {
+        name: "kubelet",
+        namespace,
+        labels: monitoringLabels,
+      },
+      spec: {
+        endpoints: [
+          {
+            port: "https-metrics",
+            scheme: "https",
+            interval: "30s",
+            tlsConfig: {
+              insecureSkipVerify: true,
+            },
+            path: "/metrics",
+            bearerTokenFile: tokenPath,
+          },
+        ],
+        selector: {
+          matchLabels: {
+            "k8s-app": "kubelet",
+          },
+        },
+        namespaceSelector: {
+          matchNames: ["kube-system"],
         },
       },
     });
