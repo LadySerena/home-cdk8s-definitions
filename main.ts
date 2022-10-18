@@ -1,70 +1,46 @@
 import { Construct } from "constructs";
 import { App, Chart, ChartProps } from "cdk8s";
-
-import { SystemRbac } from "./lib/system-rbac";
-import { MetricsServer } from "./lib/metrics-server";
-import { PrometheusOperator } from "./lib/prometheus-operator";
-import { PrometheusOperatorCrds } from "./lib/prometheus-operator-crds";
-import { Monitoring } from "./lib/monitoring";
-import { Metallb } from "./lib/metallb";
-import { IngressNginx } from "./lib/ingress-nginx";
 import { Cilium } from "./lib/cilium";
 import { CertManager } from "./lib/cert-manager";
 import { CertManagerCrds } from "./lib/cert-manager-crds";
-import { CertificateAuthority } from "./lib/certificate-authority";
 
-export class MyChart extends Chart {
+const certManagerVersion = "v1.9.1";
+
+export class CiliumChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
     super(scope, id, props);
 
+    //TODO test is failing because cilium randomly generates certs for resources
     // define resources here
+    new Cilium(this, "cilium");
+  }
+}
 
-    new SystemRbac(this, "serena-rbac", {
-      user: "serena",
-      resourcePrefix: "tel",
-    });
-    new MetricsServer(this, "metrics-server", {});
+export class CertManagerChart extends Chart {
+  constructor(scope: Construct, id: string, props: ChartProps = {}) {
+    super(scope, id, props);
 
-    new PrometheusOperator(this, "prometheus-operator", {});
-
-    new Monitoring(this, "serena-monitoring", {});
-
-    new Metallb(this, "metallb", {});
-
-    new IngressNginx(this, "nginx", {});
-
-    const resourceNamespace = "certificate-authority";
-
+    // TODO sort out auth to gcp for dns challenges https://github.com/salrashid123/k8s_federation_with_gcp
     new CertManager(this, "cert-manager", {
-      resourceNamespace: resourceNamespace,
+      version: certManagerVersion,
     });
-
-    const CertAuthority = new CertificateAuthority(this, "serena-ca", {
-      namespace: resourceNamespace,
-    });
-
-    new Cilium(this, "cilium", { clusterIssuer: CertAuthority.issuer });
   }
 }
 
-export class PrometheusCrds extends Chart {
+export class CertManagerCrdsChart extends Chart {
   constructor(scope: Construct, id: string, props: ChartProps = {}) {
     super(scope, id, props);
 
-    new PrometheusOperatorCrds(this, "prometheus-crds");
-  }
-}
-
-export class CertManagerCrdInstall extends Chart {
-  constructor(scope: Construct, id: string, props: ChartProps = {}) {
-    super(scope, id, props);
-
-    new CertManagerCrds(this, "cert-manager-crds");
+    new CertManagerCrds(this, "cert-manager", {
+      version: certManagerVersion,
+    });
   }
 }
 
 const app = new App();
-new MyChart(app, "home-kubernetes-js");
-new PrometheusCrds(app, "prometheus-crds");
-new CertManagerCrdInstall(app, "cert-manager-crds");
+const network = new CiliumChart(app, "cilium");
+const certmanager = new CertManagerChart(app, "cert-manager");
+const certmanagercrds = new CertManagerCrdsChart(app, "cert-manager-crds");
+certmanager.addDependency(certmanagercrds);
+network.addDependency(certmanager);
 app.synth();

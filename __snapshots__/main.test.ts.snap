@@ -1,4385 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Placeholder Empty 1`] = `
-Array [
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "system-rbac",
-      },
-      "name": "tel-serena-rolebinding",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cluster-admin",
-    },
-    "subjects": Array [
-      Object {
-        "apiGroup": "rbac.authorization.k8s.io",
-        "kind": "User",
-        "name": "serena",
-      },
-    ],
-  },
-  Object {
+[
+  {
     "apiVersion": "v1",
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-      },
-      "name": "metrics-server",
-      "namespace": "kube-system",
-    },
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-        "rbac.authorization.k8s.io/aggregate-to-admin": "true",
-        "rbac.authorization.k8s.io/aggregate-to-edit": "true",
-        "rbac.authorization.k8s.io/aggregate-to-view": "true",
-      },
-      "name": "system:metrics-server-aggregated-reader",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "metrics.k8s.io",
-        ],
-        "resources": Array [
-          "pods",
-          "nodes",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-      },
-      "name": "system:metrics-server",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "nodes/metrics",
-        ],
-        "verbs": Array [
-          "get",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "pods",
-          "nodes",
-          "namespaces",
-          "configmaps",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-      },
-      "name": "metrics-server:system:auth-delegator",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "system:auth-delegator",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "metrics-server",
-        "namespace": "kube-system",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-      },
-      "name": "system:metrics-server",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "system:metrics-server",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "metrics-server",
-        "namespace": "kube-system",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-      },
-      "name": "metrics-server-auth-reader",
-      "namespace": "kube-system",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "extension-apiserver-authentication-reader",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "metrics-server",
-        "namespace": "kube-system",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "name": "metrics-server",
-      "namespace": "kube-system",
-    },
-    "spec": Object {
-      "ports": Array [
-        Object {
-          "name": "https",
-          "port": 443,
-          "protocol": "TCP",
-          "targetPort": "https",
-        },
-      ],
-      "selector": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-      },
-      "type": "ClusterIP",
-    },
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-      },
-      "name": "metrics-server",
-      "namespace": "kube-system",
-    },
-    "spec": Object {
-      "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "metrics-server",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "metrics-server",
-          },
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "--secure-port=4443",
-                "--cert-dir=/tmp",
-                "--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname",
-                "--kubelet-use-node-status-port",
-                "--metric-resolution=30s",
-                "--kubelet-insecure-tls",
-              ],
-              "image": "k8s.gcr.io/metrics-server/metrics-server:v0.6.1",
-              "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "failureThreshold": 4,
-                "httpGet": Object {
-                  "path": "/livez",
-                  "port": "https",
-                  "scheme": "HTTPS",
-                },
-                "initialDelaySeconds": 15,
-                "periodSeconds": 10,
-              },
-              "name": "metrics-server",
-              "ports": Array [
-                Object {
-                  "containerPort": 4443,
-                  "name": "https",
-                  "protocol": "TCP",
-                },
-              ],
-              "readinessProbe": Object {
-                "failureThreshold": 3,
-                "httpGet": Object {
-                  "path": "/readyz",
-                  "port": "https",
-                  "scheme": "HTTPS",
-                },
-                "initialDelaySeconds": 20,
-                "periodSeconds": 10,
-              },
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-                "readOnlyRootFilesystem": true,
-                "runAsNonRoot": true,
-                "runAsUser": 1000,
-              },
-              "volumeMounts": Array [
-                Object {
-                  "mountPath": "/tmp",
-                  "name": "tmp",
-                },
-              ],
-            },
-          ],
-          "priorityClassName": "system-cluster-critical",
-          "serviceAccountName": "metrics-server",
-          "volumes": Array [
-            Object {
-              "emptyDir": Object {},
-              "name": "tmp",
-            },
-          ],
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "apiregistration.k8s.io/v1",
-    "kind": "APIService",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metrics-server",
-      },
-      "name": "v1beta1.metrics.k8s.io",
-    },
-    "spec": Object {
-      "group": "metrics.k8s.io",
-      "groupPriorityMinimum": 100,
-      "insecureSkipTLSVerify": true,
-      "service": Object {
-        "name": "metrics-server",
-        "namespace": "kube-system",
-      },
-      "version": "v1beta1",
-      "versionPriority": 100,
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Namespace",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus-operator",
-      },
-      "name": "prometheus-system",
-    },
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus-operator",
-      },
-      "name": "prometheus-operator",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "monitoring.coreos.com",
-        ],
-        "resources": Array [
-          "alertmanagers",
-          "alertmanagers/finalizers",
-          "alertmanagerconfigs",
-          "prometheuses",
-          "prometheuses/finalizers",
-          "thanosrulers",
-          "thanosrulers/finalizers",
-          "servicemonitors",
-          "podmonitors",
-          "probes",
-          "prometheusrules",
-        ],
-        "verbs": Array [
-          "*",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "apps",
-        ],
-        "resources": Array [
-          "statefulsets",
-        ],
-        "verbs": Array [
-          "*",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "configmaps",
-          "secrets",
-        ],
-        "verbs": Array [
-          "*",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "pods",
-        ],
-        "verbs": Array [
-          "list",
-          "delete",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "services",
-          "services/finalizers",
-          "endpoints",
-        ],
-        "verbs": Array [
-          "get",
-          "create",
-          "update",
-          "delete",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "nodes",
-        ],
-        "verbs": Array [
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "namespaces",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingresses",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "v1",
-    "automountServiceAccountToken": false,
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus-operator",
-      },
-      "name": "prometheus-operator",
-      "namespace": "prometheus-system",
-    },
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus-operator",
-      },
-      "name": "prometheus-operator",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "prometheus-operator",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "prometheus-operator",
-        "namespace": "prometheus-system",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus-operator",
-      },
-      "name": "prometheus-operator",
-      "namespace": "prometheus-system",
-    },
-    "spec": Object {
-      "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "prometheus-operator",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "annotations": Object {
-            "kubectl.kubernetes.io/default-container": "prometheus-operator",
-          },
-          "labels": Object {
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "prometheus-operator",
-          },
-        },
-        "spec": Object {
-          "automountServiceAccountToken": true,
-          "containers": Array [
-            Object {
-              "args": Array [
-                "--kubelet-service=kube-system/kubelet",
-                "--prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.55.1",
-              ],
-              "image": "quay.io/prometheus-operator/prometheus-operator:v0.55.1",
-              "name": "prometheus-operator",
-              "ports": Array [
-                Object {
-                  "containerPort": 8080,
-                  "name": "http",
-                },
-              ],
-              "resources": Object {
-                "limits": Object {
-                  "cpu": "200m",
-                  "memory": "100Mi",
-                },
-                "requests": Object {
-                  "cpu": "100m",
-                  "memory": "100Mi",
-                },
-              },
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-                "capabilities": Object {
-                  "drop": Array [
-                    "ALL",
-                  ],
-                },
-                "readOnlyRootFilesystem": true,
-              },
-            },
-          ],
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "securityContext": Object {
-            "runAsNonRoot": true,
-            "runAsUser": 65534,
-          },
-          "serviceAccountName": "prometheus-operator",
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus-operator",
-      },
-      "name": "prometheus-operator",
-      "namespace": "prometheus-system",
-    },
-    "spec": Object {
-      "clusterIP": "None",
-      "ports": Array [
-        Object {
-          "name": "http",
-          "port": 8080,
-          "targetPort": "http",
-        },
-      ],
-      "selector": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus-operator",
-      },
-    },
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus-operator",
-        "rbac.serenacodes.com/aggregate-to-cluster-admin": "true",
-      },
-      "name": "prometheus-crd-admin-roles",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "monitoring.coreos.com",
-        ],
-        "resources": Array [
-          "alertmanagerconfigs",
-          "alertmanagers",
-          "podmonitors",
-          "probes",
-          "prometheuses",
-          "prometheusrules",
-          "servicemonitors",
-          "thanosrulers",
-        ],
-        "verbs": Array [
-          "*",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus",
-      },
-      "name": "prometheus",
-      "namespace": "monitoring",
-    },
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus",
-      },
-      "name": "prometheus",
-      "namespace": "monitoring",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "view",
-    },
-    "subjects": Array [
-      Object {
-        "apiGroup": "",
-        "kind": "ServiceAccount",
-        "name": "prometheus",
-        "namespace": "monitoring",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Namespace",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus",
-        "monitoring.serenacodes.com/pod-monitor-opt-in": "true",
-        "monitoring.serenacodes.com/rule-opt-in": "true",
-        "monitoring.serenacodes.com/service-monitor-opt-in": "true",
-      },
-      "name": "monitoring",
-    },
-  },
-  Object {
-    "apiVersion": "monitoring.coreos.com/v1",
-    "kind": "Prometheus",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus",
-      },
-      "name": "prometheus",
-      "namespace": "monitoring",
-    },
-    "spec": Object {
-      "podMetadata": Object {
-        "labels": Object {
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "prometheus",
-        },
-      },
-      "podMonitorSelector": Object {
-        "matchLabels": Object {
-          "monitoring.serenacodes.com/pod-monitor-opt-in": "true",
-        },
-      },
-      "replicas": 1,
-      "retention": "2h",
-      "ruleNamespaceSelector": Object {
-        "matchLabels": Object {
-          "monitoring.serenacodes.com/rule-opt-in": "true",
-        },
-      },
-      "ruleSelector": Object {
-        "matchLabels": Object {
-          "monitoring.serenacodes.com/rule-opt-in": "true",
-        },
-      },
-      "serviceAccountName": "prometheus",
-      "serviceMonitorNamespaceSelector": Object {
-        "matchLabels": Object {
-          "monitoring.serenacodes.com/service-monitor-opt-in": "true",
-        },
-      },
-      "serviceMonitorSelector": Object {
-        "matchLabels": Object {
-          "monitoring.serenacodes.com/service-monitor-opt-in": "true",
-        },
-      },
-      "version": "v2.33.5",
-      "walCompression": true,
-    },
-  },
-  Object {
-    "apiVersion": "monitoring.coreos.com/v1",
-    "kind": "PodMonitor",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus",
-        "monitoring.serenacodes.com/pod-monitor-opt-in": "true",
-        "monitoring.serenacodes.com/rule-opt-in": "true",
-        "monitoring.serenacodes.com/service-monitor-opt-in": "true",
-      },
-      "name": "self-monitor",
-      "namespace": "monitoring",
-    },
-    "spec": Object {
-      "podMetricsEndpoints": Array [
-        Object {
-          "path": "/metrics",
-          "port": "web",
-          "scheme": "http",
-        },
-        Object {
-          "path": "/metrics",
-          "port": "reloader-web",
-          "scheme": "http",
-        },
-      ],
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/name": "prometheus",
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus",
-      },
-      "name": "prometheus-nodeport",
-      "namespace": "monitoring",
-    },
-    "spec": Object {
-      "ports": Array [
-        Object {
-          "port": 9090,
-          "targetPort": "web",
-        },
-      ],
-      "selector": Object {
-        "app.kubernetes.io/name": "prometheus",
-      },
-    },
-  },
-  Object {
-    "apiVersion": "networking.k8s.io/v1",
-    "kind": "Ingress",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "prometheus",
-      },
-      "name": "monitoring-ingress",
-      "namespace": "monitoring",
-    },
-    "spec": Object {
-      "ingressClassName": "nginx",
-      "rules": Array [
-        Object {
-          "host": "prometheus.internal.serenacodes.com",
-          "http": Object {
-            "paths": Array [
-              Object {
-                "backend": Object {
-                  "service": Object {
-                    "name": "prometheus-nodeport",
-                    "port": Object {
-                      "name": "web",
-                    },
-                  },
-                },
-                "path": "/",
-                "pathType": "Prefix",
-              },
-            ],
-          },
-        },
-      ],
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Namespace",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "metallb-system",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "controller",
-      "namespace": "metallb-system",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "speaker",
-      "namespace": "metallb-system",
-    },
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "metallb-system:controller",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "services",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "services/status",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "policy",
-        ],
-        "resourceNames": Array [
-          "controller",
-        ],
-        "resources": Array [
-          "podsecuritypolicies",
-        ],
-        "verbs": Array [
-          "use",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "metallb-system:speaker",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "services",
-          "endpoints",
-          "nodes",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "discovery.k8s.io",
-        ],
-        "resources": Array [
-          "endpointslices",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "policy",
-        ],
-        "resourceNames": Array [
-          "speaker",
-        ],
-        "resources": Array [
-          "podsecuritypolicies",
-        ],
-        "verbs": Array [
-          "use",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "Role",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "config-watcher",
-      "namespace": "metallb-system",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "configmaps",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "Role",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "pod-lister",
-      "namespace": "metallb-system",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "pods",
-        ],
-        "verbs": Array [
-          "list",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "Role",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "controller",
-      "namespace": "metallb-system",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "create",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resourceNames": Array [
-          "memberlist",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "list",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "apps",
-        ],
-        "resourceNames": Array [
-          "controller",
-        ],
-        "resources": Array [
-          "deployments",
-        ],
-        "verbs": Array [
-          "get",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "metallb-system:controller",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "metallb-system:controller",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "controller",
-        "namespace": "metallb-system",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "metallb-system:speaker",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "metallb-system:speaker",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "speaker",
-        "namespace": "metallb-system",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "config-watcher",
-      "namespace": "metallb-system",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "config-watcher",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "controller",
-      },
-      Object {
-        "kind": "ServiceAccount",
-        "name": "speaker",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "pod-lister",
-      "namespace": "metallb-system",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "pod-lister",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "speaker",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "controller",
-      "namespace": "metallb-system",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "controller",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "controller",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "DaemonSet",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/component": "speaker",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "speaker",
-      "namespace": "metallb-system",
-    },
-    "spec": Object {
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "speaker",
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "metallb",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "annotations": Object {
-            "prometheus.io/port": "7472",
-            "prometheus.io/scrape": "true",
-          },
-          "labels": Object {
-            "app.kubernetes.io/component": "speaker",
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "metallb",
-          },
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "--port=7472",
-                "--config=config",
-                "--log-level=info",
-              ],
-              "env": Array [
-                Object {
-                  "name": "METALLB_NODE_NAME",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "spec.nodeName",
-                    },
-                  },
-                },
-                Object {
-                  "name": "METALLB_HOST",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "status.hostIP",
-                    },
-                  },
-                },
-                Object {
-                  "name": "METALLB_ML_BIND_ADDR",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "status.podIP",
-                    },
-                  },
-                },
-                Object {
-                  "name": "METALLB_ML_LABELS",
-                  "value": "app=metallb,component=speaker",
-                },
-                Object {
-                  "name": "METALLB_ML_SECRET_KEY",
-                  "valueFrom": Object {
-                    "secretKeyRef": Object {
-                      "key": "secretkey",
-                      "name": "memberlist",
-                    },
-                  },
-                },
-              ],
-              "image": "quay.io/metallb/speaker:v0.12.1",
-              "livenessProbe": Object {
-                "failureThreshold": 3,
-                "httpGet": Object {
-                  "path": "/metrics",
-                  "port": "monitoring",
-                },
-                "initialDelaySeconds": 10,
-                "periodSeconds": 10,
-                "successThreshold": 1,
-                "timeoutSeconds": 1,
-              },
-              "name": "speaker",
-              "ports": Array [
-                Object {
-                  "containerPort": 7472,
-                  "name": "monitoring",
-                },
-                Object {
-                  "containerPort": 7946,
-                  "name": "memberlist-tcp",
-                },
-                Object {
-                  "containerPort": 7946,
-                  "name": "memberlist-udp",
-                  "protocol": "UDP",
-                },
-              ],
-              "readinessProbe": Object {
-                "failureThreshold": 3,
-                "httpGet": Object {
-                  "path": "/metrics",
-                  "port": "monitoring",
-                },
-                "initialDelaySeconds": 10,
-                "periodSeconds": 10,
-                "successThreshold": 1,
-                "timeoutSeconds": 1,
-              },
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-                "capabilities": Object {
-                  "add": Array [
-                    "NET_RAW",
-                  ],
-                  "drop": Array [
-                    "ALL",
-                  ],
-                },
-                "readOnlyRootFilesystem": true,
-              },
-            },
-          ],
-          "hostNetwork": true,
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "serviceAccountName": "speaker",
-          "terminationGracePeriodSeconds": 2,
-          "tolerations": Array [
-            Object {
-              "effect": "NoSchedule",
-              "key": "node-role.kubernetes.io/master",
-              "operator": "Exists",
-            },
-          ],
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/component": "controller",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "metallb",
-      },
-      "name": "controller",
-      "namespace": "metallb-system",
-    },
-    "spec": Object {
-      "revisionHistoryLimit": 3,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "controller",
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "metallb",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "annotations": Object {
-            "prometheus.io/port": "7472",
-            "prometheus.io/scrape": "true",
-          },
-          "labels": Object {
-            "app.kubernetes.io/component": "controller",
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "metallb",
-          },
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "--port=7472",
-                "--config=config",
-                "--log-level=info",
-              ],
-              "env": Array [
-                Object {
-                  "name": "METALLB_ML_SECRET_NAME",
-                  "value": "memberlist",
-                },
-                Object {
-                  "name": "METALLB_DEPLOYMENT",
-                  "value": "controller",
-                },
-              ],
-              "image": "quay.io/metallb/controller:v0.12.1",
-              "livenessProbe": Object {
-                "failureThreshold": 3,
-                "httpGet": Object {
-                  "path": "/metrics",
-                  "port": "monitoring",
-                },
-                "initialDelaySeconds": 10,
-                "periodSeconds": 10,
-                "successThreshold": 1,
-                "timeoutSeconds": 1,
-              },
-              "name": "controller",
-              "ports": Array [
-                Object {
-                  "containerPort": 7472,
-                  "name": "monitoring",
-                },
-              ],
-              "readinessProbe": Object {
-                "failureThreshold": 3,
-                "httpGet": Object {
-                  "path": "/metrics",
-                  "port": "monitoring",
-                },
-                "initialDelaySeconds": 10,
-                "periodSeconds": 10,
-                "successThreshold": 1,
-                "timeoutSeconds": 1,
-              },
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-                "capabilities": Object {
-                  "drop": Array [
-                    "all",
-                  ],
-                },
-                "readOnlyRootFilesystem": true,
-              },
-            },
-          ],
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "securityContext": Object {
-            "fsGroup": 65534,
-            "runAsNonRoot": true,
-            "runAsUser": 65534,
-          },
-          "serviceAccountName": "controller",
-          "terminationGracePeriodSeconds": 0,
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "data": Object {
-      "config": "address-pools:
-- name: default
-  protocol: layer2
-  addresses:
-  - 10.1.192.0/18
-",
-    },
-    "kind": "ConfigMap",
-    "metadata": Object {
-      "name": "config",
-      "namespace": "metallb-system",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Namespace",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx",
-      "namespace": "ingress-nginx",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-admission",
-      "namespace": "ingress-nginx",
-    },
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "Role",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx:ingress-nginx",
-      "namespace": "ingress-nginx",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "namespaces",
-        ],
-        "verbs": Array [
-          "get",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "configmaps",
-          "pods",
-          "secrets",
-          "endpoints",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "services",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingresses",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingresses/status",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingressclasses",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resourceNames": Array [
-          "ingress-controller-leader",
-        ],
-        "resources": Array [
-          "configmaps",
-        ],
-        "verbs": Array [
-          "get",
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "configmaps",
-        ],
-        "verbs": Array [
-          "create",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "Role",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx:ingress-nginx-admission",
-      "namespace": "ingress-nginx",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "create",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx:ingress-nginx",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "configmaps",
-          "endpoints",
-          "nodes",
-          "pods",
-          "secrets",
-          "namespaces",
-        ],
-        "verbs": Array [
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "nodes",
-        ],
-        "verbs": Array [
-          "get",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "services",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingresses",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingresses/status",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingressclasses",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx:ingress-nginx-admission",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "admissionregistration.k8s.io",
-        ],
-        "resources": Array [
-          "validatingwebhookconfigurations",
-        ],
-        "verbs": Array [
-          "get",
-          "update",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx",
-      "namespace": "ingress-nginx",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "ingress-nginx:ingress-nginx",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "ingress-nginx",
-        "namespace": "ingress-nginx",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-admission",
-      "namespace": "ingress-nginx",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "ingress-nginx:ingress-nginx-admission",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "ingress-nginx-admission",
-        "namespace": "ingress-nginx",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx:ingress-nginx",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "ingress-nginx:ingress-nginx",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "ingress-nginx",
-        "namespace": "ingress-nginx",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx:ingress-nginx-admission",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "ingress-nginx:ingress-nginx-admission",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "ingress-nginx-admission",
-        "namespace": "ingress-nginx",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "v1",
-    "data": Object {
-      "allow-snippet-annotations": "true",
-    },
-    "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-controller",
-      "namespace": "ingress-nginx",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-controller",
-      "namespace": "ingress-nginx",
-    },
-    "spec": Object {
-      "ports": Array [
-        Object {
-          "appProtocol": "http",
-          "name": "http",
-          "port": 80,
-          "protocol": "TCP",
-          "targetPort": "http",
-        },
-        Object {
-          "appProtocol": "https",
-          "name": "https",
-          "port": 443,
-          "protocol": "TCP",
-          "targetPort": "https",
-        },
-      ],
-      "selector": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "type": "LoadBalancer",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-controller-admission",
-      "namespace": "ingress-nginx",
-    },
-    "spec": Object {
-      "ports": Array [
-        Object {
-          "appProtocol": "https",
-          "name": "https-webhook",
-          "port": 443,
-          "targetPort": "webhook",
-        },
-      ],
-      "selector": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "type": "ClusterIP",
-    },
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-controller",
-      "namespace": "ingress-nginx",
-    },
-    "spec": Object {
-      "minReadySeconds": 0,
-      "revisionHistoryLimit": 10,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "ingress-nginx",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "ingress-nginx",
-          },
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "/nginx-ingress-controller",
-                "--election-id=ingress-controller-leader",
-                "--controller-class=k8s.io/ingress-nginx",
-                "--ingress-class=nginx",
-                "--configmap=$(POD_NAMESPACE)/ingress-nginx-controller",
-                "--validating-webhook=:8443",
-                "--validating-webhook-certificate=/usr/local/certificates/cert",
-                "--validating-webhook-key=/usr/local/certificates/key",
-              ],
-              "env": Array [
-                Object {
-                  "name": "POD_NAME",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "metadata.name",
-                    },
-                  },
-                },
-                Object {
-                  "name": "POD_NAMESPACE",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "metadata.namespace",
-                    },
-                  },
-                },
-                Object {
-                  "name": "LD_PRELOAD",
-                  "value": "/usr/local/lib/libmimalloc.so",
-                },
-              ],
-              "image": "gcr.io/k8s-staging-ingress-nginx/controller-chroot:v1.2.0",
-              "imagePullPolicy": "IfNotPresent",
-              "lifecycle": Object {
-                "preStop": Object {
-                  "exec": Object {
-                    "command": Array [
-                      "/wait-shutdown",
-                    ],
-                  },
-                },
-              },
-              "livenessProbe": Object {
-                "failureThreshold": 5,
-                "httpGet": Object {
-                  "path": "/healthz",
-                  "port": 10254,
-                  "scheme": "HTTP",
-                },
-                "initialDelaySeconds": 10,
-                "periodSeconds": 10,
-                "successThreshold": 1,
-                "timeoutSeconds": 1,
-              },
-              "name": "controller",
-              "ports": Array [
-                Object {
-                  "containerPort": 80,
-                  "name": "http",
-                  "protocol": "TCP",
-                },
-                Object {
-                  "containerPort": 443,
-                  "name": "https",
-                  "protocol": "TCP",
-                },
-                Object {
-                  "containerPort": 8443,
-                  "name": "webhook",
-                  "protocol": "TCP",
-                },
-              ],
-              "readinessProbe": Object {
-                "failureThreshold": 3,
-                "httpGet": Object {
-                  "path": "/healthz",
-                  "port": 10254,
-                  "scheme": "HTTP",
-                },
-                "initialDelaySeconds": 10,
-                "periodSeconds": 10,
-                "successThreshold": 1,
-                "timeoutSeconds": 1,
-              },
-              "resources": Object {
-                "requests": Object {
-                  "cpu": "100m",
-                  "memory": "90Mi",
-                },
-              },
-              "securityContext": Object {
-                "allowPrivilegeEscalation": true,
-                "capabilities": Object {
-                  "add": Array [
-                    "NET_BIND_SERVICE",
-                    "SYS_CHROOT",
-                  ],
-                  "drop": Array [
-                    "ALL",
-                  ],
-                },
-                "runAsUser": 101,
-              },
-              "volumeMounts": Array [
-                Object {
-                  "mountPath": "/usr/local/certificates/",
-                  "name": "webhook-cert",
-                  "readOnly": true,
-                },
-              ],
-            },
-          ],
-          "dnsPolicy": "ClusterFirst",
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "serviceAccountName": "ingress-nginx",
-          "terminationGracePeriodSeconds": 300,
-          "volumes": Array [
-            Object {
-              "name": "webhook-cert",
-              "secret": Object {
-                "secretName": "ingress-nginx-admission",
-              },
-            },
-          ],
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "batch/v1",
-    "kind": "Job",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-admission-create",
-      "namespace": "ingress-nginx",
-    },
-    "spec": Object {
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "ingress-nginx",
-          },
-          "name": "ingress-nginx-admission-create",
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "create",
-                "--host=ingress-nginx-controller-admission,ingress-nginx-controller-admission.$(POD_NAMESPACE).svc",
-                "--namespace=$(POD_NAMESPACE)",
-                "--secret-name=ingress-nginx-admission",
-              ],
-              "env": Array [
-                Object {
-                  "name": "POD_NAMESPACE",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "metadata.namespace",
-                    },
-                  },
-                },
-              ],
-              "image": "k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1@sha256:64d8c73dca984af206adf9d6d7e46aa550362b1d7a01f3a0a91b20cc67868660",
-              "imagePullPolicy": "IfNotPresent",
-              "name": "create",
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-              },
-            },
-          ],
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "restartPolicy": "OnFailure",
-          "securityContext": Object {
-            "fsGroup": 2000,
-            "runAsNonRoot": true,
-            "runAsUser": 2000,
-          },
-          "serviceAccountName": "ingress-nginx-admission",
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "batch/v1",
-    "kind": "Job",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-admission-patch",
-      "namespace": "ingress-nginx",
-    },
-    "spec": Object {
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "ingress-nginx",
-          },
-          "name": "ingress-nginx-admission-patch",
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "patch",
-                "--webhook-name=ingress-nginx-admission",
-                "--namespace=$(POD_NAMESPACE)",
-                "--patch-mutating=false",
-                "--secret-name=ingress-nginx-admission",
-                "--patch-failure-policy=Fail",
-              ],
-              "env": Array [
-                Object {
-                  "name": "POD_NAMESPACE",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "metadata.namespace",
-                    },
-                  },
-                },
-              ],
-              "image": "k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1@sha256:64d8c73dca984af206adf9d6d7e46aa550362b1d7a01f3a0a91b20cc67868660",
-              "imagePullPolicy": "IfNotPresent",
-              "name": "patch",
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-              },
-            },
-          ],
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "restartPolicy": "OnFailure",
-          "securityContext": Object {
-            "fsGroup": 2000,
-            "runAsNonRoot": true,
-            "runAsUser": 2000,
-          },
-          "serviceAccountName": "ingress-nginx-admission",
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "networking.k8s.io/v1",
-    "kind": "IngressClass",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "nginx",
-    },
-    "spec": Object {
-      "controller": "k8s.io/ingress-nginx",
-    },
-  },
-  Object {
-    "apiVersion": "admissionregistration.k8s.io/v1",
-    "kind": "ValidatingWebhookConfiguration",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "ingress-nginx",
-      },
-      "name": "ingress-nginx-admission",
-    },
-    "webhooks": Array [
-      Object {
-        "admissionReviewVersions": Array [
-          "v1",
-        ],
-        "clientConfig": Object {
-          "service": Object {
-            "name": "ingress-nginx-controller-admission",
-            "namespace": "ingress-nginx",
-            "path": "/networking/v1/ingresses",
-          },
-        },
-        "failurePolicy": "Fail",
-        "matchPolicy": "Equivalent",
-        "name": "validate.nginx.ingress.kubernetes.io",
-        "rules": Array [
-          Object {
-            "apiGroups": Array [
-              "networking.k8s.io",
-            ],
-            "apiVersions": Array [
-              "v1",
-            ],
-            "operations": Array [
-              "CREATE",
-              "UPDATE",
-            ],
-            "resources": Array [
-              "ingresses",
-            ],
-          },
-        ],
-        "sideEffects": "None",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Namespace",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-cainjector",
-      "namespace": "cert-manager",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager",
-      "namespace": "cert-manager",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-webhook",
-      "namespace": "cert-manager",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "data": Object {},
-    "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-webhook",
-      "namespace": "cert-manager",
-    },
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-cainjector",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "get",
-          "create",
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "admissionregistration.k8s.io",
-        ],
-        "resources": Array [
-          "validatingwebhookconfigurations",
-          "mutatingwebhookconfigurations",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "apiregistration.k8s.io",
-        ],
-        "resources": Array [
-          "apiservices",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "apiextensions.k8s.io",
-        ],
-        "resources": Array [
-          "customresourcedefinitions",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "update",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-issuers",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "issuers",
-          "issuers/status",
-        ],
-        "verbs": Array [
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "issuers",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "create",
-          "update",
-          "delete",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-clusterissuers",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "clusterissuers",
-          "clusterissuers/status",
-        ],
-        "verbs": Array [
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "clusterissuers",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "create",
-          "update",
-          "delete",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-certificates",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates",
-          "certificates/status",
-          "certificaterequests",
-          "certificaterequests/status",
-        ],
-        "verbs": Array [
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates",
-          "certificaterequests",
-          "clusterissuers",
-          "issuers",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates/finalizers",
-          "certificaterequests/finalizers",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "orders",
-        ],
-        "verbs": Array [
-          "create",
-          "delete",
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "create",
-          "update",
-          "delete",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-orders",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "orders",
-          "orders/status",
-        ],
-        "verbs": Array [
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "orders",
-          "challenges",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "clusterissuers",
-          "issuers",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "challenges",
-        ],
-        "verbs": Array [
-          "create",
-          "delete",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "orders/finalizers",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-challenges",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "challenges",
-          "challenges/status",
-        ],
-        "verbs": Array [
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "challenges",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "issuers",
-          "clusterissuers",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "pods",
-          "services",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "create",
-          "delete",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingresses",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "create",
-          "delete",
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "gateway.networking.k8s.io",
-        ],
-        "resources": Array [
-          "httproutes",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "create",
-          "delete",
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "route.openshift.io",
-        ],
-        "resources": Array [
-          "routes/custom-host",
-        ],
-        "verbs": Array [
-          "create",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "challenges/finalizers",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-ingress-shim",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates",
-          "certificaterequests",
-        ],
-        "verbs": Array [
-          "create",
-          "update",
-          "delete",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates",
-          "certificaterequests",
-          "issuers",
-          "clusterissuers",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingresses",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "ingresses/finalizers",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "gateway.networking.k8s.io",
-        ],
-        "resources": Array [
-          "gateways",
-          "httproutes",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "gateway.networking.k8s.io",
-        ],
-        "resources": Array [
-          "gateways/finalizers",
-          "httproutes/finalizers",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "events",
-        ],
-        "verbs": Array [
-          "create",
-          "patch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-        "rbac.authorization.k8s.io/aggregate-to-admin": "true",
-        "rbac.authorization.k8s.io/aggregate-to-edit": "true",
-        "rbac.authorization.k8s.io/aggregate-to-view": "true",
-      },
-      "name": "cert-manager:cert-manager-view",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates",
-          "certificaterequests",
-          "issuers",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "challenges",
-          "orders",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-        "rbac.authorization.k8s.io/aggregate-to-admin": "true",
-        "rbac.authorization.k8s.io/aggregate-to-edit": "true",
-      },
-      "name": "cert-manager:cert-manager-edit",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates",
-          "certificaterequests",
-          "issuers",
-        ],
-        "verbs": Array [
-          "create",
-          "delete",
-          "deletecollection",
-          "patch",
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resources": Array [
-          "certificates/status",
-        ],
-        "verbs": Array [
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "acme.cert-manager.io",
-        ],
-        "resources": Array [
-          "challenges",
-          "orders",
-        ],
-        "verbs": Array [
-          "create",
-          "delete",
-          "deletecollection",
-          "patch",
-          "update",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-approve:cert-manager-io",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "cert-manager.io",
-        ],
-        "resourceNames": Array [
-          "issuers.cert-manager.io/*",
-          "clusterissuers.cert-manager.io/*",
-        ],
-        "resources": Array [
-          "signers",
-        ],
-        "verbs": Array [
-          "approve",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-certificatesigningrequests",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "certificates.k8s.io",
-        ],
-        "resources": Array [
-          "certificatesigningrequests",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "certificates.k8s.io",
-        ],
-        "resources": Array [
-          "certificatesigningrequests/status",
-        ],
-        "verbs": Array [
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "certificates.k8s.io",
-        ],
-        "resourceNames": Array [
-          "issuers.cert-manager.io/*",
-          "clusterissuers.cert-manager.io/*",
-        ],
-        "resources": Array [
-          "signers",
-        ],
-        "verbs": Array [
-          "sign",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "authorization.k8s.io",
-        ],
-        "resources": Array [
-          "subjectaccessreviews",
-        ],
-        "verbs": Array [
-          "create",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-webhook:subjectaccessreviews",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "authorization.k8s.io",
-        ],
-        "resources": Array [
-          "subjectaccessreviews",
-        ],
-        "verbs": Array [
-          "create",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-cainjector",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-cainjector",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager-cainjector",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-issuers",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-controller-issuers",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-clusterissuers",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-controller-clusterissuers",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-certificates",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-controller-certificates",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-orders",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-controller-orders",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-challenges",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-controller-challenges",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-ingress-shim",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-controller-ingress-shim",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-approve:cert-manager-io",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-controller-approve:cert-manager-io",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-controller-certificatesigningrequests",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-controller-certificatesigningrequests",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:cert-manager-webhook:subjectaccessreviews",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "cert-manager:cert-manager-webhook:subjectaccessreviews",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager-webhook",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "Role",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-cainjector:leaderelection",
-      "namespace": "kube-system",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "coordination.k8s.io",
-        ],
-        "resourceNames": Array [
-          "cert-manager-cainjector-leader-election",
-          "cert-manager-cainjector-leader-election-core",
-        ],
-        "resources": Array [
-          "leases",
-        ],
-        "verbs": Array [
-          "get",
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "coordination.k8s.io",
-        ],
-        "resources": Array [
-          "leases",
-        ],
-        "verbs": Array [
-          "create",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "Role",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:leaderelection",
-      "namespace": "kube-system",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "coordination.k8s.io",
-        ],
-        "resourceNames": Array [
-          "cert-manager-controller",
-        ],
-        "resources": Array [
-          "leases",
-        ],
-        "verbs": Array [
-          "get",
-          "update",
-          "patch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "coordination.k8s.io",
-        ],
-        "resources": Array [
-          "leases",
-        ],
-        "verbs": Array [
-          "create",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "Role",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-webhook:dynamic-serving",
-      "namespace": "cert-manager",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resourceNames": Array [
-          "cert-manager-webhook-ca",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-          "update",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "secrets",
-        ],
-        "verbs": Array [
-          "create",
-        ],
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-cainjector:leaderelection",
-      "namespace": "kube-system",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "cert-manager-cainjector:leaderelection",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager-cainjector",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager:leaderelection",
-      "namespace": "kube-system",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "cert-manager:leaderelection",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "RoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-webhook:dynamic-serving",
-      "namespace": "cert-manager",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "Role",
-      "name": "cert-manager-webhook:dynamic-serving",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "cert-manager-webhook",
-        "namespace": "cert-manager",
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager",
-      "namespace": "cert-manager",
-    },
-    "spec": Object {
-      "ports": Array [
-        Object {
-          "name": "tcp-prometheus-servicemonitor",
-          "port": 9402,
-          "protocol": "TCP",
-          "targetPort": 9402,
-        },
-      ],
-      "selector": Object {
-        "app.kubernetes.io/component": "controller",
-        "app.kubernetes.io/instance": "cert-manager",
-        "app.kubernetes.io/name": "cert-manager",
-      },
-      "type": "ClusterIP",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-server",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-webhook",
-      "namespace": "cert-manager",
-    },
-    "spec": Object {
-      "ports": Array [
-        Object {
-          "name": "https",
-          "port": 443,
-          "protocol": "TCP",
-          "targetPort": "https",
-        },
-      ],
-      "selector": Object {
-        "app.kubernetes.io/component": "webhook",
-        "app.kubernetes.io/instance": "cert-manager",
-        "app.kubernetes.io/name": "webhook",
-      },
-      "type": "ClusterIP",
-    },
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app": "cainjector",
-        "app.kubernetes.io/component": "cainjector",
-        "app.kubernetes.io/instance": "cert-manager",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cainjector",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-cainjector",
-      "namespace": "cert-manager",
-    },
-    "spec": Object {
-      "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "cainjector",
-          "app.kubernetes.io/instance": "cert-manager",
-          "app.kubernetes.io/name": "cainjector",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app": "cainjector",
-            "app.kubernetes.io/component": "cainjector",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "cainjector",
-            "app.kubernetes.io/version": "v1.8.0",
-          },
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "--v=2",
-                "--leader-election-namespace=kube-system",
-              ],
-              "env": Array [
-                Object {
-                  "name": "POD_NAMESPACE",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "metadata.namespace",
-                    },
-                  },
-                },
-              ],
-              "image": "quay.io/jetstack/cert-manager-cainjector:v1.8.0",
-              "imagePullPolicy": "IfNotPresent",
-              "name": "cert-manager",
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-              },
-            },
-          ],
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "securityContext": Object {
-            "runAsNonRoot": true,
-          },
-          "serviceAccountName": "cert-manager-cainjector",
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app": "cert-manager",
-        "app.kubernetes.io/component": "controller",
-        "app.kubernetes.io/instance": "cert-manager",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cert-manager",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager",
-      "namespace": "cert-manager",
-    },
-    "spec": Object {
-      "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "controller",
-          "app.kubernetes.io/instance": "cert-manager",
-          "app.kubernetes.io/name": "cert-manager",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "annotations": Object {
-            "prometheus.io/path": "/metrics",
-            "prometheus.io/port": "9402",
-            "prometheus.io/scrape": "true",
-          },
-          "labels": Object {
-            "app": "cert-manager",
-            "app.kubernetes.io/component": "controller",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "cert-manager",
-            "app.kubernetes.io/version": "v1.8.0",
-          },
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "--v=2",
-                "--cluster-resource-namespace=$(POD_NAMESPACE)",
-                "--leader-election-namespace=kube-system",
-              ],
-              "env": Array [
-                Object {
-                  "name": "POD_NAMESPACE",
-                  "value": "certificate-authority",
-                },
-              ],
-              "image": "quay.io/jetstack/cert-manager-controller:v1.8.0",
-              "imagePullPolicy": "IfNotPresent",
-              "name": "cert-manager",
-              "ports": Array [
-                Object {
-                  "containerPort": 9402,
-                  "name": "http-metrics",
-                  "protocol": "TCP",
-                },
-              ],
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-              },
-            },
-          ],
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "securityContext": Object {
-            "runAsNonRoot": true,
-          },
-          "serviceAccountName": "cert-manager",
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app": "webhook",
-        "app.kubernetes.io/component": "webhook",
-        "app.kubernetes.io/instance": "cert-manager",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "webhook",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-webhook",
-      "namespace": "cert-manager",
-    },
-    "spec": Object {
-      "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "webhook",
-          "app.kubernetes.io/instance": "cert-manager",
-          "app.kubernetes.io/name": "webhook",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app": "webhook",
-            "app.kubernetes.io/component": "webhook",
-            "app.kubernetes.io/instance": "cert-manager",
-            "app.kubernetes.io/name": "webhook",
-            "app.kubernetes.io/version": "v1.8.0",
-          },
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "args": Array [
-                "--v=2",
-                "--secure-port=10250",
-                "--dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)",
-                "--dynamic-serving-ca-secret-name=cert-manager-webhook-ca",
-                "--dynamic-serving-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc",
-              ],
-              "env": Array [
-                Object {
-                  "name": "POD_NAMESPACE",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
-                      "fieldPath": "metadata.namespace",
-                    },
-                  },
-                },
-              ],
-              "image": "quay.io/jetstack/cert-manager-webhook:v1.8.0",
-              "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "failureThreshold": 3,
-                "httpGet": Object {
-                  "path": "/livez",
-                  "port": 6080,
-                  "scheme": "HTTP",
-                },
-                "initialDelaySeconds": 60,
-                "periodSeconds": 10,
-                "successThreshold": 1,
-                "timeoutSeconds": 1,
-              },
-              "name": "cert-manager",
-              "ports": Array [
-                Object {
-                  "containerPort": 10250,
-                  "name": "https",
-                  "protocol": "TCP",
-                },
-              ],
-              "readinessProbe": Object {
-                "failureThreshold": 3,
-                "httpGet": Object {
-                  "path": "/healthz",
-                  "port": 6080,
-                  "scheme": "HTTP",
-                },
-                "initialDelaySeconds": 5,
-                "periodSeconds": 5,
-                "successThreshold": 1,
-                "timeoutSeconds": 1,
-              },
-              "securityContext": Object {
-                "allowPrivilegeEscalation": false,
-              },
-            },
-          ],
-          "nodeSelector": Object {
-            "kubernetes.io/os": "linux",
-          },
-          "securityContext": Object {
-            "runAsNonRoot": true,
-          },
-          "serviceAccountName": "cert-manager-webhook",
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "admissionregistration.k8s.io/v1",
-    "kind": "MutatingWebhookConfiguration",
-    "metadata": Object {
-      "annotations": Object {
-        "cert-manager.io/inject-ca-from-secret": "cert-manager/cert-manager-webhook-ca",
-      },
-      "labels": Object {
-        "app": "webhook",
-        "app.kubernetes.io/component": "webhook",
-        "app.kubernetes.io/instance": "cert-manager",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "webhook",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-webhook",
-    },
-    "webhooks": Array [
-      Object {
-        "admissionReviewVersions": Array [
-          "v1",
-        ],
-        "clientConfig": Object {
-          "service": Object {
-            "name": "cert-manager-webhook",
-            "namespace": "cert-manager",
-            "path": "/mutate",
-          },
-        },
-        "failurePolicy": "Fail",
-        "matchPolicy": "Equivalent",
-        "name": "webhook.cert-manager.io",
-        "rules": Array [
-          Object {
-            "apiGroups": Array [
-              "cert-manager.io",
-              "acme.cert-manager.io",
-            ],
-            "apiVersions": Array [
-              "v1",
-            ],
-            "operations": Array [
-              "CREATE",
-              "UPDATE",
-            ],
-            "resources": Array [
-              "*/*",
-            ],
-          },
-        ],
-        "sideEffects": "None",
-        "timeoutSeconds": 10,
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "admissionregistration.k8s.io/v1",
-    "kind": "ValidatingWebhookConfiguration",
-    "metadata": Object {
-      "annotations": Object {
-        "cert-manager.io/inject-ca-from-secret": "cert-manager/cert-manager-webhook-ca",
-      },
-      "labels": Object {
-        "app": "webhook",
-        "app.kubernetes.io/component": "webhook",
-        "app.kubernetes.io/instance": "cert-manager",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "webhook",
-        "app.kubernetes.io/version": "v1.8.0",
-      },
-      "name": "cert-manager-webhook",
-    },
-    "webhooks": Array [
-      Object {
-        "admissionReviewVersions": Array [
-          "v1",
-        ],
-        "clientConfig": Object {
-          "service": Object {
-            "name": "cert-manager-webhook",
-            "namespace": "cert-manager",
-            "path": "/validate",
-          },
-        },
-        "failurePolicy": "Fail",
-        "matchPolicy": "Equivalent",
-        "name": "webhook.cert-manager.io",
-        "namespaceSelector": Object {
-          "matchExpressions": Array [
-            Object {
-              "key": "cert-manager.io/disable-validation",
-              "operator": "NotIn",
-              "values": Array [
-                "true",
-              ],
-            },
-            Object {
-              "key": "name",
-              "operator": "NotIn",
-              "values": Array [
-                "cert-manager",
-              ],
-            },
-          ],
-        },
-        "rules": Array [
-          Object {
-            "apiGroups": Array [
-              "cert-manager.io",
-              "acme.cert-manager.io",
-            ],
-            "apiVersions": Array [
-              "v1",
-            ],
-            "operations": Array [
-              "CREATE",
-              "UPDATE",
-            ],
-            "resources": Array [
-              "*/*",
-            ],
-          },
-        ],
-        "sideEffects": "None",
-        "timeoutSeconds": 10,
-      },
-    ],
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Namespace",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "serena-ca",
-      },
-      "name": "certificate-authority",
-    },
-  },
-  Object {
-    "apiVersion": "cert-manager.io/v1",
-    "kind": "ClusterIssuer",
-    "metadata": Object {
-      "name": "self-signed",
-    },
-    "spec": Object {
-      "selfSigned": Object {},
-    },
-  },
-  Object {
-    "apiVersion": "cert-manager.io/v1",
-    "kind": "Certificate",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "serena-ca",
-      },
-      "name": "serena-ca",
-      "namespace": "certificate-authority",
-    },
-    "spec": Object {
-      "commonName": "home-ca-root",
-      "duration": "8766h",
-      "isCA": true,
-      "issuerRef": Object {
-        "group": "cert-manager.io",
-        "kind": "ClusterIssuer",
-        "name": "self-signed",
-      },
-      "privateKey": Object {
-        "algorithm": "ECDSA",
-        "size": 256,
-      },
-      "secretName": "root-ca",
-      "subject": Object {
-        "countries": Array [
-          "US",
-        ],
-        "organizations": Array [
-          "serena homelab",
-        ],
-      },
-    },
-  },
-  Object {
-    "apiVersion": "cert-manager.io/v1",
-    "kind": "ClusterIssuer",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "serena-ca",
-      },
-      "name": "serena-ca",
-      "namespace": "certificate-authority",
-    },
-    "spec": Object {
-      "ca": Object {
-        "secretName": "root-ca",
-      },
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
+    "metadata": {
       "name": "cilium",
       "namespace": "kube-system",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
+    "metadata": {
       "name": "cilium-operator",
       "namespace": "kube-system",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "hubble-relay",
+    "data": {
+      "ca.crt": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURGRENDQWZ5Z0F3SUJBZ0lSQU9wR1VUTWRLQ2Z4Y01ZNkRNTWhlVjh3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlEybHNhWFZ0SUVOQk1CNFhEVEl5TVRBeE9EQTBNVFl3TUZvWERUSTFNVEF4TnpBMApNVFl3TUZvd0ZERVNNQkFHQTFVRUF4TUpRMmxzYVhWdElFTkJNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DCkFROEFNSUlCQ2dLQ0FRRUE2a0NBUnZWV1d6SVdxT2pkVnVKUW0zc2p1NDJPUHprYjNzcnJiN2RZbnVBUFJCbzcKK1Bwdll6RGp0Sld6YUg0VTBYaDdJQ0ZHeWNTbXZBQm1SUFp6Z3B4ODlZblZFbG0wZExza1o2VEkyd0NVODlMagprMkxlcms3NlcveUwyWTNQZlNrSG4rM3grR1hDYnAvL1MvUWxqbE5ZMnpIU1NBVytuNC8vN3QycThZRW5ocGtICjBXNkpieHBHZnFZL0F4cmxvdFA2L3JMTXgyWUJPVnU5VDJjd2l5aVkvVEtzL0RQRGZnT1VOZHg2MUZVck5qMmkKbDRSQXc3MzdQWDRPK1RrUDhnZWtLeFIvTm13V0VmSC9DUnZSS3IzUDhsUE1VT0xsQ2lPK1RENHVqTm9URHBwcwpMSWtNL0JWcUEzWVpyd2FKQWhNRGlBVEZsZ3hzZ20vNTVNWlhpUUlEQVFBQm8yRXdYekFPQmdOVkhROEJBZjhFCkJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01BOEdBMVVkRXdFQi93UUYKTUFNQkFmOHdIUVlEVlIwT0JCWUVGTkVidzVWT2s1ckl5alRZTlRpTXNBRGYyL25jTUEwR0NTcUdTSWIzRFFFQgpDd1VBQTRJQkFRQ2lLSEpGVUN4bEM1ZG1oQWJKVU9mSkE0ejRmOUJSUzNOc1NZb1M0KzdTRUlhdjFRWUJNMVBMClNORjVoKy9rTjNCajhoblhHeU5HanNBb0tVMnZQNVMyVVRUeHVWT1N1TXFURFZobm1vRzRoVjRlOU03eHVHeHQKME9qdjBZUXp0dHZLcXQvcUxKUEdubXlCNkRLUkNqVlljQ1VZOTRIdkFBYkh0dUZLeGxFYUJlWkxVY0pYZTF1RQozNXRPc2k4Y3BtVTVuOC9YS1FxQ3F2VGRUMVA3MVpRQitRbnN5eHNoU3NkalRqMGVtdjRpZGl2K2VpWFhNMzgvCmIxVHRHTWU3ZDVRYWpJMmkwMEpMajVuc3Nadm5PZkRJTE05Rm90TUQycm9kbnpMM3ZGb0x1aGlSMi94YlVXZ3QKK2l0Z09ldWF2SGg0a3E2TVlPeEJ5ZjBid0tDeVlpcGMKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=",
+      "ca.key": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBNmtDQVJ2VldXeklXcU9qZFZ1SlFtM3NqdTQyT1B6a2Izc3JyYjdkWW51QVBSQm83CitQcHZZekRqdEpXemFINFUwWGg3SUNGR3ljU212QUJtUlBaemdweDg5WW5WRWxtMGRMc2taNlRJMndDVTg5TGoKazJMZXJrNzZXL3lMMlkzUGZTa0huKzN4K0dYQ2JwLy9TL1FsamxOWTJ6SFNTQVcrbjQvLzd0MnE4WUVuaHBrSAowVzZKYnhwR2ZxWS9BeHJsb3RQNi9yTE14MllCT1Z1OVQyY3dpeWlZL1RLcy9EUERmZ09VTmR4NjFGVXJOajJpCmw0UkF3NzM3UFg0TytUa1A4Z2VrS3hSL05td1dFZkgvQ1J2UktyM1A4bFBNVU9MbENpTytURDR1ak5vVERwcHMKTElrTS9CVnFBM1lacndhSkFoTURpQVRGbGd4c2dtLzU1TVpYaVFJREFRQUJBb0lCQUYyMGY1dmkrREJ5ME8ydwplUm9RWGY1VU8rOENxU3hSUS96VFgyckpCUUpJenRLSFRBWkU1OW5kN0xpSVNjUTY2MGovMFFFQlRyZlhtbnNLCkRkNzRWeXlnUEx4YjdvZndxbWNubFdDQVluaDR1eHp0OTJzMTJhNFFtY1hDT0k5R1V3SFdMOTZoNkhGZEEzSU4KUHFxN2QycC9uTVBTSWpQOVdFdXI1czAranVzYjR4MGFqUUtBMXNRMVJESStIc0plT1FyVnRGWVVMNEFBcEJTVgovN3g3UWlCTFEydjNWQzU3UEZmbzE0YVkvVzkvSXd3cTJCY1FUaVl6dFBLcHI3TzBXY1h3Y0s3YUxReTdlZnBjCnRwR2l5cG5yOHRpSC81TGUzdm1hWnhVUTRCTi9EbTBUalZMcXhVZjMzd3I0RDAwM0NySXV3azRxQW9mZEMvamcKQVVIRC9DRUNnWUVBN2pGTklOTUp3aFVBZlgreW9QYUZXcDJjckNRTlR6OURoZ0gvS3JvVzF6aG5OTTVkV1ZpZwpjZkdDUHJkZUdYNDZMbUF0RSs0eXRwY2REYXQvS282WlFYWE9DL014WUt6UVNyeGlQZHQ5bkFSYVlBUFJIMG1OCndwRnNaT1F5NmtDQjlZSXFMRkk1VjdjS21jY2M0TFRmcnlTbzNxM0VkSnNadGFBM2x6Wm85MGNDZ1lFQSs4UEkKQThWUERJUm5Dc2Ntc3I4S1RLdUwxNXNOTGZib1plcWdrcmNjVlozdXZpOWFjVENXa20rZzBtbnhhWFRERTlseAp4bit0TTdXMkpWMHpJYkF3bG9kZjR4QjhsbUozRnlISDFmbHJuMWp5UmNmNEt1NHhhbXBvSU81QlJwbGhGSm8vCkZwN0ladU5yZFRLcm5nTmkyU1pkWGRVTm5Ba1hqTGdUR2U4VFFxOENnWUFJT1kyWFA1SkxzRnYyK1d6YW9BaVUKeTNKNGd6b3ViVm5RaThzYTE1Z29VRnRIK0lSQ3JJdkZ3M2dpNEVRUWowcEZCYThvekFYV1JqdUxtRXRvMWNtMgo5L0ZvZWpwUFEwaGgvRVZNSzRNWDJ4S2YxQ0hwZWFtNmVUa0w5dEZIUTNqNVdFaEtoWUJUWmcrb3BiWjZqK1JWCmNPZWY0Tkl5MEpRL3NFdWJIaGJieXdLQmdRRGc2SXRiNHYyMUh1cTJWQ2FiODlJTm9Bb3pOODVVUzRoYzAzZFMKMmNXMExueEM1aWFUaTJaWHR1VWlVNFpZUVBpc1dNb3RHNDNzN2Qya0QxaElOZytSeWFtOVBOTXZ2UkxLVldFaQpJOGtpOXVDbnVmWlcwNmJOZS9VOXhkb0dhYXF5THdGQkFlUGhGalMrNDk4d0w3STBidk5saVppNDFkNTExVk1yCkRjcFUvUUtCZ1FES0JBcGJDUmFhUDhEOERML2dTc0E3Tjk1MUpSR2NJT1hwdTRtNWo1aEJyRWVxM2RVZ0RkcmEKMXhkYW9QSGhpbklSajM4aG16QTBDdHhNKzNaM0RjdGREVlYrb3ovQzQrZ1kzS05BQys5NTVaelc5WW9GZWYxVwpSNmdqcUZMREZHZzZFdlpvVytMdUppakl1QWw5QVVURXFnRFRWRVBYay9WWUFuLzJ2bDdsSVE9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=",
+    },
+    "kind": "Secret",
+    "metadata": {
+      "name": "cilium-ca",
       "namespace": "kube-system",
     },
   },
-  Object {
+  {
     "apiVersion": "v1",
-    "kind": "ServiceAccount",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "hubble-ui",
+    "data": {
+      "ca.crt": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURGRENDQWZ5Z0F3SUJBZ0lSQU9wR1VUTWRLQ2Z4Y01ZNkRNTWhlVjh3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlEybHNhWFZ0SUVOQk1CNFhEVEl5TVRBeE9EQTBNVFl3TUZvWERUSTFNVEF4TnpBMApNVFl3TUZvd0ZERVNNQkFHQTFVRUF4TUpRMmxzYVhWdElFTkJNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DCkFROEFNSUlCQ2dLQ0FRRUE2a0NBUnZWV1d6SVdxT2pkVnVKUW0zc2p1NDJPUHprYjNzcnJiN2RZbnVBUFJCbzcKK1Bwdll6RGp0Sld6YUg0VTBYaDdJQ0ZHeWNTbXZBQm1SUFp6Z3B4ODlZblZFbG0wZExza1o2VEkyd0NVODlMagprMkxlcms3NlcveUwyWTNQZlNrSG4rM3grR1hDYnAvL1MvUWxqbE5ZMnpIU1NBVytuNC8vN3QycThZRW5ocGtICjBXNkpieHBHZnFZL0F4cmxvdFA2L3JMTXgyWUJPVnU5VDJjd2l5aVkvVEtzL0RQRGZnT1VOZHg2MUZVck5qMmkKbDRSQXc3MzdQWDRPK1RrUDhnZWtLeFIvTm13V0VmSC9DUnZSS3IzUDhsUE1VT0xsQ2lPK1RENHVqTm9URHBwcwpMSWtNL0JWcUEzWVpyd2FKQWhNRGlBVEZsZ3hzZ20vNTVNWlhpUUlEQVFBQm8yRXdYekFPQmdOVkhROEJBZjhFCkJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01BOEdBMVVkRXdFQi93UUYKTUFNQkFmOHdIUVlEVlIwT0JCWUVGTkVidzVWT2s1ckl5alRZTlRpTXNBRGYyL25jTUEwR0NTcUdTSWIzRFFFQgpDd1VBQTRJQkFRQ2lLSEpGVUN4bEM1ZG1oQWJKVU9mSkE0ejRmOUJSUzNOc1NZb1M0KzdTRUlhdjFRWUJNMVBMClNORjVoKy9rTjNCajhoblhHeU5HanNBb0tVMnZQNVMyVVRUeHVWT1N1TXFURFZobm1vRzRoVjRlOU03eHVHeHQKME9qdjBZUXp0dHZLcXQvcUxKUEdubXlCNkRLUkNqVlljQ1VZOTRIdkFBYkh0dUZLeGxFYUJlWkxVY0pYZTF1RQozNXRPc2k4Y3BtVTVuOC9YS1FxQ3F2VGRUMVA3MVpRQitRbnN5eHNoU3NkalRqMGVtdjRpZGl2K2VpWFhNMzgvCmIxVHRHTWU3ZDVRYWpJMmkwMEpMajVuc3Nadm5PZkRJTE05Rm90TUQycm9kbnpMM3ZGb0x1aGlSMi94YlVXZ3QKK2l0Z09ldWF2SGg0a3E2TVlPeEJ5ZjBid0tDeVlpcGMKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=",
+      "ca.key": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBNmtDQVJ2VldXeklXcU9qZFZ1SlFtM3NqdTQyT1B6a2Izc3JyYjdkWW51QVBSQm83CitQcHZZekRqdEpXemFINFUwWGg3SUNGR3ljU212QUJtUlBaemdweDg5WW5WRWxtMGRMc2taNlRJMndDVTg5TGoKazJMZXJrNzZXL3lMMlkzUGZTa0huKzN4K0dYQ2JwLy9TL1FsamxOWTJ6SFNTQVcrbjQvLzd0MnE4WUVuaHBrSAowVzZKYnhwR2ZxWS9BeHJsb3RQNi9yTE14MllCT1Z1OVQyY3dpeWlZL1RLcy9EUERmZ09VTmR4NjFGVXJOajJpCmw0UkF3NzM3UFg0TytUa1A4Z2VrS3hSL05td1dFZkgvQ1J2UktyM1A4bFBNVU9MbENpTytURDR1ak5vVERwcHMKTElrTS9CVnFBM1lacndhSkFoTURpQVRGbGd4c2dtLzU1TVpYaVFJREFRQUJBb0lCQUYyMGY1dmkrREJ5ME8ydwplUm9RWGY1VU8rOENxU3hSUS96VFgyckpCUUpJenRLSFRBWkU1OW5kN0xpSVNjUTY2MGovMFFFQlRyZlhtbnNLCkRkNzRWeXlnUEx4YjdvZndxbWNubFdDQVluaDR1eHp0OTJzMTJhNFFtY1hDT0k5R1V3SFdMOTZoNkhGZEEzSU4KUHFxN2QycC9uTVBTSWpQOVdFdXI1czAranVzYjR4MGFqUUtBMXNRMVJESStIc0plT1FyVnRGWVVMNEFBcEJTVgovN3g3UWlCTFEydjNWQzU3UEZmbzE0YVkvVzkvSXd3cTJCY1FUaVl6dFBLcHI3TzBXY1h3Y0s3YUxReTdlZnBjCnRwR2l5cG5yOHRpSC81TGUzdm1hWnhVUTRCTi9EbTBUalZMcXhVZjMzd3I0RDAwM0NySXV3azRxQW9mZEMvamcKQVVIRC9DRUNnWUVBN2pGTklOTUp3aFVBZlgreW9QYUZXcDJjckNRTlR6OURoZ0gvS3JvVzF6aG5OTTVkV1ZpZwpjZkdDUHJkZUdYNDZMbUF0RSs0eXRwY2REYXQvS282WlFYWE9DL014WUt6UVNyeGlQZHQ5bkFSYVlBUFJIMG1OCndwRnNaT1F5NmtDQjlZSXFMRkk1VjdjS21jY2M0TFRmcnlTbzNxM0VkSnNadGFBM2x6Wm85MGNDZ1lFQSs4UEkKQThWUERJUm5Dc2Ntc3I4S1RLdUwxNXNOTGZib1plcWdrcmNjVlozdXZpOWFjVENXa20rZzBtbnhhWFRERTlseAp4bit0TTdXMkpWMHpJYkF3bG9kZjR4QjhsbUozRnlISDFmbHJuMWp5UmNmNEt1NHhhbXBvSU81QlJwbGhGSm8vCkZwN0ladU5yZFRLcm5nTmkyU1pkWGRVTm5Ba1hqTGdUR2U4VFFxOENnWUFJT1kyWFA1SkxzRnYyK1d6YW9BaVUKeTNKNGd6b3ViVm5RaThzYTE1Z29VRnRIK0lSQ3JJdkZ3M2dpNEVRUWowcEZCYThvekFYV1JqdUxtRXRvMWNtMgo5L0ZvZWpwUFEwaGgvRVZNSzRNWDJ4S2YxQ0hwZWFtNmVUa0w5dEZIUTNqNVdFaEtoWUJUWmcrb3BiWjZqK1JWCmNPZWY0Tkl5MEpRL3NFdWJIaGJieXdLQmdRRGc2SXRiNHYyMUh1cTJWQ2FiODlJTm9Bb3pOODVVUzRoYzAzZFMKMmNXMExueEM1aWFUaTJaWHR1VWlVNFpZUVBpc1dNb3RHNDNzN2Qya0QxaElOZytSeWFtOVBOTXZ2UkxLVldFaQpJOGtpOXVDbnVmWlcwNmJOZS9VOXhkb0dhYXF5THdGQkFlUGhGalMrNDk4d0w3STBidk5saVppNDFkNTExVk1yCkRjcFUvUUtCZ1FES0JBcGJDUmFhUDhEOERML2dTc0E3Tjk1MUpSR2NJT1hwdTRtNWo1aEJyRWVxM2RVZ0RkcmEKMXhkYW9QSGhpbklSajM4aG16QTBDdHhNKzNaM0RjdGREVlYrb3ovQzQrZ1kzS05BQys5NTVaelc5WW9GZWYxVwpSNmdqcUZMREZHZzZFdlpvVytMdUppakl1QWw5QVVURXFnRFRWRVBYay9WWUFuLzJ2bDdsSVE9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=",
+    },
+    "kind": "Secret",
+    "metadata": {
+      "name": "hubble-ca-secret",
       "namespace": "kube-system",
     },
   },
-  Object {
-    "apiVersion": "cert-manager.io/v1",
-    "kind": "Certificate",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "hubble-relay-client-certs",
-      "namespace": "kube-system",
+  {
+    "apiVersion": "v1",
+    "data": {
+      "ca.crt": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURGRENDQWZ5Z0F3SUJBZ0lSQU9wR1VUTWRLQ2Z4Y01ZNkRNTWhlVjh3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlEybHNhWFZ0SUVOQk1CNFhEVEl5TVRBeE9EQTBNVFl3TUZvWERUSTFNVEF4TnpBMApNVFl3TUZvd0ZERVNNQkFHQTFVRUF4TUpRMmxzYVhWdElFTkJNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DCkFROEFNSUlCQ2dLQ0FRRUE2a0NBUnZWV1d6SVdxT2pkVnVKUW0zc2p1NDJPUHprYjNzcnJiN2RZbnVBUFJCbzcKK1Bwdll6RGp0Sld6YUg0VTBYaDdJQ0ZHeWNTbXZBQm1SUFp6Z3B4ODlZblZFbG0wZExza1o2VEkyd0NVODlMagprMkxlcms3NlcveUwyWTNQZlNrSG4rM3grR1hDYnAvL1MvUWxqbE5ZMnpIU1NBVytuNC8vN3QycThZRW5ocGtICjBXNkpieHBHZnFZL0F4cmxvdFA2L3JMTXgyWUJPVnU5VDJjd2l5aVkvVEtzL0RQRGZnT1VOZHg2MUZVck5qMmkKbDRSQXc3MzdQWDRPK1RrUDhnZWtLeFIvTm13V0VmSC9DUnZSS3IzUDhsUE1VT0xsQ2lPK1RENHVqTm9URHBwcwpMSWtNL0JWcUEzWVpyd2FKQWhNRGlBVEZsZ3hzZ20vNTVNWlhpUUlEQVFBQm8yRXdYekFPQmdOVkhROEJBZjhFCkJBTUNBcVF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01BOEdBMVVkRXdFQi93UUYKTUFNQkFmOHdIUVlEVlIwT0JCWUVGTkVidzVWT2s1ckl5alRZTlRpTXNBRGYyL25jTUEwR0NTcUdTSWIzRFFFQgpDd1VBQTRJQkFRQ2lLSEpGVUN4bEM1ZG1oQWJKVU9mSkE0ejRmOUJSUzNOc1NZb1M0KzdTRUlhdjFRWUJNMVBMClNORjVoKy9rTjNCajhoblhHeU5HanNBb0tVMnZQNVMyVVRUeHVWT1N1TXFURFZobm1vRzRoVjRlOU03eHVHeHQKME9qdjBZUXp0dHZLcXQvcUxKUEdubXlCNkRLUkNqVlljQ1VZOTRIdkFBYkh0dUZLeGxFYUJlWkxVY0pYZTF1RQozNXRPc2k4Y3BtVTVuOC9YS1FxQ3F2VGRUMVA3MVpRQitRbnN5eHNoU3NkalRqMGVtdjRpZGl2K2VpWFhNMzgvCmIxVHRHTWU3ZDVRYWpJMmkwMEpMajVuc3Nadm5PZkRJTE05Rm90TUQycm9kbnpMM3ZGb0x1aGlSMi94YlVXZ3QKK2l0Z09ldWF2SGg0a3E2TVlPeEJ5ZjBid0tDeVlpcGMKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=",
+      "tls.crt": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURWekNDQWorZ0F3SUJBZ0lSQU1hT3ZpTTc5a2M4aWFJSExUK0ZRekV3RFFZSktvWklodmNOQVFFTEJRQXcKRkRFU01CQUdBMVVFQXhNSlEybHNhWFZ0SUVOQk1CNFhEVEl5TVRBeE9EQTBNVFl3TUZvWERUSTFNVEF4TnpBMApNVFl3TUZvd0tqRW9NQ1lHQTFVRUF3d2ZLaTVrWldaaGRXeDBMbWgxWW1Kc1pTMW5jbkJqTG1OcGJHbDFiUzVwCmJ6Q0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQU5zbk9XVmdBYUJmMUcwcVh4WHIKemdENUJ0Ykt4VDFRVGZIMDVLOVphWlVPVzhVbG1lSm0xV1NrL1E2WXNGeVdZdGNIczA1Z0ljb3FhZzhEWjBPQQpZZ2kxcjVZSmpuUUprQ3BCVm9ya0wvdE5PbmtqOFlJSitGRGNmZEFJNy9VdzVvbThvU2dKUzc1eitVWEcwQkRmCm84K2xvOWpDSXQ2bGFqemw3SitGaUphelpMZTdXTTdEaWdxVzJkRkJQYW1GVTVGczhpcGtSMTYzYU1FZWs5VlkKbmVKdThOR29BREJ4di91REZ3Sk9TSXZrYmF0aVlEQlZMSVB0c3JKZ1dGaW1hVWxYUmwzNkkyTEIxeXRpSjNxVgpMVlFpMlVWcUgrWDdCcHNOOUZvQkdST2dVR2oyR2J2b29oMk80QjBXSWdzZUVNU0NEUlk4ZGhFMlJrTjNpSWtqCm55RUNBd0VBQWFPQmpUQ0JpakFPQmdOVkhROEJBZjhFQkFNQ0JhQXdIUVlEVlIwbEJCWXdGQVlJS3dZQkJRVUgKQXdFR0NDc0dBUVVGQndNQ01Bd0dBMVVkRXdFQi93UUNNQUF3SHdZRFZSMGpCQmd3Rm9BVTBSdkRsVTZUbXNqSwpOTmcxT0l5d0FOL2IrZHd3S2dZRFZSMFJCQ013SVlJZktpNWtaV1poZFd4MExtaDFZbUpzWlMxbmNuQmpMbU5wCmJHbDFiUzVwYnpBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQWRzaEUvTXBNN2pSTW9BS2dVRVlZYWFaWkJUNm8KTXdrRUFrR08zVWVENURZVzFKUVlVTWpQK0s3R1pQdE01SjhtRWoza3RUTHNncGcrcWEzZkNmc2dXZ0RnZm15ego1dWh0ZjBMWTFMMmZEbDlTZGlhWjBhVmNuTmRFVUdBd3VHTWU4WmREaHhDTnBzQWthbXVkZ3FPeiszZy9kRUpkCm04b2YzNVdPaGV6VXEvdi9NQzZ6YzVVRGxwdDUyYVBMSWNKcjR5NVBKenNFV0d1MnVLT2p0bW9WMmJjRDdpc24KTS90T2NEZlcxWFpId2s1MXRSZWZGTURsdjZjTjJmbEZhVjdHWUZ3Tkl4OHF2bTBpMi9SaElhNFhkSmVtOXB0SQp6VEtEVUlIa2RLcGZNZndNTDM1ejhsVXlJS2lwcjBXSDE0S2ZxL2RoVTBBVEFnYlZIdTUwWlRtRzlnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=",
+      "tls.key": "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcGdJQkFBS0NBUUVBMnljNVpXQUJvRi9VYlNwZkZldk9BUGtHMXNyRlBWQk44ZlRrcjFscGxRNWJ4U1daCjRtYlZaS1Q5RHBpd1hKWmkxd2V6VG1BaHlpcHFEd05uUTRCaUNMV3ZsZ21PZEFtUUtrRldpdVF2KzAwNmVTUHgKZ2duNFVOeDkwQWp2OVREbWlieWhLQWxMdm5QNVJjYlFFTitqejZXajJNSWkzcVZxUE9Yc240V0lsck5rdDd0WQp6c09LQ3BiWjBVRTlxWVZUa1d6eUttUkhYcmRvd1I2VDFWaWQ0bTd3MGFnQU1IRy8rNE1YQWs1SWkrUnRxMkpnCk1GVXNnKzJ5c21CWVdLWnBTVmRHWGZvallzSFhLMkluZXBVdFZDTFpSV29mNWZzR213MzBXZ0VaRTZCUWFQWVoKdStpaUhZN2dIUllpQ3g0UXhJSU5GangyRVRaR1EzZUlpU09mSVFJREFRQUJBb0lCQVFEREJzc0xMajhFUzRPdAppbkdIL29zYlRvSUpqL1dyTk5YSXB0a0VPeHU4ckVSNjA1VjRaMjhyMjYvZjEzM0xSNEc2UG40UkYzZTZnN2hTCm1BTERqWEt3c1k4S2hJS2pQUWR3c3lpaS9hSzlqdUtrZjVvaTBXQ01CVXhwWUNxN0ZzTnllODBtNWU3a0ZDMFgKTFhCb003MkJ3clJtNTQxRWVneHJHV3BVSSsrRHU0Z0U0OXlkT2tzeUszSzJDS0NWRysrNHBwM1U0MjE3dUdTNQpXaXBmd1lZZUwweVJaT0RrUk1UTnQwYnpGdjMvSzRWbTVuSFM0UUpyMFY0V1E2dE5QWmtENXNFSHhWTXVpak5qCjFZN0UrbE1odGd4ak9wNDJWQlFOSnUrQS9ReDJwZUZLY2NnR2xwWndUb1NCaElvajRXZDNnQS94VUJYcUNRVXkKOFU5WlF1ZHBBb0dCQVBNRW1wR1h3UGRKVlUxWXUxZzJBdlIzN1UwMVZpdVZsbE11ZHdIcUlzeWIzeTFWSmpZRgplMXFBdGtqRlZkTUdGWkh4S3NNQVdPMU9MYkdFLzF2Rk5xZGkxYmVYMlc4K0FVOVIxeGZ2ZFpmOGc2RE96eWpCClRhM0gxdVo2VzVSQlY0TXhSZHF3d0p0dzByU0pSbHlRaGJGS1JwRFZSZEpoK0tZUFR2SW5hbDN6QW9HQkFPYmMKUWVsbldlZEVVQW5wL2hmMUF6Y0tCUi9vUGNJc3gwclJWT2FaazM5RDBQeTJicWpMWE1ESlR4U3YweEN3S01sTQplM2lwWUNjOWRYSTkzZG1ma3VGbXIrTnRFdFEwV3RQNGxMLzZlREFUL2tsSmFFdmRJTlRBSzEzZDUrcHBYZW8vCmJUdzVWSlUvZzJCVVQwSmtLdERYOHRvRHZWZmVyN0ZYR0p2UU5vK2JBb0dCQU8rUngwcm1IbDNwbGtVMHh5T1QKdzEvN1poMnFDZlBYZUtVeDlqSVYvZzVWVHpNaWNSUHFYWXQvdmJPSmppMEZIM2lMRmd1OHFPM3dGdzJjdmh4YgpFNkQ1eHhSQmh5R3FMNkpoWExrRTRKbGZYdWZGV09XbGdvMWhwMUg0cDVWRXdSL2RFQzhoOWc2R3I4RTRYdnZiCm9XQ0FoNFk2S2FYWDNVYmZhb1ZBSkJUUEFvR0JBTlEzSEkvRjVhcmw3UDF3RDVkT0x3cGxONWpCRUNSeXJUQmwKaFRvRmFzVE9Qa3BRR1NFbzc3WjRWeTJaQXRpUVZxM1VsSnV5ZHlVYkpkOUNaN0VwTXdmb01UOUtnTWg0NkJWNgpxS0poU0NKSi9ySzN2QndneFpGTXBaQy83L1JYcjNFcHBPeDdkdmxMVFNVNzJ6QVlqQk0ycjVNaFpPaGxWL1FaCk1CSHJNSHlKQW9HQkFPNHcrUUVBalBrdDBhektaK01iQW5hTFU2d3cvZW9LQTc0Tm0rWmNZbk4vWWhnU3I5UG4KYmlwRGV6YmQyQURlVGRyU0lZQmdjNlJmdkh3UVFSOXNqMm9SZ0d4TFlCanJHSkVoMVBSeGRTRkd0ZlgzbUsvZwpJTVhjSjZOWUxnblN2M0hIOTZhSjNTQVFtOTdzWkYxTjZQbDdrc2xXTnliUlVnOWkzV1JPdDAxMgotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=",
     },
-    "spec": Object {
-      "commonName": "*.hubble-relay.cilium.io",
-      "dnsNames": Array [
-        "*.hubble-relay.cilium.io",
-      ],
-      "duration": "26280h",
-      "issuerRef": Object {
-        "group": "cert-manager.io",
-        "kind": "ClusterIssuer",
-        "name": "serena-ca",
-      },
-      "secretName": "hubble-relay-client-certs",
-    },
-  },
-  Object {
-    "apiVersion": "cert-manager.io/v1",
-    "kind": "Certificate",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
+    "kind": "Secret",
+    "metadata": {
       "name": "hubble-server-certs",
       "namespace": "kube-system",
     },
-    "spec": Object {
-      "commonName": "*.default.hubble-grpc.cilium.io",
-      "dnsNames": Array [
-        "*.default.hubble-grpc.cilium.io",
-      ],
-      "duration": "26280h",
-      "issuerRef": Object {
-        "group": "cert-manager.io",
-        "kind": "ClusterIssuer",
-        "name": "serena-ca",
-      },
-      "secretName": "hubble-server-certs",
-    },
+    "type": "kubernetes.io/tls",
   },
-  Object {
+  {
     "apiVersion": "v1",
-    "data": Object {
+    "data": {
+      "agent-not-ready-taint-key": "node.cilium.io/agent-not-ready",
+      "arping-refresh-period": "30s",
       "auto-direct-node-routes": "false",
       "bpf-lb-external-clusterip": "false",
       "bpf-lb-map-max": "65536",
+      "bpf-lb-sock": "false",
       "bpf-map-dynamic-size-ratio": "0.0025",
       "bpf-policy-map-max": "16384",
+      "bpf-root": "/sys/fs/bpf",
       "cgroup-root": "/run/cilium/cgroupv2",
       "cilium-endpoint-gc-interval": "5m0s",
-      "cluster-id": "",
+      "cluster-id": "0",
       "cluster-name": "default",
-      "cluster-pool-ipv4-cidr": "10.0.128.0/17",
+      "cluster-pool-ipv4-cidr": "10.0.128.0/19 10.0.160.0/19 10.0.192.0/19",
       "cluster-pool-ipv4-mask-size": "24",
       "custom-cni-conf": "false",
       "debug": "false",
       "disable-cnp-status-updates": "true",
       "disable-endpoint-crd": "false",
       "enable-auto-protect-node-port-range": "true",
-      "enable-bandwidth-manager": "false",
+      "enable-bgp-control-plane": "false",
       "enable-bpf-clock-probe": "true",
       "enable-endpoint-health-checking": "true",
       "enable-health-check-nodeport": "true",
@@ -4395,13 +95,12 @@ Array [
       "enable-local-redirect-policy": "false",
       "enable-policy": "default",
       "enable-remote-node-identity": "true",
-      "enable-session-affinity": "true",
+      "enable-svc-source-range-check": "true",
+      "enable-vtep": "false",
       "enable-well-known-identities": "false",
       "enable-xt-socket-fallback": "true",
       "hubble-disable-tls": "false",
       "hubble-listen-address": ":4244",
-      "hubble-metrics": "dns drop tcp flow icmp http",
-      "hubble-metrics-server": ":9091",
       "hubble-socket-path": "/var/run/cilium/hubble.sock",
       "hubble-tls-cert-file": "/var/lib/cilium/tls/hubble/server.crt",
       "hubble-tls-client-ca-files": "/var/lib/cilium/tls/hubble/client-ca.crt",
@@ -4416,398 +115,431 @@ Array [
       "monitor-aggregation-flags": "all",
       "monitor-aggregation-interval": "5s",
       "node-port-bind-protection": "true",
+      "nodes-gc-interval": "5m0s",
       "operator-api-serve-addr": "127.0.0.1:9234",
       "preallocate-bpf-maps": "false",
+      "procfs": "/host/proc",
+      "remove-cilium-node-taints": "true",
+      "set-cilium-is-up-condition": "true",
       "sidecar-istio-proxy-image": "cilium/istio_proxy",
-      "tunnel": "geneve",
+      "synchronize-k8s-nodes": "true",
+      "tofqdns-dns-reject-response-code": "refused",
+      "tofqdns-enable-dns-compression": "true",
+      "tofqdns-endpoint-max-ip-per-hostname": "50",
+      "tofqdns-idle-connection-grace-period": "0s",
+      "tofqdns-max-deferred-connection-deletes": "10000",
+      "tofqdns-min-ttl": "3600",
+      "tofqdns-proxy-response-max-delay": "100ms",
+      "tunnel": "vxlan",
+      "unmanaged-pod-watcher-interval": "15",
+      "vtep-cidr": "",
+      "vtep-endpoint": "",
+      "vtep-mac": "",
+      "vtep-mask": "",
     },
     "kind": "ConfigMap",
-    "metadata": Object {
+    "metadata": {
       "name": "cilium-config",
       "namespace": "kube-system",
     },
   },
-  Object {
-    "apiVersion": "v1",
-    "data": Object {
-      "config.yaml": "peer-service: unix:///var/run/cilium/hubble.sock
-listen-address: :4245
-dial-timeout: 
-retry-timeout: 
-sort-buffer-len-max: 
-sort-buffer-drain-timeout: 
-tls-client-cert-file: /var/lib/hubble-relay/tls/client.crt
-tls-client-key-file: /var/lib/hubble-relay/tls/client.key
-tls-hubble-server-ca-files: /var/lib/hubble-relay/tls/hubble-server-ca.crt
-disable-server-tls: true
-",
-    },
-    "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "hubble-relay-config",
-      "namespace": "kube-system",
-    },
-  },
-  Object {
-    "apiVersion": "v1",
-    "data": Object {
-      "envoy.yaml": "static_resources:
-  listeners:
-    - name: listener_hubble_ui
-      address:
-        socket_address:
-          address: 0.0.0.0
-          port_value: 8081
-      filter_chains:
-        - filters:
-            - name: envoy.filters.network.http_connection_manager
-              typed_config:
-                \\"@type\\": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-                codec_type: auto
-                stat_prefix: ingress_http
-                route_config:
-                  name: local_route
-                  virtual_hosts:
-                    - name: local_service
-                      domains: [\\"*\\"]
-                      routes:
-                        - match:
-                            prefix: \\"/api/\\"
-                          route:
-                            cluster: backend
-                            prefix_rewrite: \\"/\\"
-                            timeout: 0s
-                            max_stream_duration:
-                              grpc_timeout_header_max: 0s
-                        - match:
-                            prefix: \\"/\\"
-                          route:
-                            cluster: frontend
-                      cors:
-                        allow_origin_string_match:
-                          - prefix: \\"*\\"
-                        allow_methods: GET, PUT, DELETE, POST, OPTIONS
-                        allow_headers: keep-alive,user-agent,cache-control,content-type,content-transfer-encoding,x-accept-content-transfer-encoding,x-accept-response-streaming,x-user-agent,x-grpc-web,grpc-timeout
-                        max_age: \\"1728000\\"
-                        expose_headers: grpc-status,grpc-message
-                http_filters:
-                  - name: envoy.filters.http.grpc_web
-                  - name: envoy.filters.http.cors
-                  - name: envoy.filters.http.router
-  clusters:
-    - name: frontend
-      connect_timeout: 0.25s
-      type: strict_dns
-      lb_policy: round_robin
-      load_assignment:
-        cluster_name: frontend
-        endpoints:
-          - lb_endpoints:
-              - endpoint:
-                  address:
-                    socket_address:
-                      address: 127.0.0.1
-                      port_value: 8080
-    - name: backend
-      connect_timeout: 0.25s
-      type: logical_dns
-      lb_policy: round_robin
-      http2_protocol_options: {}
-      load_assignment:
-        cluster_name: backend
-        endpoints:
-          - lb_endpoints:
-              - endpoint:
-                  address:
-                    socket_address:
-                      address: 127.0.0.1
-                      port_value: 8090
-",
-    },
-    "kind": "ConfigMap",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "hubble-ui-envoy",
-      "namespace": "kube-system",
-    },
-  },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "kube-system:cilium",
+    "metadata": {
+      "name": "cilium",
     },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
+    "rules": [
+      {
+        "apiGroups": [
           "networking.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "networkpolicies",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "discovery.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "endpointslices",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "namespaces",
           "services",
-          "nodes",
-          "endpoints",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
           "pods",
-          "pods/finalizers",
+          "endpoints",
+          "nodes",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
           "list",
           "watch",
+        ],
+      },
+      {
+        "apiGroups": [
+          "apiextensions.k8s.io",
+        ],
+        "resources": [
+          "customresourcedefinitions",
+        ],
+        "verbs": [
+          "list",
+          "watch",
+          "get",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumbgploadbalancerippools",
+          "ciliumbgppeeringpolicies",
+          "ciliumclusterwideenvoyconfigs",
+          "ciliumclusterwidenetworkpolicies",
+          "ciliumegressgatewaypolicies",
+          "ciliumegressnatpolicies",
+          "ciliumendpoints",
+          "ciliumendpointslices",
+          "ciliumenvoyconfigs",
+          "ciliumidentities",
+          "ciliumlocalredirectpolicies",
+          "ciliumnetworkpolicies",
+          "ciliumnodes",
+        ],
+        "verbs": [
+          "list",
+          "watch",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumidentities",
+          "ciliumendpoints",
+          "ciliumnodes",
+        ],
+        "verbs": [
+          "create",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumidentities",
+        ],
+        "verbs": [
           "update",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumendpoints",
+        ],
+        "verbs": [
           "delete",
+          "get",
         ],
       },
-      Object {
-        "apiGroups": Array [
-          "",
+      {
+        "apiGroups": [
+          "cilium.io",
         ],
-        "resources": Array [
-          "nodes",
+        "resources": [
+          "ciliumnodes",
+          "ciliumnodes/status",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
-          "list",
-          "watch",
           "update",
         ],
       },
-      Object {
-        "apiGroups": Array [
-          "",
+      {
+        "apiGroups": [
+          "cilium.io",
         ],
-        "resources": Array [
-          "nodes",
-          "nodes/status",
+        "resources": [
+          "ciliumnetworkpolicies/status",
+          "ciliumclusterwidenetworkpolicies/status",
+          "ciliumendpoints/status",
+          "ciliumendpoints",
         ],
-        "verbs": Array [
+        "verbs": [
           "patch",
         ],
       },
-      Object {
-        "apiGroups": Array [
-          "apiextensions.k8s.io",
-        ],
-        "resources": Array [
-          "customresourcedefinitions",
-        ],
-        "verbs": Array [
-          "create",
-          "list",
-          "watch",
-          "update",
-          "get",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cilium.io",
-        ],
-        "resources": Array [
-          "ciliumnetworkpolicies",
-          "ciliumnetworkpolicies/status",
-          "ciliumnetworkpolicies/finalizers",
-          "ciliumclusterwidenetworkpolicies",
-          "ciliumclusterwidenetworkpolicies/status",
-          "ciliumclusterwidenetworkpolicies/finalizers",
-          "ciliumendpoints",
-          "ciliumendpoints/status",
-          "ciliumendpoints/finalizers",
-          "ciliumnodes",
-          "ciliumnodes/status",
-          "ciliumnodes/finalizers",
-          "ciliumidentities",
-          "ciliumidentities/finalizers",
-          "ciliumlocalredirectpolicies",
-          "ciliumlocalredirectpolicies/status",
-          "ciliumlocalredirectpolicies/finalizers",
-          "ciliumegressnatpolicies",
-          "ciliumendpointslices",
-        ],
-        "verbs": Array [
-          "*",
-        ],
-      },
     ],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "kube-system-cilium-operator",
+    "metadata": {
+      "name": "cilium-operator",
     },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
+    "rules": [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
+        "resources": [
           "pods",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
           "list",
           "watch",
           "delete",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
+          "",
+        ],
+        "resources": [
+          "nodes",
+        ],
+        "verbs": [
+          "list",
+          "watch",
+        ],
+      },
+      {
+        "apiGroups": [
+          "",
+        ],
+        "resources": [
+          "nodes",
+          "nodes/status",
+        ],
+        "verbs": [
+          "patch",
+        ],
+      },
+      {
+        "apiGroups": [
           "discovery.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "endpointslices",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
-          "services",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
+        "resources": [
           "services/status",
         ],
-        "verbs": Array [
+        "verbs": [
           "update",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
           "",
         ],
-        "resources": Array [
-          "services",
-          "endpoints",
+        "resources": [
           "namespaces",
         ],
-        "verbs": Array [
+        "verbs": [
           "get",
           "list",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
-          "cilium.io",
+      {
+        "apiGroups": [
+          "",
         ],
-        "resources": Array [
-          "ciliumnetworkpolicies",
-          "ciliumnetworkpolicies/status",
-          "ciliumnetworkpolicies/finalizers",
-          "ciliumclusterwidenetworkpolicies",
-          "ciliumclusterwidenetworkpolicies/status",
-          "ciliumclusterwidenetworkpolicies/finalizers",
-          "ciliumendpoints",
-          "ciliumendpoints/status",
-          "ciliumendpoints/finalizers",
-          "ciliumnodes",
-          "ciliumnodes/status",
-          "ciliumnodes/finalizers",
-          "ciliumidentities",
-          "ciliumendpointslices",
-          "ciliumidentities/status",
-          "ciliumidentities/finalizers",
-          "ciliumlocalredirectpolicies",
-          "ciliumlocalredirectpolicies/status",
-          "ciliumlocalredirectpolicies/finalizers",
+        "resources": [
+          "services",
+          "endpoints",
         ],
-        "verbs": Array [
-          "*",
+        "verbs": [
+          "get",
+          "list",
+          "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumnetworkpolicies",
+          "ciliumclusterwidenetworkpolicies",
+        ],
+        "verbs": [
+          "create",
+          "update",
+          "deletecollection",
+          "patch",
+          "get",
+          "list",
+          "watch",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumnetworkpolicies/status",
+          "ciliumclusterwidenetworkpolicies/status",
+        ],
+        "verbs": [
+          "patch",
+          "update",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumendpoints",
+          "ciliumidentities",
+        ],
+        "verbs": [
+          "delete",
+          "list",
+          "watch",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumidentities",
+        ],
+        "verbs": [
+          "update",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumnodes",
+        ],
+        "verbs": [
+          "create",
+          "update",
+          "get",
+          "list",
+          "watch",
+          "delete",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumnodes/status",
+        ],
+        "verbs": [
+          "update",
+        ],
+      },
+      {
+        "apiGroups": [
+          "cilium.io",
+        ],
+        "resources": [
+          "ciliumendpointslices",
+          "ciliumenvoyconfigs",
+        ],
+        "verbs": [
+          "create",
+          "update",
+          "get",
+          "list",
+          "watch",
+          "delete",
+        ],
+      },
+      {
+        "apiGroups": [
           "apiextensions.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "customresourcedefinitions",
         ],
-        "verbs": Array [
+        "verbs": [
           "create",
           "get",
           "list",
-          "update",
           "watch",
         ],
       },
-      Object {
-        "apiGroups": Array [
+      {
+        "apiGroups": [
+          "apiextensions.k8s.io",
+        ],
+        "resourceNames": [
+          "ciliumbgploadbalancerippools.cilium.io",
+          "ciliumbgppeeringpolicies.cilium.io",
+          "ciliumclusterwideenvoyconfigs.cilium.io",
+          "ciliumclusterwidenetworkpolicies.cilium.io",
+          "ciliumegressgatewaypolicies.cilium.io",
+          "ciliumegressnatpolicies.cilium.io",
+          "ciliumendpoints.cilium.io",
+          "ciliumendpointslices.cilium.io",
+          "ciliumenvoyconfigs.cilium.io",
+          "ciliumexternalworkloads.cilium.io",
+          "ciliumidentities.cilium.io",
+          "ciliumlocalredirectpolicies.cilium.io",
+          "ciliumnetworkpolicies.cilium.io",
+          "ciliumnodes.cilium.io",
+        ],
+        "resources": [
+          "customresourcedefinitions",
+        ],
+        "verbs": [
+          "update",
+        ],
+      },
+      {
+        "apiGroups": [
           "coordination.k8s.io",
         ],
-        "resources": Array [
+        "resources": [
           "leases",
         ],
-        "verbs": Array [
+        "verbs": [
           "create",
           "get",
           "update",
@@ -4815,359 +547,205 @@ disable-server-tls: true
       },
     ],
   },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRole",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "kube-system-hubble-ui",
-    },
-    "rules": Array [
-      Object {
-        "apiGroups": Array [
-          "networking.k8s.io",
-        ],
-        "resources": Array [
-          "networkpolicies",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "",
-        ],
-        "resources": Array [
-          "componentstatuses",
-          "endpoints",
-          "namespaces",
-          "nodes",
-          "pods",
-          "services",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "apiextensions.k8s.io",
-        ],
-        "resources": Array [
-          "customresourcedefinitions",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-      Object {
-        "apiGroups": Array [
-          "cilium.io",
-        ],
-        "resources": Array [
-          "*",
-        ],
-        "verbs": Array [
-          "get",
-          "list",
-          "watch",
-        ],
-      },
-    ],
-  },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "kube-system-cilium",
+    "metadata": {
+      "name": "cilium",
     },
-    "roleRef": Object {
+    "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
-      "name": "kube-system:cilium",
+      "name": "cilium",
     },
-    "subjects": Array [
-      Object {
+    "subjects": [
+      {
         "kind": "ServiceAccount",
         "name": "cilium",
         "namespace": "kube-system",
       },
     ],
   },
-  Object {
+  {
     "apiVersion": "rbac.authorization.k8s.io/v1",
     "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "kube-system-cilium-operator",
+    "metadata": {
+      "name": "cilium-operator",
     },
-    "roleRef": Object {
+    "roleRef": {
       "apiGroup": "rbac.authorization.k8s.io",
       "kind": "ClusterRole",
-      "name": "kube-system-cilium-operator",
+      "name": "cilium-operator",
     },
-    "subjects": Array [
-      Object {
+    "subjects": [
+      {
         "kind": "ServiceAccount",
         "name": "cilium-operator",
         "namespace": "kube-system",
       },
     ],
   },
-  Object {
-    "apiVersion": "rbac.authorization.k8s.io/v1",
-    "kind": "ClusterRoleBinding",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "kube-system-hubble-ui",
-    },
-    "roleRef": Object {
-      "apiGroup": "rbac.authorization.k8s.io",
-      "kind": "ClusterRole",
-      "name": "kube-system-hubble-ui",
-    },
-    "subjects": Array [
-      Object {
-        "kind": "ServiceAccount",
-        "name": "hubble-ui",
-        "namespace": "kube-system",
-      },
-    ],
-  },
-  Object {
+  {
     "apiVersion": "v1",
     "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/component": "hubble-relay",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
+    "metadata": {
+      "labels": {
+        "k8s-app": "cilium",
       },
-      "name": "hubble-relay",
+      "name": "hubble-peer",
       "namespace": "kube-system",
     },
-    "spec": Object {
-      "ports": Array [
-        Object {
-          "port": 80,
+    "spec": {
+      "internalTrafficPolicy": "Local",
+      "ports": [
+        {
+          "name": "peer-service",
+          "port": 443,
           "protocol": "TCP",
-          "targetPort": 4245,
+          "targetPort": 4244,
         },
       ],
-      "selector": Object {
-        "app.kubernetes.io/component": "hubble-relay",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
+      "selector": {
+        "k8s-app": "cilium",
       },
-      "type": "ClusterIP",
     },
   },
-  Object {
-    "apiVersion": "v1",
-    "kind": "Service",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/component": "hubble-ui",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "hubble-ui",
-      "namespace": "kube-system",
-    },
-    "spec": Object {
-      "ports": Array [
-        Object {
-          "port": 80,
-          "protocol": "TCP",
-          "targetPort": 8081,
-        },
-      ],
-      "selector": Object {
-        "app.kubernetes.io/component": "hubble-ui",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "type": "ClusterIP",
-    },
-  },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "DaemonSet",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/component": "agent",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
+    "metadata": {
+      "labels": {
+        "k8s-app": "cilium",
       },
       "name": "cilium",
       "namespace": "kube-system",
     },
-    "spec": Object {
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "agent",
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "cilium",
+    "spec": {
+      "selector": {
+        "matchLabels": {
+          "k8s-app": "cilium",
         },
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app.kubernetes.io/component": "agent",
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "cilium",
+      "template": {
+        "metadata": {
+          "annotations": {
+            "container.apparmor.security.beta.kubernetes.io/apply-sysctl-overwrites": "unconfined",
+            "container.apparmor.security.beta.kubernetes.io/cilium-agent": "unconfined",
+            "container.apparmor.security.beta.kubernetes.io/clean-cilium-state": "unconfined",
+            "container.apparmor.security.beta.kubernetes.io/mount-cgroup": "unconfined",
+          },
+          "labels": {
+            "k8s-app": "cilium",
           },
         },
-        "spec": Object {
-          "affinity": Object {
-            "nodeAffinity": Object {
-              "requiredDuringSchedulingIgnoredDuringExecution": Object {
-                "nodeSelectorTerms": Array [
-                  Object {
-                    "matchExpressions": Array [
-                      Object {
-                        "key": "kubernetes.io/os",
-                        "operator": "In",
-                        "values": Array [
-                          "linux",
-                        ],
-                      },
-                    ],
-                  },
-                ],
-              },
-            },
-            "podAntiAffinity": Object {
-              "requiredDuringSchedulingIgnoredDuringExecution": Array [
-                Object {
-                  "labelSelector": Object {
-                    "matchExpressions": Array [
-                      Object {
-                        "key": "k8s-app",
-                        "operator": "In",
-                        "values": Array [
-                          "cilium",
-                        ],
-                      },
-                    ],
+        "spec": {
+          "affinity": {
+            "podAntiAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": [
+                {
+                  "labelSelector": {
+                    "matchLabels": {
+                      "k8s-app": "cilium",
+                    },
                   },
                   "topologyKey": "kubernetes.io/hostname",
                 },
               ],
             },
           },
-          "containers": Array [
-            Object {
-              "args": Array [
+          "containers": [
+            {
+              "args": [
                 "--config-dir=/tmp/cilium/config-map",
               ],
-              "command": Array [
+              "command": [
                 "cilium-agent",
               ],
-              "env": Array [
-                Object {
+              "env": [
+                {
                   "name": "K8S_NODE_NAME",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
+                  "valueFrom": {
+                    "fieldRef": {
                       "apiVersion": "v1",
                       "fieldPath": "spec.nodeName",
                     },
                   },
                 },
-                Object {
+                {
                   "name": "CILIUM_K8S_NAMESPACE",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
+                  "valueFrom": {
+                    "fieldRef": {
                       "apiVersion": "v1",
                       "fieldPath": "metadata.namespace",
                     },
                   },
                 },
-                Object {
+                {
                   "name": "CILIUM_CLUSTERMESH_CONFIG",
                   "value": "/var/lib/cilium/clustermesh/",
                 },
-                Object {
+                {
                   "name": "CILIUM_CNI_CHAINING_MODE",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "cni-chaining-mode",
                       "name": "cilium-config",
                       "optional": true,
                     },
                   },
                 },
-                Object {
+                {
                   "name": "CILIUM_CUSTOM_CNI_CONF",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "custom-cni-conf",
                       "name": "cilium-config",
                       "optional": true,
                     },
                   },
                 },
-                Object {
+                {
                   "name": "KUBERNETES_SERVICE_HOST",
-                  "value": "kubernetes-control.internal.serenacodes.com",
+                  "value": "k8s-control.serenacodes.casa",
                 },
-                Object {
+                {
                   "name": "KUBERNETES_SERVICE_PORT",
                   "value": "6443",
                 },
               ],
-              "image": "quay.io/cilium/cilium:v1.11.1@sha256:251ff274acf22fd2067b29a31e9fda94253d2961c061577203621583d7e85bd2",
+              "image": "quay.io/cilium/cilium:v1.12.2@sha256:986f8b04cfdb35cf714701e58e35da0ee63da2b8a048ab596ccb49de58d5ba36",
               "imagePullPolicy": "IfNotPresent",
-              "lifecycle": Object {
-                "postStart": Object {
-                  "exec": Object {
-                    "command": Array [
+              "lifecycle": {
+                "postStart": {
+                  "exec": {
+                    "command": [
                       "/cni-install.sh",
                       "--enable-debug=false",
                       "--cni-exclusive=true",
+                      "--log-file=/var/run/cilium/cilium-cni.log",
                     ],
                   },
                 },
-                "preStop": Object {
-                  "exec": Object {
-                    "command": Array [
+                "preStop": {
+                  "exec": {
+                    "command": [
                       "/cni-uninstall.sh",
                     ],
                   },
                 },
               },
-              "livenessProbe": Object {
+              "livenessProbe": {
                 "failureThreshold": 10,
-                "httpGet": Object {
+                "httpGet": {
                   "host": "127.0.0.1",
-                  "httpHeaders": Array [
-                    Object {
+                  "httpHeaders": [
+                    {
                       "name": "brief",
                       "value": "true",
                     },
                   ],
                   "path": "/healthz",
-                  "port": 9876,
+                  "port": 9879,
                   "scheme": "HTTP",
                 },
                 "periodSeconds": 30,
@@ -5175,82 +753,113 @@ disable-server-tls: true
                 "timeoutSeconds": 5,
               },
               "name": "cilium-agent",
-              "readinessProbe": Object {
+              "readinessProbe": {
                 "failureThreshold": 3,
-                "httpGet": Object {
+                "httpGet": {
                   "host": "127.0.0.1",
-                  "httpHeaders": Array [
-                    Object {
+                  "httpHeaders": [
+                    {
                       "name": "brief",
                       "value": "true",
                     },
                   ],
                   "path": "/healthz",
-                  "port": 9876,
+                  "port": 9879,
                   "scheme": "HTTP",
                 },
                 "periodSeconds": 30,
                 "successThreshold": 1,
                 "timeoutSeconds": 5,
               },
-              "securityContext": Object {
-                "privileged": true,
+              "securityContext": {
+                "capabilities": {
+                  "add": [
+                    "CHOWN",
+                    "KILL",
+                    "NET_ADMIN",
+                    "NET_RAW",
+                    "IPC_LOCK",
+                    "SYS_MODULE",
+                    "SYS_ADMIN",
+                    "SYS_RESOURCE",
+                    "DAC_OVERRIDE",
+                    "FOWNER",
+                    "SETGID",
+                    "SETUID",
+                  ],
+                  "drop": [
+                    "ALL",
+                  ],
+                },
+                "seLinuxOptions": {
+                  "level": "s0",
+                  "type": "spc_t",
+                },
               },
-              "startupProbe": Object {
+              "startupProbe": {
                 "failureThreshold": 105,
-                "httpGet": Object {
+                "httpGet": {
                   "host": "127.0.0.1",
-                  "httpHeaders": Array [
-                    Object {
+                  "httpHeaders": [
+                    {
                       "name": "brief",
                       "value": "true",
                     },
                   ],
                   "path": "/healthz",
-                  "port": 9876,
+                  "port": 9879,
                   "scheme": "HTTP",
                 },
                 "periodSeconds": 2,
                 "successThreshold": 1,
               },
-              "volumeMounts": Array [
-                Object {
+              "terminationMessagePolicy": "FallbackToLogsOnError",
+              "volumeMounts": [
+                {
+                  "mountPath": "/host/proc/sys/net",
+                  "name": "host-proc-sys-net",
+                },
+                {
+                  "mountPath": "/host/proc/sys/kernel",
+                  "name": "host-proc-sys-kernel",
+                },
+                {
                   "mountPath": "/sys/fs/bpf",
-                  "mountPropagation": "Bidirectional",
+                  "mountPropagation": "HostToContainer",
                   "name": "bpf-maps",
                 },
-                Object {
+                {
                   "mountPath": "/var/run/cilium",
                   "name": "cilium-run",
                 },
-                Object {
+                {
                   "mountPath": "/host/opt/cni/bin",
                   "name": "cni-path",
                 },
-                Object {
+                {
                   "mountPath": "/host/etc/cni/net.d",
                   "name": "etc-cni-netd",
                 },
-                Object {
+                {
                   "mountPath": "/var/lib/cilium/clustermesh",
                   "name": "clustermesh-secrets",
                   "readOnly": true,
                 },
-                Object {
+                {
                   "mountPath": "/tmp/cilium/config-map",
                   "name": "cilium-config-path",
                   "readOnly": true,
                 },
-                Object {
+                {
                   "mountPath": "/lib/modules",
                   "name": "lib-modules",
                   "readOnly": true,
                 },
-                Object {
+                {
                   "mountPath": "/run/xtables.lock",
                   "name": "xtables-lock",
                 },
-                Object {
+                {
                   "mountPath": "/var/lib/cilium/tls/hubble",
                   "name": "hubble-tls",
                   "readOnly": true,
@@ -5259,202 +868,319 @@ disable-server-tls: true
             },
           ],
           "hostNetwork": true,
-          "initContainers": Array [
-            Object {
-              "command": Array [
+          "initContainers": [
+            {
+              "command": [
                 "sh",
                 "-ec",
                 "cp /usr/bin/cilium-mount /hostbin/cilium-mount;
-nsenter --cgroup=/hostproc/1/ns/cgroup --mount=/hostproc/1/ns/mnt \\"\${BIN_PATH}/cilium-mount\\" $CGROUP_ROOT;
+nsenter --cgroup=/hostproc/1/ns/cgroup --mount=/hostproc/1/ns/mnt "\${BIN_PATH}/cilium-mount" $CGROUP_ROOT;
 rm /hostbin/cilium-mount
 ",
               ],
-              "env": Array [
-                Object {
+              "env": [
+                {
                   "name": "CGROUP_ROOT",
                   "value": "/run/cilium/cgroupv2",
                 },
-                Object {
+                {
                   "name": "BIN_PATH",
                   "value": "/opt/cni/bin",
                 },
               ],
-              "image": "quay.io/cilium/cilium:v1.11.1@sha256:251ff274acf22fd2067b29a31e9fda94253d2961c061577203621583d7e85bd2",
+              "image": "quay.io/cilium/cilium:v1.12.2@sha256:986f8b04cfdb35cf714701e58e35da0ee63da2b8a048ab596ccb49de58d5ba36",
               "imagePullPolicy": "IfNotPresent",
               "name": "mount-cgroup",
-              "securityContext": Object {
-                "privileged": true,
+              "securityContext": {
+                "capabilities": {
+                  "add": [
+                    "SYS_ADMIN",
+                    "SYS_CHROOT",
+                    "SYS_PTRACE",
+                  ],
+                  "drop": [
+                    "ALL",
+                  ],
+                },
+                "seLinuxOptions": {
+                  "level": "s0",
+                  "type": "spc_t",
+                },
               },
-              "volumeMounts": Array [
-                Object {
+              "terminationMessagePolicy": "FallbackToLogsOnError",
+              "volumeMounts": [
+                {
                   "mountPath": "/hostproc",
                   "name": "hostproc",
                 },
-                Object {
+                {
                   "mountPath": "/hostbin",
                   "name": "cni-path",
                 },
               ],
             },
-            Object {
-              "command": Array [
+            {
+              "command": [
+                "sh",
+                "-ec",
+                "cp /usr/bin/cilium-sysctlfix /hostbin/cilium-sysctlfix;
+nsenter --mount=/hostproc/1/ns/mnt "\${BIN_PATH}/cilium-sysctlfix";
+rm /hostbin/cilium-sysctlfix
+",
+              ],
+              "env": [
+                {
+                  "name": "BIN_PATH",
+                  "value": "/opt/cni/bin",
+                },
+              ],
+              "image": "quay.io/cilium/cilium:v1.12.2@sha256:986f8b04cfdb35cf714701e58e35da0ee63da2b8a048ab596ccb49de58d5ba36",
+              "imagePullPolicy": "IfNotPresent",
+              "name": "apply-sysctl-overwrites",
+              "securityContext": {
+                "capabilities": {
+                  "add": [
+                    "SYS_ADMIN",
+                    "SYS_CHROOT",
+                    "SYS_PTRACE",
+                  ],
+                  "drop": [
+                    "ALL",
+                  ],
+                },
+                "seLinuxOptions": {
+                  "level": "s0",
+                  "type": "spc_t",
+                },
+              },
+              "terminationMessagePolicy": "FallbackToLogsOnError",
+              "volumeMounts": [
+                {
+                  "mountPath": "/hostproc",
+                  "name": "hostproc",
+                },
+                {
+                  "mountPath": "/hostbin",
+                  "name": "cni-path",
+                },
+              ],
+            },
+            {
+              "args": [
+                "mount | grep "/sys/fs/bpf type bpf" || mount -t bpf bpf /sys/fs/bpf",
+              ],
+              "command": [
+                "/bin/bash",
+                "-c",
+                "--",
+              ],
+              "image": "quay.io/cilium/cilium:v1.12.2@sha256:986f8b04cfdb35cf714701e58e35da0ee63da2b8a048ab596ccb49de58d5ba36",
+              "imagePullPolicy": "IfNotPresent",
+              "name": "mount-bpf-fs",
+              "securityContext": {
+                "privileged": true,
+              },
+              "terminationMessagePolicy": "FallbackToLogsOnError",
+              "volumeMounts": [
+                {
+                  "mountPath": "/sys/fs/bpf",
+                  "mountPropagation": "Bidirectional",
+                  "name": "bpf-maps",
+                },
+              ],
+            },
+            {
+              "command": [
                 "/init-container.sh",
               ],
-              "env": Array [
-                Object {
+              "env": [
+                {
                   "name": "CILIUM_ALL_STATE",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "clean-cilium-state",
                       "name": "cilium-config",
                       "optional": true,
                     },
                   },
                 },
-                Object {
+                {
                   "name": "CILIUM_BPF_STATE",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "clean-cilium-bpf-state",
                       "name": "cilium-config",
                       "optional": true,
                     },
                   },
                 },
-                Object {
+                {
                   "name": "KUBERNETES_SERVICE_HOST",
-                  "value": "kubernetes-control.internal.serenacodes.com",
+                  "value": "k8s-control.serenacodes.casa",
                 },
-                Object {
+                {
                   "name": "KUBERNETES_SERVICE_PORT",
                   "value": "6443",
                 },
               ],
-              "image": "quay.io/cilium/cilium:v1.11.1@sha256:251ff274acf22fd2067b29a31e9fda94253d2961c061577203621583d7e85bd2",
+              "image": "quay.io/cilium/cilium:v1.12.2@sha256:986f8b04cfdb35cf714701e58e35da0ee63da2b8a048ab596ccb49de58d5ba36",
               "imagePullPolicy": "IfNotPresent",
               "name": "clean-cilium-state",
-              "resources": Object {
-                "requests": Object {
+              "resources": {
+                "requests": {
                   "cpu": "100m",
                   "memory": "100Mi",
                 },
               },
-              "securityContext": Object {
-                "privileged": true,
+              "securityContext": {
+                "capabilities": {
+                  "add": [
+                    "NET_ADMIN",
+                    "SYS_MODULE",
+                    "SYS_ADMIN",
+                    "SYS_RESOURCE",
+                  ],
+                  "drop": [
+                    "ALL",
+                  ],
+                },
+                "seLinuxOptions": {
+                  "level": "s0",
+                  "type": "spc_t",
+                },
               },
-              "volumeMounts": Array [
-                Object {
+              "terminationMessagePolicy": "FallbackToLogsOnError",
+              "volumeMounts": [
+                {
                   "mountPath": "/sys/fs/bpf",
                   "name": "bpf-maps",
                 },
-                Object {
+                {
                   "mountPath": "/run/cilium/cgroupv2",
                   "mountPropagation": "HostToContainer",
                   "name": "cilium-cgroup",
                 },
-                Object {
+                {
                   "mountPath": "/var/run/cilium",
                   "name": "cilium-run",
                 },
               ],
             },
           ],
+          "nodeSelector": {
+            "kubernetes.io/os": "linux",
+          },
           "priorityClassName": "system-node-critical",
           "restartPolicy": "Always",
+          "serviceAccount": "cilium",
           "serviceAccountName": "cilium",
           "terminationGracePeriodSeconds": 1,
-          "tolerations": Array [
-            Object {
+          "tolerations": [
+            {
               "operator": "Exists",
             },
           ],
-          "volumes": Array [
-            Object {
-              "hostPath": Object {
+          "volumes": [
+            {
+              "hostPath": {
                 "path": "/var/run/cilium",
                 "type": "DirectoryOrCreate",
               },
               "name": "cilium-run",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/sys/fs/bpf",
                 "type": "DirectoryOrCreate",
               },
               "name": "bpf-maps",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/proc",
                 "type": "Directory",
               },
               "name": "hostproc",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/run/cilium/cgroupv2",
                 "type": "DirectoryOrCreate",
               },
               "name": "cilium-cgroup",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/opt/cni/bin",
                 "type": "DirectoryOrCreate",
               },
               "name": "cni-path",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/etc/cni/net.d",
                 "type": "DirectoryOrCreate",
               },
               "name": "etc-cni-netd",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/lib/modules",
               },
               "name": "lib-modules",
             },
-            Object {
-              "hostPath": Object {
+            {
+              "hostPath": {
                 "path": "/run/xtables.lock",
                 "type": "FileOrCreate",
               },
               "name": "xtables-lock",
             },
-            Object {
+            {
               "name": "clustermesh-secrets",
-              "secret": Object {
+              "secret": {
                 "defaultMode": 256,
                 "optional": true,
                 "secretName": "cilium-clustermesh",
               },
             },
-            Object {
-              "configMap": Object {
+            {
+              "configMap": {
                 "name": "cilium-config",
               },
               "name": "cilium-config-path",
             },
-            Object {
+            {
+              "hostPath": {
+                "path": "/proc/sys/net",
+                "type": "Directory",
+              },
+              "name": "host-proc-sys-net",
+            },
+            {
+              "hostPath": {
+                "path": "/proc/sys/kernel",
+                "type": "Directory",
+              },
+              "name": "host-proc-sys-kernel",
+            },
+            {
               "name": "hubble-tls",
-              "projected": Object {
+              "projected": {
                 "defaultMode": 256,
-                "sources": Array [
-                  Object {
-                    "secret": Object {
-                      "items": Array [
-                        Object {
+                "sources": [
+                  {
+                    "secret": {
+                      "items": [
+                        {
                           "key": "ca.crt",
                           "path": "client-ca.crt",
                         },
-                        Object {
+                        {
                           "key": "tls.crt",
                           "path": "server.crt",
                         },
-                        Object {
+                        {
                           "key": "tls.key",
                           "path": "server.key",
                         },
@@ -5469,63 +1195,54 @@ rm /hostbin/cilium-mount
           ],
         },
       },
-      "updateStrategy": Object {
-        "rollingUpdate": Object {
+      "updateStrategy": {
+        "rollingUpdate": {
           "maxUnavailable": 2,
         },
         "type": "RollingUpdate",
       },
     },
   },
-  Object {
+  {
     "apiVersion": "apps/v1",
     "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/component": "operator",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
+    "metadata": {
+      "labels": {
         "io.cilium/app": "operator",
+        "name": "cilium-operator",
       },
       "name": "cilium-operator",
       "namespace": "kube-system",
     },
-    "spec": Object {
+    "spec": {
       "replicas": 2,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "operator",
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "cilium",
+      "selector": {
+        "matchLabels": {
           "io.cilium/app": "operator",
+          "name": "cilium-operator",
         },
       },
-      "strategy": Object {
-        "rollingUpdate": Object {
+      "strategy": {
+        "rollingUpdate": {
           "maxSurge": 1,
           "maxUnavailable": 1,
         },
         "type": "RollingUpdate",
       },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app.kubernetes.io/component": "operator",
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "cilium",
+      "template": {
+        "metadata": {
+          "labels": {
             "io.cilium/app": "operator",
+            "name": "cilium-operator",
           },
         },
-        "spec": Object {
-          "affinity": Object {
-            "podAntiAffinity": Object {
-              "requiredDuringSchedulingIgnoredDuringExecution": Array [
-                Object {
-                  "labelSelector": Object {
-                    "matchLabels": Object {
-                      "app.kubernetes.io/component": "operator",
-                      "app.kubernetes.io/managed-by": "cdk8s",
-                      "app.kubernetes.io/name": "cilium",
+        "spec": {
+          "affinity": {
+            "podAntiAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": [
+                {
+                  "labelSelector": {
+                    "matchLabels": {
                       "io.cilium/app": "operator",
                     },
                   },
@@ -5534,57 +1251,57 @@ rm /hostbin/cilium-mount
               ],
             },
           },
-          "containers": Array [
-            Object {
-              "args": Array [
+          "containers": [
+            {
+              "args": [
                 "--config-dir=/tmp/cilium/config-map",
                 "--debug=$(CILIUM_DEBUG)",
               ],
-              "command": Array [
+              "command": [
                 "cilium-operator-generic",
               ],
-              "env": Array [
-                Object {
+              "env": [
+                {
                   "name": "K8S_NODE_NAME",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
+                  "valueFrom": {
+                    "fieldRef": {
                       "apiVersion": "v1",
                       "fieldPath": "spec.nodeName",
                     },
                   },
                 },
-                Object {
+                {
                   "name": "CILIUM_K8S_NAMESPACE",
-                  "valueFrom": Object {
-                    "fieldRef": Object {
+                  "valueFrom": {
+                    "fieldRef": {
                       "apiVersion": "v1",
                       "fieldPath": "metadata.namespace",
                     },
                   },
                 },
-                Object {
+                {
                   "name": "CILIUM_DEBUG",
-                  "valueFrom": Object {
-                    "configMapKeyRef": Object {
+                  "valueFrom": {
+                    "configMapKeyRef": {
                       "key": "debug",
                       "name": "cilium-config",
                       "optional": true,
                     },
                   },
                 },
-                Object {
+                {
                   "name": "KUBERNETES_SERVICE_HOST",
-                  "value": "kubernetes-control.internal.serenacodes.com",
+                  "value": "k8s-control.serenacodes.casa",
                 },
-                Object {
+                {
                   "name": "KUBERNETES_SERVICE_PORT",
                   "value": "6443",
                 },
               ],
-              "image": "quay.io/cilium/operator-generic:v1.11.1@sha256:977240a4783c7be821e215ead515da3093a10f4a7baea9f803511a2c2b44a235",
+              "image": "quay.io/cilium/operator-generic:v1.12.2@sha256:00508f78dae5412161fa40ee30069c2802aef20f7bdd20e91423103ba8c0df6e",
               "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "httpGet": Object {
+              "livenessProbe": {
+                "httpGet": {
                   "host": "127.0.0.1",
                   "path": "/healthz",
                   "port": 9234,
@@ -5595,8 +1312,9 @@ rm /hostbin/cilium-mount
                 "timeoutSeconds": 3,
               },
               "name": "cilium-operator",
-              "volumeMounts": Array [
-                Object {
+              "terminationMessagePolicy": "FallbackToLogsOnError",
+              "volumeMounts": [
+                {
                   "mountPath": "/tmp/cilium/config-map",
                   "name": "cilium-config-path",
                   "readOnly": true,
@@ -5605,17 +1323,21 @@ rm /hostbin/cilium-mount
             },
           ],
           "hostNetwork": true,
+          "nodeSelector": {
+            "kubernetes.io/os": "linux",
+          },
           "priorityClassName": "system-cluster-critical",
           "restartPolicy": "Always",
+          "serviceAccount": "cilium-operator",
           "serviceAccountName": "cilium-operator",
-          "tolerations": Array [
-            Object {
+          "tolerations": [
+            {
               "operator": "Exists",
             },
           ],
-          "volumes": Array [
-            Object {
-              "configMap": Object {
+          "volumes": [
+            {
+              "configMap": {
                 "name": "cilium-config",
               },
               "name": "cilium-config-path",
@@ -5623,315 +1345,6 @@ rm /hostbin/cilium-mount
           ],
         },
       },
-    },
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/component": "hubble-relay",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "hubble-relay",
-      "namespace": "kube-system",
-    },
-    "spec": Object {
-      "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "hubble-relay",
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "cilium",
-        },
-      },
-      "strategy": Object {
-        "rollingUpdate": Object {
-          "maxUnavailable": 1,
-        },
-        "type": "RollingUpdate",
-      },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app.kubernetes.io/component": "hubble-relay",
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "cilium",
-          },
-        },
-        "spec": Object {
-          "affinity": Object {
-            "podAffinity": Object {
-              "requiredDuringSchedulingIgnoredDuringExecution": Array [
-                Object {
-                  "labelSelector": Object {
-                    "matchLabels": Object {
-                      "app.kubernetes.io/component": "hubble-relay",
-                      "app.kubernetes.io/managed-by": "cdk8s",
-                      "app.kubernetes.io/name": "cilium",
-                    },
-                  },
-                  "topologyKey": "kubernetes.io/hostname",
-                },
-              ],
-            },
-          },
-          "automountServiceAccountToken": false,
-          "containers": Array [
-            Object {
-              "args": Array [
-                "serve",
-              ],
-              "command": Array [
-                "hubble-relay",
-              ],
-              "image": "quay.io/cilium/hubble-relay:v1.11.1@sha256:23d40b2a87a5bf94e0365bd9606721c96f78b8304b61725dca45a0b8a6048203",
-              "imagePullPolicy": "IfNotPresent",
-              "livenessProbe": Object {
-                "tcpSocket": Object {
-                  "port": "grpc",
-                },
-              },
-              "name": "hubble-relay",
-              "ports": Array [
-                Object {
-                  "containerPort": 4245,
-                  "name": "grpc",
-                },
-              ],
-              "readinessProbe": Object {
-                "tcpSocket": Object {
-                  "port": "grpc",
-                },
-              },
-              "volumeMounts": Array [
-                Object {
-                  "mountPath": "/var/run/cilium",
-                  "name": "hubble-sock-dir",
-                  "readOnly": true,
-                },
-                Object {
-                  "mountPath": "/etc/hubble-relay",
-                  "name": "config",
-                  "readOnly": true,
-                },
-                Object {
-                  "mountPath": "/var/lib/hubble-relay/tls",
-                  "name": "tls",
-                  "readOnly": true,
-                },
-              ],
-            },
-          ],
-          "restartPolicy": "Always",
-          "serviceAccountName": "hubble-relay",
-          "terminationGracePeriodSeconds": 0,
-          "volumes": Array [
-            Object {
-              "configMap": Object {
-                "items": Array [
-                  Object {
-                    "key": "config.yaml",
-                    "path": "config.yaml",
-                  },
-                ],
-                "name": "hubble-relay-config",
-              },
-              "name": "config",
-            },
-            Object {
-              "hostPath": Object {
-                "path": "/var/run/cilium",
-                "type": "Directory",
-              },
-              "name": "hubble-sock-dir",
-            },
-            Object {
-              "name": "tls",
-              "projected": Object {
-                "defaultMode": 256,
-                "sources": Array [
-                  Object {
-                    "secret": Object {
-                      "items": Array [
-                        Object {
-                          "key": "ca.crt",
-                          "path": "hubble-server-ca.crt",
-                        },
-                        Object {
-                          "key": "tls.crt",
-                          "path": "client.crt",
-                        },
-                        Object {
-                          "key": "tls.key",
-                          "path": "client.key",
-                        },
-                      ],
-                      "name": "hubble-relay-client-certs",
-                    },
-                  },
-                ],
-              },
-            },
-          ],
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "apps/v1",
-    "kind": "Deployment",
-    "metadata": Object {
-      "labels": Object {
-        "app.kubernetes.io/component": "hubble-ui",
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "hubble-ui",
-      "namespace": "kube-system",
-    },
-    "spec": Object {
-      "replicas": 1,
-      "selector": Object {
-        "matchLabels": Object {
-          "app.kubernetes.io/component": "hubble-ui",
-          "app.kubernetes.io/managed-by": "cdk8s",
-          "app.kubernetes.io/name": "cilium",
-        },
-      },
-      "template": Object {
-        "metadata": Object {
-          "labels": Object {
-            "app.kubernetes.io/component": "hubble-ui",
-            "app.kubernetes.io/managed-by": "cdk8s",
-            "app.kubernetes.io/name": "cilium",
-          },
-        },
-        "spec": Object {
-          "containers": Array [
-            Object {
-              "image": "quay.io/cilium/hubble-ui:v0.8.5@sha256:4eaca1ec1741043cfba6066a165b3bf251590cf4ac66371c4f63fbed2224ebb4",
-              "imagePullPolicy": "IfNotPresent",
-              "name": "frontend",
-              "ports": Array [
-                Object {
-                  "containerPort": 8080,
-                  "name": "http",
-                },
-              ],
-            },
-            Object {
-              "env": Array [
-                Object {
-                  "name": "EVENTS_SERVER_PORT",
-                  "value": "8090",
-                },
-                Object {
-                  "name": "FLOWS_API_ADDR",
-                  "value": "hubble-relay:80",
-                },
-              ],
-              "image": "quay.io/cilium/hubble-ui-backend:v0.8.5@sha256:2bce50cf6c32719d072706f7ceccad654bfa907b2745a496da99610776fe31ed",
-              "imagePullPolicy": "IfNotPresent",
-              "name": "backend",
-              "ports": Array [
-                Object {
-                  "containerPort": 8090,
-                  "name": "grpc",
-                },
-              ],
-            },
-            Object {
-              "args": Array [
-                "-c",
-                "/etc/envoy.yaml",
-                "-l",
-                "info",
-              ],
-              "command": Array [
-                "envoy",
-              ],
-              "image": "docker.io/envoyproxy/envoy:v1.18.4@sha256:e5c2bb2870d0e59ce917a5100311813b4ede96ce4eb0c6bfa879e3fbe3e83935",
-              "imagePullPolicy": "IfNotPresent",
-              "name": "proxy",
-              "ports": Array [
-                Object {
-                  "containerPort": 8081,
-                  "name": "http",
-                },
-              ],
-              "volumeMounts": Array [
-                Object {
-                  "mountPath": "/etc/envoy.yaml",
-                  "name": "hubble-ui-envoy-yaml",
-                  "subPath": "envoy.yaml",
-                },
-              ],
-            },
-          ],
-          "securityContext": Object {
-            "runAsUser": 1001,
-          },
-          "serviceAccountName": "hubble-ui",
-          "volumes": Array [
-            Object {
-              "configMap": Object {
-                "name": "hubble-ui-envoy",
-              },
-              "name": "hubble-ui-envoy-yaml",
-            },
-          ],
-        },
-      },
-    },
-  },
-  Object {
-    "apiVersion": "networking.k8s.io/v1",
-    "kind": "Ingress",
-    "metadata": Object {
-      "annotations": Object {
-        "cert-manager.io/cluster-issuer": "serena-ca",
-        "cert-manager.io/common-name": "hubble.internal.serenacodes.com",
-      },
-      "labels": Object {
-        "app.kubernetes.io/managed-by": "cdk8s",
-        "app.kubernetes.io/name": "cilium",
-      },
-      "name": "cilium-hubble-ui",
-      "namespace": "kube-system",
-    },
-    "spec": Object {
-      "ingressClassName": "nginx",
-      "rules": Array [
-        Object {
-          "host": "hubble.internal.serenacodes.com",
-          "http": Object {
-            "paths": Array [
-              Object {
-                "backend": Object {
-                  "service": Object {
-                    "name": "hubble-ui",
-                    "port": Object {
-                      "number": 8081,
-                    },
-                  },
-                },
-                "path": "/",
-                "pathType": "Prefix",
-              },
-            ],
-          },
-        },
-      ],
-      "tls": Array [
-        Object {
-          "hosts": Array [
-            "hubble.internal.serenacodes.com",
-          ],
-          "secretName": "hubble-ingress",
-        },
-      ],
     },
   },
 ]
