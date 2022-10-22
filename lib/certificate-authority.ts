@@ -45,7 +45,7 @@ export class CertificateAuthority extends Construct {
       metadata: {
         name: name,
         labels: labels,
-        namespace: namespace,
+        namespace: "cert-manager",
       },
       spec: {
         isCa: true,
